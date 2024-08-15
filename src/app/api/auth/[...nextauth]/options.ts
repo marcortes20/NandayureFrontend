@@ -9,19 +9,22 @@ export const options: NextAuthOptions = {
         UserId: {
           label: "Identificacion",
           type: "text",
-          placeholder: "5-5555-5555",
-          value: "504420108",
+          placeholder: "5-5555-5555"
         },
-        Password: { label: "Contraseña", type: "password", value: "1234" },
+        Password: { label: "Contraseña", type: "password" },
       },
 
-      async authorize(credentials, req) {
-        console.log(credentials);
+      async authorize(credentials) {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login`, //create service to make fetch
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, //create service to make fetch
           {
             method: "POST",
-            body: JSON.stringify(credentials),
+            body: JSON.stringify(
+              {
+                UserId: credentials?.UserId,
+                Password: credentials?.Password,
+              }
+            ),
             headers: { "Content-Type": "application/json" },
           }
         );
@@ -42,7 +45,6 @@ export const options: NextAuthOptions = {
   callbacks: {
     async signIn({ user }) {
       if (user) return true;
-
       return false;
     },
     async jwt({ token, user }) {
@@ -53,4 +55,10 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
+
+  secret: process.env.AUTH_SECRET,
+  
+  pages:{
+    signIn: '/auth/login',
+  }
 };
