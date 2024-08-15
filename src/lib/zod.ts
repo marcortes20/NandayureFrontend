@@ -1,4 +1,4 @@
-import { number, string, z } from "zod";
+import { string, z } from "zod";
 
 export const LoginSchema = z.object({
   UserId: z.string().refine((val) => !isNaN(Number(val)), {
