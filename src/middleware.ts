@@ -16,10 +16,10 @@ async function authMiddleware(req: NextRequest) {
       return null;
     }
 
-    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
+    return NextResponse.redirect(new URL("/auth/login", req.url));
   } catch (error) {
     console.error("Error al obtener el token:", error);
-    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
+    return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 }
 
@@ -36,7 +36,7 @@ async function rolesMiddleware(req: NextRequest, roles: string[]) {
       return null;
     }
     console.log(tokenDecoded);
-    return NextResponse.redirect(new URL("/Unauthorize", req.url));
+    return NextResponse.redirect(new URL("/unauthorize", req.url));
   } catch (error) {
     console.error("Error al verificar roles:", error);
     return NextResponse.redirect(new URL("/dashboard", req.url));
@@ -52,7 +52,7 @@ export async function middleware(req: NextRequest) {
     return response;
   }
 
-  if (pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/admin") || pathname.startsWith("/auth/register")) {
     response = await rolesMiddleware(req, [Roles.admin]);
     if (response) return response;
   }
@@ -61,5 +61,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/auth/register"],
 };
