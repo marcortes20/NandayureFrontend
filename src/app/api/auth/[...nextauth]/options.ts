@@ -16,7 +16,7 @@ export const options: NextAuthOptions = {
 
       async authorize(credentials) {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, //create service to make fetch
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
           {
             method: "POST",
             body: JSON.stringify(
@@ -35,7 +35,7 @@ export const options: NextAuthOptions = {
         }
         if (user.error) {
           console.log(user.error);
-          throw user;
+          throw new Error(user.error);
         }
 
         return null;

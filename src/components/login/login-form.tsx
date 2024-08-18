@@ -16,6 +16,7 @@ interface FormFields {
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string | null>(null)
     const router = useRouter()
 
     const { handleSubmit, register, formState: { errors } } = useForm<FormFields>({
@@ -23,13 +24,20 @@ const LoginForm = () => {
     })
     const onSubmit = handleSubmit(async ({ UserId, Password }) => {
         setIsLoading(true)
-        await signIn('credentials', {
+        const responseNextAuth = await signIn('credentials', {
             UserId,
             Password,
             redirect: false
         }
         )
-        router.push('/dashboard')
+
+        if (responseNextAuth?.error) {
+            setError(responseNextAuth.error)
+            setIsLoading(false)
+            return
+        } else {
+            router.push('/dashboard')
+        }
     });
     return (
         <form onSubmit={onSubmit} noValidate>
@@ -62,6 +70,7 @@ const LoginForm = () => {
                 {errors.Password && (
                     <p className="text-red-500 text-xs mt-1">{errors.Password.message}</p>
                 )}
+                {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
                 <div className="mt-3">
                     <label className="inline-flex items-center">
                         <input
