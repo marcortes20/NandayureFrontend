@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Spinner from '../ui/spinner'
-import { signIn } from 'next-auth/react'
 
 interface FormFields {
     UserName: string
@@ -18,6 +17,7 @@ interface FormFields {
 const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string | null>(null)
     const router = useRouter()
 
     const { handleSubmit, register, formState: { errors } } = useForm<FormFields>({
@@ -25,36 +25,33 @@ const RegisterForm = () => {
     })
     const onSubmit = handleSubmit(async ({ UserId, Mail, UserName, Name, Password }) => {
         setIsLoading(true);
-        try {
-            await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        UserId: Number(UserId),
-                        Mail: Mail,
-                        UserName: UserName,
-                        Name: Name,
-                        Password: Password,
-                    }),
-                }
-            );
+        const responseNextAuth = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    UserId: Number(UserId),
+                    Mail: Mail,
+                    UserName: UserName,
+                    Name: Name,
+                    Password: Password,
+                }),
+            }
+        );
 
-            await signIn('credentials', {
-                UserId,
-                Password,
-                redirect: false
-            });
+        if (responseNextAuth.ok) return
 
-            router.push('/dashboard');
-        } catch (error) {
-            console.error('Error during registration or login:', error);
-        } finally {
-            setIsLoading(false);
+        if (!responseNextAuth.ok) {
+            const error = await responseNextAuth.json()
+            console.log(error)
+            setError(error.error)
+            setIsLoading(false)
+            return
         }
+
     });
 
 
@@ -134,6 +131,11 @@ const RegisterForm = () => {
                 {errors.Password && (
                     <p className="text-red-500 text-xs mt-1">{errors.Password.message}</p>
                 )}
+                {
+                    error && (
+                        <p className="text-red-500 text-xs mt-1">{error}</p>
+                    )
+                }
                 <div className="mt-3">
                     <label className="inline-flex items-center">
                         <input
