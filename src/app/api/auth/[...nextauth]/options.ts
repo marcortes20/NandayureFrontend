@@ -27,7 +27,6 @@ export const options: NextAuthOptions = {
           }
         );
         const user = await res.json();
-        console.log(credentials);
         if (res.ok && user) {
           return user;
         }
@@ -57,6 +56,6 @@ export const options: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
 
   pages: {
-    signIn: "/auth/login",
+    signIn: "/",
   },
 };

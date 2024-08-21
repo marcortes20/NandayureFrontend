@@ -1,22 +1,11 @@
-'use client'
-
 import ButtonAuth from "@/components/ui/ButtonAuth";
-import { useSession } from "next-auth/react";
+import MaintenancePage from "@/components/ui/maintenance-page";
 
-export default function DashboardPage() {
-    const { data: session, status } = useSession();
-
-    if (status === "loading") {
-        return <p>Loading...</p>;
-    }
-    console.log(session);
+export default function HomePage() {
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <pre>
-                <code>{JSON.stringify(session, null, 2)}</code>
-            </pre>
+        <>
+            <MaintenancePage title="Inicio" />
             <ButtonAuth />
-        </div>
+        </>
     )
 }
