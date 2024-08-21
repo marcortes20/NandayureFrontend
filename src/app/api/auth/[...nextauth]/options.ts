@@ -6,30 +6,28 @@ export const options: NextAuthOptions = {
       name: "Credentials",
 
       credentials: {
-        UserId: {
+        EmployeeId: {
           label: "Identificacion",
           type: "text",
-          placeholder: "5-5555-5555"
+          placeholder: "5-5555-5555",
         },
         Password: { label: "Contraseña", type: "password" },
       },
 
       async authorize(credentials) {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login`,
           {
             method: "POST",
-            body: JSON.stringify(
-              {
-                UserId: credentials?.UserId,
-                Password: credentials?.Password,
-              }
-            ),
+            body: JSON.stringify({
+              EmployeeId: credentials?.EmployeeId,
+              Password: credentials?.Password,
+            }),
             headers: { "Content-Type": "application/json" },
           }
         );
         const user = await res.json();
-
+        console.log(credentials);
         if (res.ok && user) {
           return user;
         }
@@ -57,8 +55,8 @@ export const options: NextAuthOptions = {
   },
 
   secret: process.env.AUTH_SECRET,
-  
-  pages:{
-    signIn: '/auth/login',
-  }
+
+  pages: {
+    signIn: "/auth/login",
+  },
 };
