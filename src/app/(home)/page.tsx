@@ -1,5 +1,12 @@
 import LoginPage from "../auth/login/page";
 
-export default function Page() {
-  return <LoginPage></LoginPage>;
+export default function HomePage() {
+    return (
+        <>
+            <MaintenancePage title="Inicio" />
+            <ButtonAuth />
+            
+        </>
+    )
 }
+
