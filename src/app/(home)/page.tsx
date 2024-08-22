@@ -1,5 +1,4 @@
-import ButtonAuth from "@/components/ui/ButtonAuth";
-import MaintenancePage from "@/components/ui/maintenance-page";
+import LoginPage from "../auth/login/page";
 
 export default function HomePage() {
     return (
@@ -10,3 +9,4 @@ export default function HomePage() {
         </>
     )
 }
+
