@@ -1,9 +1,9 @@
-'use client'
+import MaintenancePage from "@/components/ui/maintenance-page";
 
-import MaintenancePage from "@/components/ui/maintenance-page"
-
-export default function DashboardPage() {
+export default function HomePage() {
     return (
-       <MaintenancePage title="dashboard" />
+        <>
+            <MaintenancePage title="Inicio" />
+        </>
     )
 }
