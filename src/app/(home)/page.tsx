@@ -6,6 +6,7 @@ export default function HomePage() {
         <>
             <MaintenancePage title="Inicio" />
             <ButtonAuth />
+            
         </>
     )
 }
