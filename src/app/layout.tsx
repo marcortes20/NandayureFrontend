@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SessionAuthProvider from "../contexts/SessionAuthProvider";
+import ReactQueryProvider from "@/lib/query-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="">
-        <SessionAuthProvider>{children}</SessionAuthProvider>
+        <SessionAuthProvider>
+          <ReactQueryProvider>
+            {children}
+          </ReactQueryProvider>
+        </SessionAuthProvider>
       </body>
     </html>
   );
