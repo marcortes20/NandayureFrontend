@@ -100,6 +100,7 @@ const LoginForm = () => {
             </div>
             <button
                 type="submit"
+                disabled={isLoading}
                 className="block w-full px-3 py-2 sm:py-3 mt-4 text-white bg-dodger-blue-600 rounded-md shadow-sm hover:bg-dodger-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
             >
                 {isLoading ? (

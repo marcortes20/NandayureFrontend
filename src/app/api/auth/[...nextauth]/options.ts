@@ -16,7 +16,7 @@ export const options: NextAuthOptions = {
 
       async authorize(credentials) {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}auth/login`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
           {
             method: "POST",
             body: JSON.stringify({
@@ -56,6 +56,6 @@ export const options: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
 
   pages: {
-    signIn: "/",
+    signIn: "/auth/login",
   },
 };
