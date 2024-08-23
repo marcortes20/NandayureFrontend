@@ -2,38 +2,52 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Spinner from '../ui/spinner';
-import { useQuery } from '@tanstack/react-query';
-import getGendersData from '@/server/actions';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { getGenders, getMaritalStatus, postEmployee } from '@/server/actions';
+import { Employee } from '@/types/entities';
 
-interface FormFields {
-    UserId: number;
-    Name: string;
-    Surname1: string;
-    Surname2: string;
-    Birthdate: Date;
-    GenderId: number;
-    MaritalStatusId: number;
-    EmployeeId: number;
-    HiringDate: Date;
-    NumberChlidren: number;
-    GrossSalary: number;
-    AvailableVacationDays: number;
-    Mail: string;
-    CellPhone: string;
-}
+export const convertEmployeeTypes = (employee: any): Employee => {
+    return {
+        EmployeeId: Number(employee.EmployeeId),
+        Name: employee.Name,
+        Surname1: employee.Surname1,
+        Surname2: employee.Surname2,
+        Birthdate: new Date(employee.Birthdate),
+        HiringDate: new Date(employee.HiringDate),
+        Email: employee.Email,
+        CellPhone: employee.CellPhone,
+        NumberChlidren: parseInt(employee.NumberChlidren, 10),
+        AvailableVacationDays: parseInt(employee.AvailableVacationDays, 10),
+        GrossSalary: Number(employee.GrossSalary),
+        MaritalStatusId: parseInt(employee.MaritalStatusId, 10),
+        GenderId: parseInt(employee.GenderId, 10),
+    };
+};
 
 const RegisterForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { handleSubmit, register } = useForm<FormFields>();
+    const { handleSubmit, register } = useForm<Employee>();
 
     const { data: genders } = useQuery({
-        queryFn: async () => await getGendersData(),
+        queryFn: async () => await getGenders(),
         queryKey: ["genders"],
     });
 
-    const onSubmit = handleSubmit((data) => {
+    const { data: maritalStatus } = useQuery({
+        queryFn: async () => await getMaritalStatus(),
+        queryKey: ["maritalStatus"],
+    });
+
+    const mutation = useMutation({
+        mutationFn: async (data: Employee) => await postEmployee(data)
+    });
+
+
+    const onSubmit = handleSubmit(async (data: Employee) => {
         setIsLoading(true);
-        console.log(data);
+        const convertedData = convertEmployeeTypes(data);
+        await mutation.mutateAsync(convertedData);
+        setIsLoading(false);
     });
 
     return (
@@ -43,18 +57,6 @@ const RegisterForm = () => {
                 <div>
                     <h2 className="text-lg font-medium text-gray-900 mb-4">Información Personal</h2>
                     <div className="space-y-4">
-                        <div>
-                            <label htmlFor="UserId" className="block text-sm font-medium text-gray-900">
-                                Identificación
-                            </label>
-                            <input
-                                type="number"
-                                placeholder="Escribe tu identificación aquí"
-                                id="UserId"
-                                className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
-                                {...register('UserId')}
-                            />
-                        </div>
                         <div>
                             <label htmlFor="Name" className="block text-sm font-medium text-gray-900">
                                 Nombre
@@ -98,7 +100,7 @@ const RegisterForm = () => {
                             <input
                                 type="date"
                                 id="Birthdate"
-                                className="block w-full px-3 py-2 sm:py-3 border text-gray-300 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
+                                className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('Birthdate')}
                             />
                         </div>
@@ -129,10 +131,11 @@ const RegisterForm = () => {
                                 {...register('MaritalStatusId')}
                             >
                                 <option>Selecciona tu estado civil</option>
-                                <option value="1">Soltero</option>
-                                <option value="2">Casado</option>
-                                <option value="3">Divorciado</option>
-                                <option value="4">Viudo</option>
+                                {maritalStatus?.map((status: { MaritalStatusId: number; Name: string }) => (
+                                    <option key={status.MaritalStatusId} value={status.MaritalStatusId}>
+                                        {status.Name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>
@@ -144,7 +147,7 @@ const RegisterForm = () => {
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="EmployeeId" className="block text-sm font-medium text-gray-900">
-                                Identificación Laboral
+                                Identificación
                             </label>
                             <input
                                 type="number"
@@ -209,15 +212,15 @@ const RegisterForm = () => {
                     <h2 className="text-lg font-medium text-gray-900 mb-4">Información de Contacto</h2>
                     <div className="space-y-4">
                         <div>
-                            <label htmlFor="Mail" className="block text-sm font-medium text-gray-900">
+                            <label htmlFor="Email" className="block text-sm font-medium text-gray-900">
                                 Correo Electrónico
                             </label>
                             <input
                                 type="email"
-                                placeholder="Escribe tu correo aquí"
-                                id="Mail"
+                                placeholder="Escribe tu correo electrónico aquí"
+                                id="Email"
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
-                                {...register('Mail')}
+                                {...register('Email')}
                             />
                         </div>
                         <div>
