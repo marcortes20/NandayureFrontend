@@ -38,5 +38,9 @@ export async function postEmployee(employee: Employee) {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/employees`,options);
   const data = await res.json();
+  if(!res.ok){
+   throw new Error(data.error);
+  }
   return data;
+
 }

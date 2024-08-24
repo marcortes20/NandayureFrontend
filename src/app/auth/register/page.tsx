@@ -1,5 +1,5 @@
-import RegisterForm from "@/components/register/register-form";
 import { titleFont } from "@/config/fonts";
+import RegisterForm from "@/modules/auth/register/components/register-form";
 
 export default function RegisterPage() {
   return (
@@ -9,6 +9,7 @@ export default function RegisterPage() {
           Registro de usuario
         </h5>
         <RegisterForm />
+        
       </div>
     </main>
   );

@@ -1,4 +1,4 @@
-import Nav from "@/components/home/nav/nav";
+import Nav from "@/modules/home/nav/nav";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
