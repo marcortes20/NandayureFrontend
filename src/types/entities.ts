@@ -5,8 +5,8 @@ export interface Employee {
   Name: string;
   Surname1: string;
   Surname2: string;
-  Birthdate: Date;
-  HiringDate: Date;
+  Birthdate: string;
+  HiringDate: string;
   Email: string;
   CellPhone: string;
   NumberChlidren: number;
