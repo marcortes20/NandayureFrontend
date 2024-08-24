@@ -3,10 +3,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { postEmployee } from "../server/actions";
+import { useRouter } from "next/navigation";
+
 
 const usePostEmployee = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { handleSubmit, register } = useForm<Employee>();
+  const router = useRouter();
 
   const mutation = useMutation({
       mutationFn: async (data: Employee) => await postEmployee(data),
@@ -19,6 +22,7 @@ const usePostEmployee = () => {
   const onSubmit = handleSubmit(async (data: Employee) => {
       const convertedData = convertEmployeeTypes(data);
       await mutation.mutateAsync(convertedData);
+      router.push('/success');
   });
 
   return {

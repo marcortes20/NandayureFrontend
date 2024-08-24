@@ -9,7 +9,6 @@ export default function RegisterPage() {
           Registro de usuario
         </h5>
         <RegisterForm />
-        
       </div>
     </main>
   );

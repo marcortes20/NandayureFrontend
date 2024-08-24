@@ -31,3 +31,14 @@ export interface User {
   EmployeeId: number;
   Password: string;
 }
+
+
+export interface ForgotPassword {
+  Email: string;
+}
+
+export interface ResetPassword {
+  Password: string;
+  ConfirmPassword: string;
+  token: string;
+}
