@@ -51,15 +51,16 @@ export async function middleware(req: NextRequest) {
   if (response) {
     return response;
   }
-
-  if (pathname.startsWith("/admin") || pathname.startsWith("/auth/register")) {
+  // w
+  if (pathname.startsWith("/admin") ) {
     response = await rolesMiddleware(req, [Roles.admin]);
     if (response) return response;
   }
 
   return NextResponse.next();
 }
+// "/auth/register"
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/auth/register"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", ],
 };

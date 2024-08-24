@@ -1,5 +1,5 @@
-import LoginForm from "@/components/login/login-form";
 import { titleFont } from "@/config/fonts";
+import LoginForm from "@/modules/auth/login/components/login-form";
 
 const LoginPage = () => {
     return (

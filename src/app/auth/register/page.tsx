@@ -1,5 +1,5 @@
-import RegisterForm from "@/components/register/register-form";
 import { titleFont } from "@/config/fonts";
+import RegisterForm from "@/modules/auth/register/components/register-form";
 
 export default function RegisterPage() {
   return (

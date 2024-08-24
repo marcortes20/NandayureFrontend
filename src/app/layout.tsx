@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SessionAuthProvider from "../contexts/SessionAuthProvider";
+import SessionAuthProvider from "../context/SessionAuthProvider";
 import ReactQueryProvider from "@/lib/query-provider";
 
 export const metadata: Metadata = {

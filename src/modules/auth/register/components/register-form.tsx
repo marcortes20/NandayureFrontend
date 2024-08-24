@@ -1,54 +1,14 @@
 'use client'
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Spinner from '../ui/spinner';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { getGenders, getMaritalStatus, postEmployee } from '@/server/actions';
-import { Employee } from '@/types/entities';
-
-export const convertEmployeeTypes = (employee: any): Employee => {
-    return {
-        EmployeeId: Number(employee.EmployeeId),
-        Name: employee.Name,
-        Surname1: employee.Surname1,
-        Surname2: employee.Surname2,
-        Birthdate: new Date(employee.Birthdate),
-        HiringDate: new Date(employee.HiringDate),
-        Email: employee.Email,
-        CellPhone: employee.CellPhone,
-        NumberChlidren: parseInt(employee.NumberChlidren, 10),
-        AvailableVacationDays: parseInt(employee.AvailableVacationDays, 10),
-        GrossSalary: Number(employee.GrossSalary),
-        MaritalStatusId: parseInt(employee.MaritalStatusId, 10),
-        GenderId: parseInt(employee.GenderId, 10),
-    };
-};
+import Spinner from '../../../../components/ui/spinner';
+import useGetGenders from '../hooks/useGetGenders';
+import useGetMaritalStatus from '../hooks/useGetMaritalStatus';
+import usePostEmployee from '../hooks/usePostEmployee';
 
 const RegisterForm = () => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { handleSubmit, register } = useForm<Employee>();
 
-    const { data: genders } = useQuery({
-        queryFn: async () => await getGenders(),
-        queryKey: ["genders"],
-    });
-
-    const { data: maritalStatus } = useQuery({
-        queryFn: async () => await getMaritalStatus(),
-        queryKey: ["maritalStatus"],
-    });
-
-    const mutation = useMutation({
-        mutationFn: async (data: Employee) => await postEmployee(data)
-    });
-
-
-    const onSubmit = handleSubmit(async (data: Employee) => {
-        setIsLoading(true);
-        const convertedData = convertEmployeeTypes(data);
-        await mutation.mutateAsync(convertedData);
-        setIsLoading(false);
-    });
+    const { genders } = useGetGenders();
+    const { maritalStatus } = useGetMaritalStatus();
+    const { onSubmit, register, errorMessage, mutation } = usePostEmployee();
 
     return (
         <form onSubmit={onSubmit} noValidate className="space-y-6">
@@ -238,13 +198,18 @@ const RegisterForm = () => {
                     </div>
                 </div>
             </div>
+            {errorMessage && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span className="block sm:inline">{errorMessage}</span>
+                </div>
+            )}
             <button
                 type="submit"
-                disabled={isLoading}
+                disabled={mutation.isPending}
                 className="px-6 w-32 py-2 sm:py-3 mt-4 text-white bg-dodger-blue-600 rounded-md shadow-sm hover:bg-dodger-blue-600 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500 transition-all mx-auto block"
             >
                 <div className="flex justify-center items-center">
-                    {isLoading ? (
+                    {mutation.isPending ? (
                         <Spinner />
                     ) : (
                         <span>Registrarse</span>

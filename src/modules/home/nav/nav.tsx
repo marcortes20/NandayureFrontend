@@ -2,9 +2,9 @@
 import { titleFont } from "@/config/fonts";
 import Link from "next/link";
 import React from "react";
-import NavLinks from "./nav-links";
 import Image from "next/image";
 import { IoMenuOutline } from "react-icons/io5";
+import NavLinks from "./nav-links";
 
 const Nav = () => {
   return (
