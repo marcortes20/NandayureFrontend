@@ -141,18 +141,6 @@ const RegisterForm = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="GrossSalary" className="block text-sm font-medium text-gray-900">
-                                Salario Bruto
-                            </label>
-                            <input
-                                type="number"
-                                placeholder="Escribe tu salario bruto aquí"
-                                id="GrossSalary"
-                                className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
-                                {...register('GrossSalary')}
-                            />
-                        </div>
-                        <div>
                             <label htmlFor="AvailableVacationDays" className="block text-sm font-medium text-gray-900">
                                 Días de Vacaciones Disponibles
                             </label>

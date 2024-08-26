@@ -45,7 +45,6 @@ export const convertEmployeeTypes = (employee: any): Employee => {
       CellPhone: employee.CellPhone,
       NumberChlidren: parseInt(employee.NumberChlidren, 10),
       AvailableVacationDays: parseInt(employee.AvailableVacationDays, 10),
-      GrossSalary: Number(employee.GrossSalary),
       MaritalStatusId: parseInt(employee.MaritalStatusId, 10),
       GenderId: parseInt(employee.GenderId, 10),
   };
