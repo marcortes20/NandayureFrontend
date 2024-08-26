@@ -39,28 +39,35 @@ async function rolesMiddleware(req: NextRequest, roles: string[]) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   } catch (error) {
     console.error("Error al verificar roles:", error);
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 }
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  let response = await authMiddleware(req);
+  // Allow access to static files
+  if (pathname.startsWith('/_next') || pathname.startsWith('/static')) {
+    return NextResponse.next();
+  }
 
+  // Allow access to public auth routes
+  if (pathname.startsWith('/auth')) {
+    if (pathname === '/auth/register') {
+      return await rolesMiddleware(req, [Roles.admin]);
+    }
+    return NextResponse.next();
+  }
+
+  // Protect the root route and all other routes
+  let response = await authMiddleware(req);
   if (response) {
     return response;
-  }
-  // w
-  if (pathname.startsWith("/admin") ) {
-    response = await rolesMiddleware(req, [Roles.admin]);
-    if (response) return response;
   }
 
   return NextResponse.next();
 }
-// "/auth/register"
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", ],
+  matcher: ['/', '/auth/:path*', '/_next/:path*', '/static/:path*', '/admin/:path*'],
 };

@@ -9,7 +9,7 @@ const SideBar = () => {
         <div className="flex w-72 h-full flex-col px-3 py-4 md:px-2 border rounded">
             <Link
                 className="mb-2 flex h-20 items-center justify-center rounded-m p-4 md:h-40"
-                href="/dashboard"
+                href="/"
             >
                 <Image src="/LogoMuni.png" alt="logo" width={100} height={100} />
             </Link>
