@@ -5,7 +5,7 @@ import usePostSendEmail from '../hooks/usePostSendEmail'
 import Spinner from '@/components/ui/spinner'
 
 const ForgotPasswordForm = () => {
-  const { errorMessage, register, onSubmit, mutation, errors } = usePostSendEmail()
+  const { errorMessage, register, onSubmit, mutation } = usePostSendEmail()
   return (
     <form onSubmit={onSubmit}>
       <div className="mt-4">
@@ -21,7 +21,6 @@ const ForgotPasswordForm = () => {
           className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
         />
       </div>
-      {errors?.Email && <p className="text-red-500 text-sm mt-2">{errors.Email.message}</p>}
       {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
       <button
         type="submit"

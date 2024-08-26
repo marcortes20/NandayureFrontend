@@ -4,17 +4,13 @@ import { useForm } from 'react-hook-form';
 import { postForgotPassword } from "../server/actions";
 import { ForgotPassword } from "@/types/entities";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ForgotPasswordSchema } from "@/lib/zod";
 
 const usePostSendEmail = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
     handleSubmit,
     register,
-    formState: { errors },
-  } = useForm<ForgotPassword>({
-    resolver: zodResolver(ForgotPasswordSchema),
-  });
+  } = useForm<ForgotPassword>();
 
   const mutation = useMutation({
     mutationFn: async (data: ForgotPassword) => await postForgotPassword(data),
@@ -34,7 +30,6 @@ const usePostSendEmail = () => {
     onSubmit,
     register,
     mutation,
-    errors
   };
 }
 export default usePostSendEmail;

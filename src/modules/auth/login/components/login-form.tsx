@@ -39,7 +39,7 @@ const LoginForm = () => {
             setIsLoading(false);
             return;
         } else {
-            router.push("/dashboard");
+            router.push("/");
         }
     });
     return (

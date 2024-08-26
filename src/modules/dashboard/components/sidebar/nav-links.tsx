@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-    { name: 'Inicio', href: '/dashboard' },
+    { name: 'Inicio', href: '/' },
     { name: 'Creación de planillas', href: '/planillas' },
     { name: 'Manejo de expedientes digitales', href: '/expedientes' },
     { name: 'Generación de constancias de salarios', href: '/constancias' },
