@@ -1,47 +1,19 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import Spinner from "../../../../components/ui/spinner";
-import { LoginSchema } from "@/lib/zod";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import usePostLogin from "../hooks/usePostLogin";
 
-interface FormFields {
-    EmployeeId: string;
-    Password: string;
-}
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
-
     const {
-        handleSubmit,
         register,
-        formState: { errors },
-    } = useForm<FormFields>({
-        resolver: zodResolver(LoginSchema),
-    });
-    const onSubmit = handleSubmit(async ({ EmployeeId, Password }) => {
-        setIsLoading(true);
-        const responseNextAuth = await signIn("credentials", {
-            EmployeeId,
-            Password,
-            redirect: false,
-        });
-
-        if (responseNextAuth?.error) {
-            setError(responseNextAuth.error);
-            setIsLoading(false);
-            return;
-        } else {
-            router.push("/");
-        }
-    });
+        errors,
+        onSubmit,
+        isLoading,
+        error,
+    } = usePostLogin();
     return (
         <form onSubmit={onSubmit} noValidate>
             <div>

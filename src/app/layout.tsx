@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SessionAuthProvider from "../context/SessionAuthProvider";
 import ReactQueryProvider from "@/lib/query-provider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,6 +19,10 @@ export default function RootLayout({
       <body className="">
         <SessionAuthProvider>
           <ReactQueryProvider>
+            <Toaster
+              position="top-right"
+              reverseOrder={false}
+            />
             {children}
           </ReactQueryProvider>
         </SessionAuthProvider>
