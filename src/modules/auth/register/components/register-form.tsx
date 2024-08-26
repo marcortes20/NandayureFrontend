@@ -11,11 +11,11 @@ const RegisterForm = () => {
     const { onSubmit, register, errorMessage, mutation } = usePostEmployee();
 
     return (
-        <form onSubmit={onSubmit} noValidate className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <form onSubmit={onSubmit} noValidate className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Información Personal */}
                 <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-4">Información Personal</h2>
+                    <h2 className="text-lg font-medium text-gray-900 mb-3">Información Personal</h2>
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="Name" className="block text-sm font-medium text-gray-900">
@@ -81,29 +81,13 @@ const RegisterForm = () => {
                                 ))}
                             </select>
                         </div>
-                        <div>
-                            <label htmlFor="MaritalStatusId" className="block text-sm font-medium text-gray-900">
-                                Estado Civil
-                            </label>
-                            <select
-                                id="MaritalStatusId"
-                                className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
-                                {...register('MaritalStatusId')}
-                            >
-                                <option>Selecciona tu estado civil</option>
-                                {maritalStatus?.map((status: { MaritalStatusId: number; Name: string }) => (
-                                    <option key={status.MaritalStatusId} value={status.MaritalStatusId}>
-                                        {status.Name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                      
                     </div>
                 </div>
 
                 {/* Información Laboral */}
                 <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-4">Información Laboral</h2>
+                    <h2 className="text-lg font-medium text-gray-900 mb-3">Información Laboral</h2>
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="EmployeeId" className="block text-sm font-medium text-gray-900">
@@ -152,12 +136,29 @@ const RegisterForm = () => {
                                 {...register('AvailableVacationDays')}
                             />
                         </div>
+                        <div>
+                            <label htmlFor="MaritalStatusId" className="block text-sm font-medium text-gray-900">
+                                Estado Civil
+                            </label>
+                            <select
+                                id="MaritalStatusId"
+                                className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
+                                {...register('MaritalStatusId')}
+                            >
+                                <option>Selecciona tu estado civil</option>
+                                {maritalStatus?.map((status: { MaritalStatusId: number; Name: string }) => (
+                                    <option key={status.MaritalStatusId} value={status.MaritalStatusId}>
+                                        {status.Name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 {/* Contacto */}
                 <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-4">Información de Contacto</h2>
+                    <h2 className="text-lg font-medium text-gray-900 mb-3">Información de Contacto</h2>
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="Email" className="block text-sm font-medium text-gray-900">

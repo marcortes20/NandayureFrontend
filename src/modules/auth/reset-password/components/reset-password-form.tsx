@@ -78,7 +78,9 @@ const ResetPasswordForm = ({ token }: Props) => {
             <Spinner />
           </div>
         ) : (
-          <span>Iniciar sesión</span>
+          <span>
+            Enviar
+          </span>
         )}
       </button>
     </form>

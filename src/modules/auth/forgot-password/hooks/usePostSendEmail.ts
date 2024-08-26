@@ -3,10 +3,14 @@ import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { postForgotPassword } from "../server/actions";
 import { ForgotPassword } from "@/types/entities";
-import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { set } from "zod";
 
 const usePostSendEmail = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [emailSent, setEmailSent] = useState(false)
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -21,8 +25,21 @@ const usePostSendEmail = () => {
   })
 
   const onSubmit = handleSubmit(async (data: ForgotPassword) => {
-    console.log(data);
-    await mutation.mutateAsync(data);
+    try {
+      const mutationPromise = mutation.mutateAsync(data);
+      toast.promise(mutationPromise, {
+        loading: 'Enviando correo...',
+        success: 'Correo enviado',
+        error: 'Error al enviar correo'
+      });
+      setEmailSent(true)
+      await mutationPromise;
+    }
+    catch (error: any) {
+      console.error(error);
+      setEmailSent(false)
+      setErrorMessage(error.message);
+    }
   });
 
   return {
@@ -30,6 +47,7 @@ const usePostSendEmail = () => {
     onSubmit,
     register,
     mutation,
+    emailSent
   };
 }
 export default usePostSendEmail;
