@@ -1,13 +1,15 @@
-'use client'
+"use client";
 import { useState } from "react";
-import usePostResetPassword from "../hooks/usePostResetPasssword"
+import usePostResetPassword from "../hooks/usePostResetPasssword";
 import Spinner from "@/components/ui/spinner";
 interface Props {
-  token: string
+  token: string;
 }
 const ResetPasswordForm = ({ token }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { onSubmit, register, errorMessage, mutation, errors } = usePostResetPassword({ token })
+  const { onSubmit, register, mutation, errors } = usePostResetPassword({
+    token,
+  });
   return (
     <form onSubmit={onSubmit} noValidate>
       <div className="mt-3">
@@ -18,16 +20,14 @@ const ResetPasswordForm = ({ token }: Props) => {
           Contraseña
         </label>
         <input
-          type={showPassword ? 'text' : 'password'}
+          type={showPassword ? "text" : "password"}
           placeholder="Escribe tu contraseña aquí"
           id="password"
-          {...register('Password')}
+          {...register("Password")}
           className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
         />
         {errors?.Password && (
-          <div className="text-red-500 text-sm">
-            {errors.Password.message}
-          </div>
+          <div className="text-red-500 text-sm">{errors.Password.message}</div>
         )}
       </div>
       <div className="mt-3">
@@ -38,10 +38,10 @@ const ResetPasswordForm = ({ token }: Props) => {
           Confirmar contraseña
         </label>
         <input
-          type={showPassword ? 'text' : 'password'}
+          type={showPassword ? "text" : "password"}
           placeholder="Confirma tu contraseña aquí"
           id="confirmPassword"
-          {...register('ConfirmPassword')}
+          {...register("ConfirmPassword")}
           className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
         />
         {errors?.ConfirmPassword && (
@@ -58,16 +58,14 @@ const ResetPasswordForm = ({ token }: Props) => {
             checked={showPassword}
             onChange={(e) => setShowPassword(e.target.checked)}
           />
-          <span className="ml-3 text-sm text-gray-600">
-            Mostrar contraseña
-          </span>
+          <span className="ml-3 text-sm text-gray-600">Mostrar contraseña</span>
         </label>
       </div>
-      {errorMessage && (
+      {/* {errorMessage && (
         <div className="mt-3 text-red-500 text-sm">
           {errorMessage}
         </div>
-      )}
+      )} */}
       <button
         type="submit"
         disabled={mutation.isPending}
@@ -78,13 +76,11 @@ const ResetPasswordForm = ({ token }: Props) => {
             <Spinner />
           </div>
         ) : (
-          <span>
-            Enviar
-          </span>
+          <span>Enviar</span>
         )}
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default ResetPasswordForm
+export default ResetPasswordForm;

@@ -201,7 +201,7 @@ const RegisterForm = () => {
                     {mutation.isPending ? (
                         <Spinner />
                     ) : (
-                        <span>Registrarse</span>
+                        <span>Registrar</span>
                     )}
                 </div>
             </button>
