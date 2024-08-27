@@ -13,7 +13,7 @@ const links = [
     { name: 'Control de marcas de ingresos y salidas', href: '/marcas' },
 ];
 
-export default function NavLinks() {
+export default function NavLinks ({isOpen} : {isOpen : boolean}){ 
     const pathname = usePathname()
     return (
         <>
@@ -24,7 +24,10 @@ export default function NavLinks() {
                         href={link.href}
                         className={clsx(`m-2 p-2 rounded-md transition-all hover:bg-gray-200
                 ${pathname === link.href ? 'text-dodger-blue-600' : ''}
+                 ${isOpen ? '' : 'hidden'}
                 `)}
+
+                title={link.name}
                     >
                         {link.name}
                     </Link >
@@ -33,3 +36,4 @@ export default function NavLinks() {
         </>
     );
 }
+
