@@ -4,17 +4,19 @@ import { useForm } from 'react-hook-form';
 import { postForgotPassword } from "../server/actions";
 import { ForgotPassword } from "@/types/entities";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import { set } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { EmailSendSchema } from "@/lib/zod";
 
 const usePostSendEmail = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [emailSent, setEmailSent] = useState(false)
-  const router = useRouter();
   const {
     handleSubmit,
     register,
-  } = useForm<ForgotPassword>();
+    formState: { errors }
+  } = useForm<ForgotPassword>({
+    resolver: zodResolver(EmailSendSchema)
+  });
 
   const mutation = useMutation({
     mutationFn: async (data: ForgotPassword) => await postForgotPassword(data),
@@ -46,7 +48,8 @@ const usePostSendEmail = () => {
     onSubmit,
     register,
     mutation,
-    emailSent
+    emailSent,
+    errors
   };
 }
 export default usePostSendEmail;

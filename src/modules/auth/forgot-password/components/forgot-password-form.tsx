@@ -6,10 +6,10 @@ import Spinner from '@/components/ui/spinner'
 import { titleFont } from '@/config/fonts'
 
 const ForgotPasswordForm = () => {
-  const { errorMessage, register, onSubmit, mutation, emailSent } = usePostSendEmail()
+  const { errorMessage, register, onSubmit, mutation, emailSent,errors } = usePostSendEmail()
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} noValidate>
       {!emailSent ? (
         <>
           <h5 className={`${titleFont.className} mb-3 text-base font-semibold text-gray-900 md:text-xl`}>
@@ -30,6 +30,7 @@ const ForgotPasswordForm = () => {
               placeholder="Escribe tu correo electrónico aquí"
               className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
             />
+            {errors.Email && <p className="text-red-500 text-sm mt-2">{errors.Email.message}</p>}
           </div>
           {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
           <button
