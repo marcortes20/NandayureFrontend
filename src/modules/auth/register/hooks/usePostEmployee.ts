@@ -5,11 +5,15 @@ import { useForm } from 'react-hook-form';
 import { postEmployee } from "../server/actions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterSchema } from "@/lib/zod";
 
 
 const usePostEmployee = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { handleSubmit, register } = useForm<Employee>();
+  const { handleSubmit, register, formState: { errors } } = useForm<Employee>({
+    resolver: zodResolver(RegisterSchema)
+  });
   const router = useRouter();
 
   const mutation = useMutation({
@@ -40,7 +44,8 @@ const usePostEmployee = () => {
     errorMessage,
     onSubmit,
     register,
-    mutation
+    mutation,
+    errors
   };
 }
 

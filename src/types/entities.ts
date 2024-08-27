@@ -5,13 +5,12 @@ export interface Employee {
   Name: string;
   Surname1: string;
   Surname2: string;
-  Birthdate: string;
-  HiringDate: string;
+  Birthdate: string | Date;
+  HiringDate: string | Date;
   Email: string;
   CellPhone: string;
   NumberChlidren: number;
   AvailableVacationDays: number;
-  GrossSalary: number;
   MaritalStatusId: number;
   GenderId: number;
 }

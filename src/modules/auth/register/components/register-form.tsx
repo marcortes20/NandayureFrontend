@@ -8,7 +8,7 @@ const RegisterForm = () => {
 
     const { genders } = useGetGenders();
     const { maritalStatus } = useGetMaritalStatus();
-    const { onSubmit, register, errorMessage, mutation } = usePostEmployee();
+    const { onSubmit, register, errorMessage, mutation,errors } = usePostEmployee();
 
     return (
         <form onSubmit={onSubmit} noValidate className="space-y-4">
@@ -28,6 +28,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('Name')}
                             />
+                            {errors.Name && <span className="text-red-500 text-sm">{errors.Name.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="Surname1" className="block text-sm font-medium text-gray-900">
@@ -40,6 +41,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('Surname1')}
                             />
+                            {errors.Surname1 && <span className="text-red-500 text-sm">{errors.Surname1.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="Surname2" className="block text-sm font-medium text-gray-900">
@@ -52,6 +54,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('Surname2')}
                             />
+                            {errors.Surname2 && <span className="text-red-500 text-sm">{errors.Surname2.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="Birthdate" className="block text-sm font-medium text-gray-900">
@@ -63,6 +66,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('Birthdate')}
                             />
+                            {errors.Birthdate && <span className="text-red-500 text-sm">{errors.Birthdate.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="GenderId" className="block text-sm font-medium text-gray-900">
@@ -80,8 +84,8 @@ const RegisterForm = () => {
                                     </option>
                                 ))}
                             </select>
+                            {errors.GenderId && <span className="text-red-500 text-sm">{errors.GenderId.message}</span>}
                         </div>
-                      
                     </div>
                 </div>
 
@@ -100,6 +104,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('EmployeeId')}
                             />
+                            {errors.EmployeeId && <span className="text-red-500 text-sm">{errors.EmployeeId.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="HiringDate" className="block text-sm font-medium text-gray-900">
@@ -111,6 +116,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('HiringDate')}
                             />
+                            {errors.HiringDate && <span className="text-red-500 text-sm">{errors.HiringDate.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="NumberChlidren" className="block text-sm font-medium text-gray-900">
@@ -123,6 +129,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('NumberChlidren')}
                             />
+                            {errors.NumberChlidren && <span className="text-red-500 text-sm">{errors.NumberChlidren.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="AvailableVacationDays" className="block text-sm font-medium text-gray-900">
@@ -135,6 +142,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('AvailableVacationDays')}
                             />
+                            {errors.AvailableVacationDays && <span className="text-red-500 text-sm">{errors.AvailableVacationDays.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="MaritalStatusId" className="block text-sm font-medium text-gray-900">
@@ -152,6 +160,7 @@ const RegisterForm = () => {
                                     </option>
                                 ))}
                             </select>
+                            {errors.MaritalStatusId && <span className="text-red-500 text-sm">{errors.MaritalStatusId.message}</span>}
                         </div>
                     </div>
                 </div>
@@ -171,6 +180,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('Email')}
                             />
+                            {errors.Email && <span className="text-red-500 text-sm">{errors.Email.message}</span>}
                         </div>
                         <div>
                             <label htmlFor="CellPhone" className="block text-sm font-medium text-gray-900">
@@ -183,6 +193,7 @@ const RegisterForm = () => {
                                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
                                 {...register('CellPhone')}
                             />
+                            {errors.CellPhone && <span className="text-red-500 text-sm">{errors.CellPhone.message}</span>}
                         </div>
                     </div>
                 </div>
