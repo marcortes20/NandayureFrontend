@@ -44,7 +44,7 @@ const usePostResetPassword = ({ token }: Props) => {
         },
         { duration: 2500 }
       );
-      await response;
+
       // Extract employeeId and password from the response
       const { EmployeeId } = response;
       const { Password: Password } = data;

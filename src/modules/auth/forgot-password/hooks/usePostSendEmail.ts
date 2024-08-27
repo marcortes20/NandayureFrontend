@@ -26,8 +26,7 @@ const usePostSendEmail = () => {
 
   const onSubmit = handleSubmit(async (data: ForgotPassword) => {
     try {
-      const mutationPromise = mutation.mutateAsync(data);
-      toast.promise(mutationPromise, {
+      const mutationPromise = await toast.promise(mutation.mutateAsync(data), {
         loading: 'Enviando correo...',
         success: 'Correo enviado',
         error: 'Error al enviar correo'
