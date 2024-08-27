@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react'
+import { create } from 'zustand';
+ 
+interface State {
+    isOpen: boolean;
+    MenuIsOpen: () => void;
+    MenuIsClose: ()=> void; 
+    
+ }
 
-export const useSidebarState = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(true);
-
-    useEffect(() => {
-        const storedState = localStorage.getItem('sidebarOpen');
-        if (storedState !== null) {
-            setIsOpen(storedState === 'true');
-        }
-    }, []);
-
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-        localStorage.setItem('sidebarOpen', (!isOpen).toString());
-    };
-
-    return { isOpen, toggleSidebar };
-}
+export const useSidebarState = create<State> () ((set) => ({
+  isOpen : false,
+  MenuIsOpen:  () => set({isOpen: true}),
+  MenuIsClose:  () => set({isOpen: false}),
+ 
+}));

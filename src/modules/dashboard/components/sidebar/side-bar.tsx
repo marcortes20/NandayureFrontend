@@ -8,8 +8,12 @@ import { HiMenuAlt2, HiX } from 'react-icons/hi'
 import { useSidebarState } from '../hooks/useSidebar'
 
 
+
 const SideBar = () => {
-    const { isOpen, toggleSidebar } = useSidebarState();
+   const isOpen = useSidebarState(state => state.isOpen);
+   const MenuIsOpen = useSidebarState(state => state.MenuIsOpen);
+   const MenuIsClose = useSidebarState(state => state.MenuIsClose);
+    
 
     return (
         <div className="flex h-full">
@@ -19,7 +23,7 @@ const SideBar = () => {
             )}>
          
                 <button
-                    onClick={toggleSidebar}
+                  onClick={isOpen ? MenuIsClose : MenuIsOpen}
                     className="fixed top-2 left-3 z-50 p-2 bg-white rounded-md shadow-md"
 
                     aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
