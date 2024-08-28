@@ -5,11 +5,8 @@ import { usePathname } from "next/navigation";
 const links = [
     { name: 'Inicio', href: '/' },
     { name: 'Creación de planillas', href: '/planillas' },
-    { name: 'Manejo de expedientes digitales', href: '/expedientes' },
-    { name: 'Generación de constancias de salarios', href: '/constancias' },
-    { name: 'Gestión de vacaciones', href: '/vacaciones' },
-    { name: 'Gestión de permisos sin goce salarial', href: '/permisos' },
-    { name: 'Gestión de licencias por maternidad', href: '/licencias' },
+    { name: 'Gestión de documentos', href: '/documentos' },
+    { name: 'Gestión de solicitudes', href: '/solicitudes' },
     { name: 'Control de marcas de ingresos y salidas', href: '/marcas' },
 ];
 
