@@ -1,11 +1,13 @@
-'use client';
-import Link from 'next/link';
-import React from 'react';
-import NavLinks from './nav-links';
-import Image from 'next/image';
-import clsx from 'clsx';
-import { HiMenuAlt2, HiX } from 'react-icons/hi';
-import { useSidebarState } from '../hooks/useSidebar';
+'use client'
+import Link from 'next/link'
+import React from 'react'
+import NavLinks from './nav-links'
+import Image from 'next/image'
+import clsx from 'clsx'
+import { HiMenuAlt2, HiX } from 'react-icons/hi'
+import { useSidebarState } from '../../hooks/useSidebar'
+
+
 
 const SideBar = () => {
   const isOpen = useSidebarState((state) => state.isOpen);
