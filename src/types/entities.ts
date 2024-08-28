@@ -41,3 +41,9 @@ export interface ResetPassword {
   ConfirmPassword: string;
   token: string;
 }
+
+export interface ChangePassword {
+  OldPassword: string;
+  Password: string;
+  ConfirmPassword: string;
+}
