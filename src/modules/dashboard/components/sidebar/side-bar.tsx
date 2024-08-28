@@ -5,7 +5,7 @@ import NavLinks from './nav-links'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { HiMenuAlt2, HiX } from 'react-icons/hi'
-import { useSidebarState } from '../hooks/useSidebar'
+import { useSidebarState } from '../../hooks/useSidebar'
 
 
 
