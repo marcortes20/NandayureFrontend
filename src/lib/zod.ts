@@ -2,10 +2,10 @@ import { string, z } from "zod";
 
 export const LoginSchema = z.object({
     EmployeeId: z.string()
-    .min(1, "El número de identificación es requerido")
-    .refine((val) => !isNaN(Number(val)), {
-        message: "El número de identificación no debe incluir caracteres especiales.",
-    }),
+        .min(1, "El número de identificación es requerido")
+        .refine((val) => !isNaN(Number(val)), {
+            message: "El número de identificación no debe incluir caracteres especiales.",
+        }),
     Password: string({ required_error: "La contraseña es requerida" })
         .min(1, "La contraseña es requerida")
         .min(6, "La contraseña debe tener al menos 6 caracteres")
@@ -69,3 +69,20 @@ export const RegisterSchema = z.object({
         message: "El género debe ser un número.",
     }),
 });
+
+export const ChangePasswordSchema = z
+    .object({
+        OldPassword: string({ required_error: "La contraseña actual es requerida" })
+            .min(6, "La contraseña debe tener al menos 6 caracteres")
+            .max(32, "La contraseña no puede tener más de 32 caracteres"),
+        Password: string({ required_error: "La contraseña es requerida" })
+            .min(6, "La contraseña debe tener al menos 6 caracteres")
+            .max(32, "La contraseña no puede tener más de 32 caracteres"),
+        ConfirmPassword: string({ required_error: "La confirmación de la contraseña es requerida" })
+            .min(6, "La contraseña debe tener al menos 6 caracteres")
+            .max(32, "La contraseña no puede tener más de 32 caracteres"),
+    })
+    .refine((data) => data.Password === data.ConfirmPassword, {
+        message: "Las contraseñas no coinciden",
+        path: ["ConfirmPassword"],
+    });
