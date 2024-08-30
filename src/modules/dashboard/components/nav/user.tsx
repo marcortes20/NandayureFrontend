@@ -1,4 +1,5 @@
 'use client';
+import useGetRoles from '@/components/hooks/useDecodeToken';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import Link from 'next/link';
 import { IoPersonOutline } from 'react-icons/io5';
 
 export default function User() {
+  const { roles } = useGetRoles();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,9 +25,11 @@ export default function User() {
         <DropdownMenuLabel>Mi perfil</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Configuración</DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href={'/auth/register'}>Registrar usuario</Link>
-        </DropdownMenuItem>
+        {roles && roles.includes('RH') && (
+          <DropdownMenuItem>
+            <Link href={'/auth/register'}>Registrar usuario</Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem>Ayuda</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
