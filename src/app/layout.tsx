@@ -1,7 +1,7 @@
-import "./globals.css";
-import SessionAuthProvider from "../context/SessionAuthProvider";
-import ReactQueryProvider from "@/lib/query-provider";
-import { Toaster } from "react-hot-toast";
+import './globals.css';
+import SessionAuthProvider from '../context/SessionAuthProvider';
+import ReactQueryProvider from '@/lib/query-provider';
+import { Toaster } from 'react-hot-toast';
 
 export default function RootLayout({
   children,
@@ -13,10 +13,7 @@ export default function RootLayout({
       <body className="">
         <SessionAuthProvider>
           <ReactQueryProvider>
-            <Toaster
-              position="top-right"
-              reverseOrder={false}
-            />
+            <Toaster position="top-right" reverseOrder={false} />
             {children}
           </ReactQueryProvider>
         </SessionAuthProvider>
