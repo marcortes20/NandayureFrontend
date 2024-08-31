@@ -1,5 +1,5 @@
-"use client";
-import Image from "next/image";
+'use client';
+import Image from 'next/image';
 
 export default function ErrorPage() {
   return (
@@ -7,7 +7,7 @@ export default function ErrorPage() {
       <div className="py-5 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-sm text-center">
           <Image
-            src={"/Error.svg"}
+            src={'/Error.svg'}
             alt="Developer"
             width={350}
             height={350}

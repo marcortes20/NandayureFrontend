@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function SuccessPage() {
   return (
@@ -7,7 +7,7 @@ export default function SuccessPage() {
       <div className="py-5 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-sm text-center">
           <Image
-            src={"/Success.svg"}
+            src={'/Success.svg'}
             alt="Developer"
             width={350}
             height={350}
@@ -20,7 +20,7 @@ export default function SuccessPage() {
             Todo ha salido bien
           </p>
         </div>
-        <Link href={"/"} className="flex justify-center">
+        <Link href={'/'} className="flex justify-center">
           <button
             type="submit"
             className="block w-3/4 justify-center px-3 py-2 sm:py-3 mt-4 text-white bg-apple-500 rounded-md shadow-sm hover:bg-apple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
