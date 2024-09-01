@@ -7,7 +7,7 @@ interface State {
 }
 
 export const useSidebarState = create<State>()((set) => ({
-  isOpen: false,
+  isOpen: true,
   MenuIsOpen: () => set({ isOpen: true }),
   MenuIsClose: () => set({ isOpen: false }),
 }));

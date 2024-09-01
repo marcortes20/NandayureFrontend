@@ -23,7 +23,7 @@ const SideBar = () => {
       >
         <button
           onClick={isOpen ? MenuIsClose : MenuIsOpen}
-          className="fixed top-2 left-3 z-50 p-2 bg-white rounded-md shadow-md"
+          className="fixed top-2 left-3 z-50 p-2 transition-all duration-300 ease-in-out"
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           {isOpen ? (

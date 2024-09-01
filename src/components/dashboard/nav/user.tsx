@@ -1,5 +1,4 @@
 'use client';
-import useGetRoles from '@/hooks/common/useDecodeToken';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import useGetRoles from '@/hooks/common/useGetRoles';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { IoPersonOutline } from 'react-icons/io5';
@@ -24,7 +24,9 @@ export default function User() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Mi perfil</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Configuración</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/profile">Configuración </Link>
+        </DropdownMenuItem>
         {roles && roles.includes('RH') && (
           <DropdownMenuItem>
             <Link href={'/auth/register'}>Registrar usuario</Link>
