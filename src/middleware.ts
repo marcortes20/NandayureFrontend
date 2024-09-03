@@ -1,6 +1,5 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
-
 import { jwtDecode } from 'jwt-decode';
 import { Payload } from './types/authResponseTypes';
 import { Roles } from './lib/constants';
@@ -59,6 +58,14 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // Protect the profile and security routes
+  if (pathname.startsWith('/profile') || pathname.startsWith('/security')) {
+    let response = await authMiddleware(req);
+    if (response) {
+      return response;
+    }
+  }
+
   // Protect the root route and all other routes
   let response = await authMiddleware(req);
   if (response) {
@@ -75,5 +82,7 @@ export const config = {
     '/_next/:path*',
     '/static/:path*',
     '/admin/:path*',
+    '/profile/:path*',
+    '/security/:path*',
   ],
 };
