@@ -1,10 +1,6 @@
-const ProfilePage = () => {
-  return (
-    <div>
-      <h1>Profile Page</h1>
-      <p>This is a profile page</p>
-    </div>
-  );
-};
+import ProfilePage from "./components";
 
-export default ProfilePage;
+
+export default function ProfileView() {
+  return <ProfilePage />;
+}
