@@ -1,30 +1,30 @@
-import type { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
 
       credentials: {
         EmployeeId: {
-          label: "Identificacion",
-          type: "text",
-          placeholder: "5-5555-5555",
+          label: 'Identificacion',
+          type: 'text',
+          placeholder: '5-5555-5555',
         },
-        Password: { label: "Contraseña", type: "password" },
+        Password: { label: 'Contraseña', type: 'password' },
       },
 
       async authorize(credentials) {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
           {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify({
               EmployeeId: credentials?.EmployeeId,
               Password: credentials?.Password,
             }),
-            headers: { "Content-Type": "application/json" },
-          }
+            headers: { 'Content-Type': 'application/json' },
+          },
         );
         const user = await res.json();
         if (res.ok && user) {
@@ -56,6 +56,6 @@ export const options: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
 
   pages: {
-    signIn: "/auth/login",
+    signIn: '/auth/login',
   },
 };

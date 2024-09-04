@@ -1,4 +1,4 @@
-import { User } from "lucide-react";
+import { User } from 'lucide-react';
 
 export interface Employee {
   EmployeeId: number;
@@ -30,7 +30,6 @@ export interface User {
   EmployeeId: number;
   Password: string;
 }
-
 
 export interface ForgotPassword {
   Email: string;

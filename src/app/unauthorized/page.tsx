@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 export default function Page() {
   return (
@@ -8,7 +8,7 @@ export default function Page() {
       <div className="py-5 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-sm text-center">
           <Image
-            src={"/Unauthorized.svg"}
+            src={'/Unauthorized.svg'}
             alt="Developer"
             width={350}
             height={350}
@@ -25,7 +25,7 @@ export default function Page() {
             No tienes permisos para acceder a esta página. Por favor inicia
             sesión en otra cuenta.
           </p>
-          <Link href={"/"} className="flex justify-center">
+          <Link href={'/'} className="flex justify-center">
             <button
               type="submit"
               className="block w-3/4 justify-center px-3 py-2 sm:py-3 mt-4 text-white bg-apple-500 rounded-md shadow-sm hover:bg-apple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"

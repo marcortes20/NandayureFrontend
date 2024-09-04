@@ -1,9 +1,8 @@
-import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
-
-import { jwtDecode } from "jwt-decode";
-import { Payload } from "./types/authResponseTypes";
-import { Roles } from "./constants/Roles";
+import { getToken } from 'next-auth/jwt';
+import { NextRequest, NextResponse } from 'next/server';
+import { jwtDecode } from 'jwt-decode';
+import { Payload } from './types/authResponseTypes';
+import { Roles } from './lib/constants';
 
 async function authMiddleware(req: NextRequest) {
   try {
@@ -16,10 +15,10 @@ async function authMiddleware(req: NextRequest) {
       return null;
     }
 
-    return NextResponse.redirect(new URL("/auth/login", req.url));
+    return NextResponse.redirect(new URL('/auth/login', req.url));
   } catch (error) {
-    console.error("Error al obtener el token:", error);
-    return NextResponse.redirect(new URL("/auth/login", req.url));
+    console.error('Error al obtener el token:', error);
+    return NextResponse.redirect(new URL('/auth/login', req.url));
   }
 }
 
@@ -36,10 +35,10 @@ async function rolesMiddleware(req: NextRequest, roles: string[]) {
       return null;
     }
     console.log(tokenDecoded);
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
+    return NextResponse.redirect(new URL('/unauthorized', req.url));
   } catch (error) {
-    console.error("Error al verificar roles:", error);
-    return NextResponse.redirect(new URL("/", req.url));
+    console.error('Error al verificar roles:', error);
+    return NextResponse.redirect(new URL('/', req.url));
   }
 }
 
@@ -59,6 +58,14 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // Protect the profile and security routes
+  if (pathname.startsWith('/profile') || pathname.startsWith('/security')) {
+    let response = await authMiddleware(req);
+    if (response) {
+      return response;
+    }
+  }
+
   // Protect the root route and all other routes
   let response = await authMiddleware(req);
   if (response) {
@@ -69,5 +76,13 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/auth/:path*', '/_next/:path*', '/static/:path*', '/admin/:path*'],
+  matcher: [
+    '/',
+    '/auth/:path*',
+    '/_next/:path*',
+    '/static/:path*',
+    '/admin/:path*',
+    '/profile/:path*',
+    '/security/:path*',
+  ],
 };
