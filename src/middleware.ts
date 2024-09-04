@@ -53,9 +53,9 @@ export async function middleware(req: NextRequest) {
 
   // Allow access to public auth routes
   if (pathname.startsWith('/auth')) {
-    if (pathname === '/auth/register') {
-      return await rolesMiddleware(req, [Roles.rh]);
-    }
+   // if (pathname === '/auth/register') {
+     // return await rolesMiddleware(req, [Roles.rh]);
+    //}
     return NextResponse.next();
   }
 
