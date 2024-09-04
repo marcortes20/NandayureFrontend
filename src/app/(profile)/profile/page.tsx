@@ -1,34 +1,35 @@
 'use client';
 
-import { IoPersonOutline } from 'react-icons/io5'; 
+import { IoPersonOutline } from 'react-icons/io5';
 import { useSession } from 'next-auth/react';
 import useGetByIdEmployee from '@/hooks/profile/useGetByIdEmployee';
-import { number } from 'zod';
+import { format, addDay } from '@formkit/tempo';
 
 const ProfilePage = () => {
-  
   const { data: session } = useSession();
-  const employeeId = session?.user?.employeeId; 
+  const employeeId = session?.user?.employeeId;
 
- 
-  const { employeeById: employeeData } = useGetByIdEmployee( {employeeId} );
+  const { employeeById: employeeData } = useGetByIdEmployee({ employeeId });
 
- 
   if (!employeeData) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
+  const inputDate = employeeData.Birthdate;
+  const newDate = addDay(inputDate, 1);
+  const formattedData = format({ date: newDate, format: "D MMMM YYYY", locale: "es" })
 
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
+    <div className="min-h-screen p-6">
       <div className="max-w-3x3 mx-auto bg-white shadow-md rounded-lg overflow-hidden">
         <div className="p-6">
           <h1 className="text-3x3 font-bold mb-6">Cuenta</h1>
           <div className="mb-8">
             <h2 className="text-xl font-semibold mb-2">Perfil</h2>
             <p className="text-gray-600 mb-4">
-            Esta es tu información pública de perfil. Se utiliza para identificarte en los servicios de la empresa. 
-            Puedes actualizar tu información para mantenerla actualizada y precisa. 
+              Esta es tu información pública de perfil. Se utiliza para
+              identificarte en los servicios de la empresa. Puedes actualizar tu
+              información para mantenerla actualizada y precisa.
             </p>
           </div>
           <div className="space-y-6">
@@ -48,8 +49,14 @@ const ProfilePage = () => {
               value={`${employeeData.Name} ${employeeData.Surname1} ${employeeData.Surname2}`}
             />
             <ProfileField label="Teléfono" value={employeeData.CellPhone} />
-            <ProfileField label="Correo electrónico" value={employeeData.Email} />
-            <ProfileField label="Fecha nacimiento" value={employeeData.Birthdate} />
+            <ProfileField
+              label="Correo electrónico"
+              value={employeeData.Email}
+            />
+            <ProfileField
+              label="Fecha nacimiento"
+              value={formattedData}
+            />
           </div>
         </div>
       </div>
@@ -62,7 +69,9 @@ const ProfileField = ({ label, value }: { label: string; value: string }) => (
     <span className="text-gray-700">{label}</span>
     <div className="flex items-center space-x-4">
       <span className="text-gray-500">{value}</span>
-      <button className="px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Cambiar</button>
+      <button className="px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">
+        Cambiar
+      </button>
     </div>
   </div>
 );
