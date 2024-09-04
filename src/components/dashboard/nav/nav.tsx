@@ -6,12 +6,13 @@ import User from './user';
 
 const Nav = () => {
   const { data: session, status } = useSession();
-  let userInfo = 'Cargando...';
 
-  if (status === 'authenticated' && session?.user) {
+  let userInfo = 'Invitado';
+
+  if (status === 'loading') {
+    userInfo = 'Cargando...';
+  } else if (status === 'authenticated' && session?.user) {
     userInfo = session.user.email || session.user.name || 'Usuario';
-  } else if (status === 'unauthenticated') {
-    userInfo = 'Invitado';
   }
 
   return (

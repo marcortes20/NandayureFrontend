@@ -16,9 +16,9 @@ const MaintenancePage = ({ title }: Props) => {
       />
       <section className="text-center mt-5">
         <h1 className={`${titleFont.className} text-4xl`}>
-          Página en Construcción
+          {title} en Construcción
         </h1>
-        <p>Estamos trabajando en la página de {title}. ¡Vuelve pronto!</p>
+        <p>Estamos trabajando en la página. ¡Vuelve pronto!</p>
       </section>
     </div>
   );

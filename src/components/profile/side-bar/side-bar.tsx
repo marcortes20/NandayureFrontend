@@ -14,12 +14,11 @@ const SideBar = () => {
   const MenuIsClose = useSidebarState((state) => state.MenuIsClose);
 
   return (
-    <div className="flex h-full">
       <aside
         className={clsx(
-          'flex flex-col px-3 py-4 md:px-2 border rounded transition-all duration-300 ease-in-out',
+          'flex flex-col h-screen px-3 py-4 md:px-2 border rounded transition-all duration-300 ease-in-out',
           isOpen ? 'w-72' : 'w-28',
-          'overflow-hidden'
+          'overflow-hidden',
         )}
       >
         <button
@@ -41,7 +40,11 @@ const SideBar = () => {
           <Image src="/LogoMuni.png" alt="logo" width={100} height={100} />
         </Link>
 
-        <h2 className={`text-xl font-bold mb-4 ${titleFont.className} ${isOpen ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
+        <h2
+          className={`text-xl font-bold mb-4 ${titleFont.className} ${
+            isOpen ? 'opacity-100' : 'opacity-0'
+          } transition-opacity duration-300`}
+        >
           Perfil
         </h2>
 
@@ -49,14 +52,13 @@ const SideBar = () => {
           className={clsx(
             'flex grow flex-col space-y-2 transition-all duration-300 ease-in-out',
             isOpen ? 'opacity-100' : 'opacity-0',
-            isOpen ? 'translate-x-0' : '-translate-x-full'
+            isOpen ? 'translate-x-0' : '-translate-x-full',
           )}
         >
-          <NavLinks isOpen ={isOpen} />
+          <NavLinks />
         </div>
       </aside>
-    </div>
-  )
-}
+  );
+};
 
 export default SideBar;

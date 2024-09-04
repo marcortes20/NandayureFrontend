@@ -32,7 +32,9 @@ export default function User() {
             <Link href={'/auth/register'}>Registrar usuario</Link>
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem>Ayuda</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/helps">Ayuda</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <button onClick={() => signOut()} className="w-full text-left">

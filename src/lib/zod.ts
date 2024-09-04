@@ -10,31 +10,8 @@ export const LoginSchema = z.object({
     }),
   Password: string({ required_error: 'La contraseña es requerida' })
     .min(1, 'La contraseña es requerida')
-    .min(6, 'La contraseña debe tener al menos 6 caracteres')
+    .min(8, 'La contraseña debe tener al menos 8 caracteres')
     .max(32, 'La contraseña no puede tener más de 32 caracteres'),
-});
-
-export const ResetPasswordSchema = z
-  .object({
-    Password: string({ required_error: 'La contraseña es requerida' })
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
-      .max(32, 'La contraseña no puede tener más de 32 caracteres'),
-    ConfirmPassword: string({
-      required_error: 'La confirmación de la contraseña es requerida',
-    })
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
-      .max(32, 'La contraseña no puede tener más de 32 caracteres'),
-  })
-  .refine((data) => data.Password === data.ConfirmPassword, {
-    message: 'Las contraseñas no coinciden',
-    path: ['ConfirmPassword'],
-  });
-
-export const EmailSendSchema = z.object({
-  Email: string({ required_error: 'El correo electrónico es requerido' })
-    .email('El correo electrónico no es válido')
-    .max(255, 'El correo electrónico no puede tener más de 255 caracteres')
-    .min(1, 'El correo electrónico es requerido'),
 });
 
 export const RegisterSchema = z.object({
@@ -76,18 +53,66 @@ export const RegisterSchema = z.object({
   }),
 });
 
+export const EmailSendSchema = z.object({
+  Email: string({ required_error: 'El correo electrónico es requerido' })
+    .email('El correo electrónico no es válido')
+    .max(255, 'El correo electrónico no puede tener más de 255 caracteres')
+    .min(1, 'El correo electrónico es requerido'),
+});
+
 export const ChangePasswordSchema = z
   .object({
-    OldPassword: string({ required_error: 'La contraseña actual es requerida' })
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+    OldPassword: z
+      .string({ required_error: 'La contraseña actual es requerida' })
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
       .max(32, 'La contraseña no puede tener más de 32 caracteres'),
-    Password: string({ required_error: 'La contraseña es requerida' })
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+    Password: z
+      .string({ required_error: 'La nueva contraseña es requerida' })
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
+      .max(32, 'La contraseña no puede tener más de 32 caracteres')
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        'La nueva contraseña debe contener al menos un carácter especial',
+      )
+      .regex(/[0-9]/, 'La nueva contraseña debe contener al menos un número')
+      .regex(
+        /[A-Z]/,
+        'La nueva contraseña debe contener al menos una mayúscula',
+      )
+      .regex(
+        /[a-z]/,
+        'La nueva contraseña debe contener al menos una minúscula',
+      ),
+    ConfirmPassword: z
+      .string({
+        required_error: 'La confirmación de la nueva contraseña es requerida',
+      })
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
       .max(32, 'La contraseña no puede tener más de 32 caracteres'),
-    ConfirmPassword: string({
-      required_error: 'La confirmación de la contraseña es requerida',
-    })
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+  })
+  .refine((data) => data.Password === data.ConfirmPassword, {
+    message: 'Las contraseñas no coinciden',
+    path: ['ConfirmPassword'],
+  });
+
+export const ResetPasswordSchema = z
+  .object({
+    Password: z
+      .string({ required_error: 'La contraseña es requerida' })
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
+      .max(32, 'La contraseña no puede tener más de 32 caracteres')
+      .regex(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        'La contraseña debe contener al menos un carácter especial',
+      )
+      .regex(/[0-9]/, 'La contraseña debe contener al menos un número')
+      .regex(/[A-Z]/, 'La contraseña debe contener al menos una mayúscula')
+      .regex(/[a-z]/, 'La contraseña debe contener al menos una minúscula'),
+    ConfirmPassword: z
+      .string({
+        required_error: 'La confirmación de la contraseña es requerida',
+      })
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
       .max(32, 'La contraseña no puede tener más de 32 caracteres'),
   })
   .refine((data) => data.Password === data.ConfirmPassword, {
