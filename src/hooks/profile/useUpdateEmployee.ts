@@ -23,21 +23,36 @@ const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
 
   const onSubmit = handleSubmit(async (data: UpdateEmployee) => {
     try {
-      await toast.promise(mutation.mutateAsync(data), {
-        loading: 'Actualizando empleado...',
-        success: 'Empleado actualizado',
-        error: 'Error al actualizar empleado',
-      });
+      await toast.promise(
+        new Promise((resolve, reject) => {
+          setTimeout(async () => {
+            try {
+              await mutation.mutateAsync(data);
+              resolve('Empleado actualizado');
+            } catch (error) {
+              reject('Error al actualizar empleado');
+            }
+          }, 500); // artificial waiting 
+        }),
+        {
+          loading: 'Actualizando empleado...',
+          success: 'Empleado actualizado',
+          error: 'Error al actualizar empleado',
+        },
+        { duration: 2500 },
+      );
       setIsOpen(false);
     } catch (error: any) {
       console.error(error);
       setIsOpen(false);
     }
   });
+
   return {
     mutation,
     onSubmit,
     register,
   };
 };
+
 export default useUpdateEmployee;
