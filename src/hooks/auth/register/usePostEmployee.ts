@@ -28,6 +28,7 @@ const usePostEmployee = () => {
   });
 
   const onSubmit = handleSubmit(async (data: Employee) => {
+    console.log(data);
     try {
       const convertedData = convertEmployeeTypes(data);
       const mutationPromise = mutation.mutateAsync(convertedData);
@@ -38,6 +39,8 @@ const usePostEmployee = () => {
       });
       await mutationPromise;
       router.push('/success');
+      console.log(data.Birthdate);
+      console.log(convertedData.Birthdate);
     } catch (error: any) {
       setErrorMessage(error.message);
     }
@@ -54,7 +57,7 @@ const usePostEmployee = () => {
 
 export const convertEmployeeTypes = (employee: any): Employee => {
   return {
-    EmployeeId: Number(employee.EmployeeId),
+    id: Number(employee.id),
     Name: employee.Name,
     Surname1: employee.Surname1,
     Surname2: employee.Surname2,

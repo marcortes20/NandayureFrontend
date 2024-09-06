@@ -1,23 +1,32 @@
-import { getByIdEmployee } from '@/server/profile/actions';
+import { getByIdEmployee } from '@/server/profile/getEmployee/actions';
 import { useQuery } from '@tanstack/react-query';
 
 interface Props {
-  employeeId: number;
+  employeeId: number | undefined;
 }
 
 const useGetByIdEmployee = ({ employeeId }: Props) => {
   const {
     data: employeeById,
     isLoading,
+    isError,
+    error,
   } = useQuery({
-    queryFn: async () => await getByIdEmployee({ employeeId }),
-    queryKey: ['employeeById', employeeId], // Incluye employeeId en la clave de la consulta
-    enabled: !!employeeId, // Solo ejecuta la consulta si employeeId está definido
+    queryFn: async () => {
+      if (employeeId === undefined) {
+        throw new Error('Employee ID is undefined');
+      }
+      return await getByIdEmployee({ employeeId });
+    },
+    queryKey: ['employeeById', employeeId],
+    enabled: !!employeeId,
   });
 
   return {
     employeeById,
-    isLoading
+    isLoading,
+    isError,
+    error,
   };
 };
 

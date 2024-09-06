@@ -1,7 +1,7 @@
 import { User } from 'lucide-react';
 
 export interface Employee {
-  EmployeeId: number;
+  id: number;
   Name: string;
   Surname1: string;
   Surname2: string;
@@ -16,14 +16,13 @@ export interface Employee {
 }
 
 export interface Gender {
-  GenderId: number;
+  id: number;
   Name: string;
 }
 
 export interface MaritalStatus {
-  MaritalStatusId: number;
+  id: number;
   Name: string;
-  Description: string;
 }
 
 export interface User {

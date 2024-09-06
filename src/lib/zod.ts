@@ -15,7 +15,7 @@ export const LoginSchema = z.object({
 });
 
 export const RegisterSchema = z.object({
-  EmployeeId: z
+  id: z
     .string()
     .min(1, 'El número de identificación es requerido')
     .refine((val) => !isNaN(Number(val)), {
