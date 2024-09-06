@@ -1,23 +1,23 @@
-import { Employee } from "@/types/entities";
+import { UpdateEmployee } from '@/types/entities';
 
 interface Props {
   employeeId: number;
-  employee: Employee;
+  employee: UpdateEmployee;
 }
 
 export async function updateEmployee({ employeeId, employee }: Props) {
   const options = {
     method: 'PATCH',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(employee),
   };
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/employees/${employeeId}`,
-    options
+    options,
   );
-  const data = (await res.json()) as Employee;
+  const data = (await res.json()) as UpdateEmployee;
   return data;
 }

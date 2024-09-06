@@ -1,5 +1,20 @@
 import { User } from 'lucide-react';
 
+export interface UpdateEmployee {
+  id?: number;
+  Name?: string;
+  Surname1?: string;
+  Surname2?: string;
+  Birthdate?: string | Date;
+  HiringDate?: string | Date;
+  Email?: string;
+  CellPhone?: string;
+  NumberChlidren?: number;
+  AvailableVacationDays?: number;
+  MaritalStatusId?: number;
+  GenderId?: number;
+}
+
 export interface Employee {
   id: number;
   Name: string;
@@ -14,7 +29,6 @@ export interface Employee {
   MaritalStatusId: number;
   GenderId: number;
 }
-
 export interface Gender {
   id: number;
   Name: string;
