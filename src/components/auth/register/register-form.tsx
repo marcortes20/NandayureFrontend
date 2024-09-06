@@ -112,8 +112,8 @@ const RegisterForm = () => {
                 {...register('GenderId')}
               >
                 <option>Selecciona tu género</option>
-                {genders?.map((gender: { GenderId: number; Name: string }) => (
-                  <option key={gender.GenderId} value={gender.GenderId}>
+                {genders?.map((gender: { id: number; Name: string }) => (
+                  <option key={gender.id} value={gender.id}>
                     {gender.Name}
                   </option>
                 ))}
@@ -143,13 +143,13 @@ const RegisterForm = () => {
               <input
                 type="number"
                 placeholder="Escribe tu identificación laboral aquí"
-                id="EmployeeId"
+                id="id"
                 className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
-                {...register('EmployeeId')}
+                {...register('id')}
               />
-              {errors.EmployeeId && (
+              {errors.id && (
                 <span className="text-red-500 text-sm">
-                  {errors.EmployeeId.message}
+                  {errors.id.message}
                 </span>
               )}
             </div>
@@ -226,10 +226,10 @@ const RegisterForm = () => {
               >
                 <option>Selecciona tu estado civil</option>
                 {maritalStatus?.map(
-                  (status: { MaritalStatusId: number; Name: string }) => (
+                  (status: { id: number; Name: string }) => (
                     <option
-                      key={status.MaritalStatusId}
-                      value={status.MaritalStatusId}
+                      key={status.id}
+                      value={status.id}
                     >
                       {status.Name}
                     </option>

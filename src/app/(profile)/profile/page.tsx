@@ -4,20 +4,33 @@ import { IoPersonOutline } from 'react-icons/io5';
 import { useSession } from 'next-auth/react';
 import useGetByIdEmployee from '@/hooks/profile/useGetByIdEmployee';
 import { format, addDay } from '@formkit/tempo';
+import { DialogProfile } from '@/components/profile/dialog/dialog';
 
 const ProfilePage = () => {
   const { data: session } = useSession();
   const employeeId = session?.user?.employeeId;
-
-  const { employeeById: employeeData } = useGetByIdEmployee({ employeeId });
+  const { employeeById: employeeData, isError } = useGetByIdEmployee({
+    employeeId,
+  });
 
   if (!employeeData) {
     return <div>Loading...</div>;
   }
 
+  if (isError) {
+    return <div> Ocurrió un error al cargar la información del empleado.</div>;
+  }
+
   const inputDate = employeeData.Birthdate;
+  
   const newDate = addDay(inputDate, 1);
-  const formattedData = format({ date: newDate, format: "D MMMM YYYY", locale: "es" })
+  const formattedData = format({
+    date: newDate,
+    format: 'D MMMM YYYY',
+    locale: 'es',
+  });
+
+  const Date = format({ date: newDate, format: 'YYYY-MM-DD', locale: 'en' });
 
   return (
     <div className="min-h-screen p-6">
@@ -45,17 +58,59 @@ const ProfilePage = () => {
               </button>
             </div>
             <ProfileField
-              label="Nombre de usuario"
-              value={`${employeeData.Name} ${employeeData.Surname1} ${employeeData.Surname2}`}
+              label="Nombre"
+              value={employeeData.Name}
+              field={{
+                id: 'name',
+                label: 'Nombre',
+                defaultValue: employeeData.Name,
+              }}
             />
-            <ProfileField label="Teléfono" value={employeeData.CellPhone} />
+            <ProfileField
+              label="Primer apellido"
+              value={employeeData.Surname1}
+              field={{
+                id: 'surname1',
+                label: 'Primer apellido',
+                defaultValue: employeeData.Surname1,
+              }}
+            />
+            <ProfileField
+              label="Segundo apellido"
+              value={employeeData.Surname2}
+              field={{
+                id: 'surname2',
+                label: 'Segundo apellido',
+                defaultValue: employeeData.Surname2,
+              }}
+            />
+            <ProfileField
+              label="Teléfono"
+              value={employeeData.CellPhone}
+              field={{
+                id: 'phone',
+                label: 'Teléfono',
+                defaultValue: employeeData.CellPhone,
+              }}
+            />
             <ProfileField
               label="Correo electrónico"
               value={employeeData.Email}
+              field={{
+                id: 'email',
+                label: 'Correo electrónico',
+                defaultValue: employeeData.Email,
+              }}
             />
             <ProfileField
               label="Fecha nacimiento"
               value={formattedData}
+              field={{
+                id: 'birthdate',
+                label: 'Fecha nacimiento',
+                defaultValue: Date,
+                type: 'date',
+              }}
             />
           </div>
         </div>
@@ -64,14 +119,24 @@ const ProfilePage = () => {
   );
 };
 
-const ProfileField = ({ label, value }: { label: string; value: string }) => (
+const ProfileField = ({
+  label,
+  value,
+  field,
+}: {
+  label: string;
+  value: string;
+  field: { id: string; label: string; defaultValue: string; type?: string };
+}) => (
   <div className="flex items-center justify-between">
     <span className="text-gray-700">{label}</span>
     <div className="flex items-center space-x-4">
       <span className="text-gray-500">{value}</span>
-      <button className="px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">
-        Cambiar
-      </button>
+      <DialogProfile
+        title={`Editar ${field.label}`}
+        description={`Actualiza tu ${field.label} aquí. Haz clic en guardar cuando hayas terminado.`}
+        fields={[field]}
+      />
     </div>
   </div>
 );
