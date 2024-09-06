@@ -1,3 +1,5 @@
+
+
 import {
   ChevronDown,
   ChevronRight,
@@ -68,56 +70,60 @@ export const navLinks: Record<string, NavLink> = {
   },
 };
 
-export function NavLinks() {
-  const [isOpen, setIsOpen] = useState(false);
+export function NavLinks({ isOpen }: { isOpen: boolean }) {
+  const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const pathname = usePathname();
 
   return (
-    <>
+    <div className="flex flex-col space-y-2">
       {Object.keys(navLinks).map((key) => {
         const link = navLinks[key];
+
         if (link.subLinks) {
           return (
-            <div key={key} className="mb-2">
+            <div key={key}>
               <Button
                 variant="ghost"
-                className="justify-start w-full"
-                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center justify-between w-full"
+                onClick={() => setOpenSubMenu(openSubMenu === key ? null : key)}
               >
-                <link.icon className="mr-2 h-4 w-4 flex-shrink-0" />
-                <span className="text-left flex-grow">{link.label}</span>
-                {isOpen ? (
-                  <ChevronDown className="ml-2 h-4 w-4 flex-shrink-0" />
-                ) : (
-                  <ChevronRight className="ml-2 h-4 w-4 flex-shrink-0" />
-                )}
+                <link.icon className="mr-2 h-5 w-5" />
+                {isOpen && <span className="flex-grow">{link.label}</span>}
+                {isOpen &&
+                  (openSubMenu === key ? (
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  ) : (
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  ))}
               </Button>
-              {isOpen && (
-                <div className="ml-4 mt-2 space-y-2">
+              {isOpen && openSubMenu === key && (
+                <div className="pl-6 mt-2 space-y-2">
                   {link.subLinks &&
-                    Object.keys(link.subLinks)?.map((subKey) => {
+                    Object.keys(link.subLinks).map((subKey) => {
                       const subLink = link.subLinks?.[subKey];
                       return (
-                        <Button
-                          key={subKey}
-                          variant="ghost"
-                          size="sm"
-                          className="justify-start w-full"
-                          asChild
-                        >
-                          <Link href={subLink?.href ?? ''}>
-                            <span
-                              className={clsx(
-                                'text-left',
-                                pathname === subLink?.href
-                                  ? 'text-dodger-blue-600'
-                                  : '',
-                              )}
-                            >
-                              {subLink?.label}
-                            </span>
-                          </Link>
-                        </Button>
+                        subLink && (
+                          <Button
+                            key={subKey}
+                            variant="ghost"
+                            size="sm"
+                            className="w-full flex items-center justify-start"
+                            asChild
+                          >
+                            <Link href={subLink.href}>
+                              <span
+                                className={clsx(
+                                  'text-left',
+                                  pathname === subLink.href
+                                    ? 'text-blue-600'
+                                    : 'text-gray-700'
+                                )}
+                              >
+                                {subLink.label}
+                              </span>
+                            </Link>
+                          </Button>
+                        )
                       );
                     })}
                 </div>
@@ -125,27 +131,30 @@ export function NavLinks() {
             </div>
           );
         }
+
         return (
           <Button
             key={key}
             variant="ghost"
-            className="justify-start mb-2 w-full"
+            className="flex items-center justify-start w-full"
             asChild
           >
-            <a href={link.href}>
-              <link.icon className="mr-2 h-4 w-4 flex-shrink-0" />
-              <span
-                className={clsx(
-                  'text-left',
-                  pathname === link.href ? 'text-dodger-blue-600' : '',
-                )}
-              >
-                {link.label}
-              </span>
-            </a>
+            <Link href={link.href}>
+              <link.icon className="mr-2 h-5 w-5" />
+              {isOpen && (
+                <span
+                  className={clsx(
+                    'text-left',
+                    pathname === link.href ? 'text-blue-600' : 'text-gray-700'
+                  )}
+                >
+                  {link.label}
+                </span>
+              )}
+            </Link>
           </Button>
         );
       })}
-    </>
+    </div>
   );
 }
