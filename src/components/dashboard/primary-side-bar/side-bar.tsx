@@ -1,22 +1,25 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
+
+import React from 'react';
 import { NavLinks } from './nav-links';
-import { useSidebarState } from '@/store/dashboard/useSidebar';
 import clsx from 'clsx';
+import { useSidebarState } from '@/store/dashboard/useSidebar';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
-export function SideBar() {
+export function Sidebar() {
   const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarState();
 
   const toggleSidebar = () => {
     isOpen ? MenuIsClose() : MenuIsOpen();
   };
+
   return (
     <aside
       className={clsx(
         'flex flex-col h-screen transition-all duration-300 bg-white border rounded border-gray-200',
-        isOpen ? 'w-64' : 'w-20 items-center',
+        isOpen ? 'w-64' : 'w-20 items-center'
       )}
     >
       <div className="flex items-center p-2">
@@ -42,11 +45,11 @@ export function SideBar() {
         />
       </Link>
 
-      <nav
-        className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}
-      >
+      <nav className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}>
         <NavLinks isOpen={isOpen} />
       </nav>
     </aside>
   );
 }
+
+export default Sidebar;

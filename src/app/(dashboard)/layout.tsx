@@ -1,5 +1,5 @@
 import Nav from '@/components/dashboard/nav/nav';
-import { Sidebar } from '@/components/dashboard/primary-side-bar/sidebar';
+import { Sidebar } from '@/components/dashboard/primary-side-bar/side-bar';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
