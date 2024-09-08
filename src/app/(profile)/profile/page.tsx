@@ -32,9 +32,9 @@ const ProfilePage = () => {
 
   return (
     <div className="min-h-screen p-6">
-      <div className="max-w-3x3 mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="max-w-3xl mx-auto bg-white border shadow-md rounded-lg overflow-hidden">
         <div className="p-6">
-          <h1 className="text-3x3 font-bold mb-6">Cuenta</h1>
+          <h1 className="text-3xl font-bold mb-6">Cuenta</h1>
           <div className="mb-8">
             <h2 className="text-xl font-semibold mb-2">Perfil</h2>
             <p className="text-gray-600 mb-4">
@@ -124,7 +124,7 @@ const ProfileField = ({
   value: string;
   field: { id: string; label: string; defaultValue: string; type?: string };
 }) => (
-  <div className="flex items-center justify-between">
+  <div className="flex items-center justify-between py-2">
     <span className="text-gray-700">{label}</span>
     <div className="flex items-center space-x-4">
       <span className="text-gray-500">{value}</span>

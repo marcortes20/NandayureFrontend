@@ -1,5 +1,3 @@
-
-
 import {
   ChevronDown,
   ChevronRight,
@@ -88,7 +86,9 @@ export function NavLinks({ isOpen }: { isOpen: boolean }) {
                 onClick={() => setOpenSubMenu(openSubMenu === key ? null : key)}
               >
                 <link.icon className="mr-2 h-5 w-5" />
-                {isOpen && <span className="flex-grow">{link.label}</span>}
+                {isOpen && (
+                  <span className="flex-grow text-left">{link.label}</span>
+                )}
                 {isOpen &&
                   (openSubMenu === key ? (
                     <ChevronDown className="ml-2 h-4 w-4" />
@@ -116,7 +116,7 @@ export function NavLinks({ isOpen }: { isOpen: boolean }) {
                                   'text-left',
                                   pathname === subLink.href
                                     ? 'text-blue-600'
-                                    : 'text-gray-700'
+                                    : 'text-gray-700',
                                 )}
                               >
                                 {subLink.label}
@@ -145,7 +145,7 @@ export function NavLinks({ isOpen }: { isOpen: boolean }) {
                 <span
                   className={clsx(
                     'text-left',
-                    pathname === link.href ? 'text-blue-600' : 'text-gray-700'
+                    pathname === link.href ? 'text-blue-600' : 'text-gray-700',
                   )}
                 >
                   {link.label}

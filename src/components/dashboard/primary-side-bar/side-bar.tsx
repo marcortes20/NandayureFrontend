@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -19,24 +18,31 @@ export function Sidebar() {
   return (
     <aside
       className={clsx(
-        'flex flex-col h-full transition-all duration-300 bg-white border-r border-gray-200',
-        isOpen ? 'w-64' : 'w-20'
+        'flex flex-col h-screen transition-all duration-300 bg-white border rounded border-gray-200',
+        isOpen ? 'w-64' : 'w-20',
       )}
     >
-    
-      <button
-        onClick={toggleSidebar}
-        className="p-2 rounded-full hover:bg-gray-200 self-end m-2"
-        aria-label="Toggle Sidebar"
-      >
-        {isOpen ? <HiX size={24} /> : <HiMenuAlt2 size={24} />}
-      </button>
+      <div className="flex items-center p-2">
+        <button
+          onClick={toggleSidebar}
+          className="p-2 rounded-full hover:bg-gray-200"
+          aria-label="Toggle Sidebar"
+        >
+          {isOpen ? <HiX size={24} /> : <HiMenuAlt2 size={24} />}
+        </button>
+      </div>
 
       <Link
         className="mb-2 flex h-20 items-center justify-center rounded-md p-4 md:h-40"
         href="/"
       >
-        <Image src="/LogoMuni.png" alt="logo" width={100} height={100} priority />
+        <Image
+          src="/LogoMuni.png"
+          alt="logo"
+          width={100}
+          height={100}
+          priority
+        />
       </Link>
 
       <nav className="flex flex-col flex-grow">
