@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { NavLinks } from './nav-links';
 import { useSidebarState } from '@/store/dashboard/useSidebar';
 import clsx from 'clsx';
-import { HiMenuAlt2, HiX } from 'react-icons/hi';
+import { Menu, X } from 'lucide-react';
 
 export function SideBar() {
   const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarState();
@@ -16,7 +16,7 @@ export function SideBar() {
     <aside
       className={clsx(
         'flex flex-col h-screen transition-all duration-300 bg-white border rounded border-gray-200',
-        isOpen ? 'w-64' : 'w-20',
+        isOpen ? 'w-64' : 'w-20 items-center',
       )}
     >
       <div className="flex items-center p-2">
@@ -25,7 +25,7 @@ export function SideBar() {
           className="p-2 rounded-full hover:bg-gray-200"
           aria-label="Toggle Sidebar"
         >
-          {isOpen ? <HiX size={24} /> : <HiMenuAlt2 size={24} />}
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -42,7 +42,9 @@ export function SideBar() {
         />
       </Link>
 
-      <nav className="flex flex-col flex-grow">
+      <nav
+        className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}
+      >
         <NavLinks isOpen={isOpen} />
       </nav>
     </aside>
