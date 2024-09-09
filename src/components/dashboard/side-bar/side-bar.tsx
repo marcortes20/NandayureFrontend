@@ -13,7 +13,7 @@ import {
   UserCheck,
   X,
 } from 'lucide-react';
-import { useSidebarStore } from '@/store/dashboard/useSidebar';
+import { useSidebarStore } from '@/store/useSidebarStore';
 
 export const navLinks: Record<string, NavLink> = {
   home: {

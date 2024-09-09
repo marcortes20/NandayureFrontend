@@ -4,7 +4,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { Fingerprint, Home, Menu, UserRoundPen, X } from 'lucide-react';
 import { NavLink, NavLinks } from '@/components/common/nav-links';
-import { useSidebarStore } from '@/store/dashboard/useSidebar';
+import { useSidebarStore } from '@/store/useSidebarStore';
 
 export const navLinks: Record<string, NavLink> = {
   home: {
