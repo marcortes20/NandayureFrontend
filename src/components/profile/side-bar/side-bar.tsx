@@ -1,10 +1,10 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSidebarState } from '@/store/dashboard/useSidebar';
 import clsx from 'clsx';
 import { Fingerprint, Home, Menu, UserRoundPen, X } from 'lucide-react';
 import { NavLink, NavLinks } from '@/components/common/nav-links';
+import { useSidebarStore } from '@/store/dashboard/useSidebar';
 
 export const navLinks: Record<string, NavLink> = {
   home: {
@@ -25,7 +25,7 @@ export const navLinks: Record<string, NavLink> = {
 };
 
 export function SideBarProfile() {
-  const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarState();
+  const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarStore();
 
   const toggleSidebar = () => {
     isOpen ? MenuIsClose() : MenuIsOpen();

@@ -2,7 +2,6 @@
 import React from 'react';
 import { NavLink, NavLinks } from '../../common/nav-links';
 import clsx from 'clsx';
-import { useSidebarState } from '@/store/dashboard/useSidebar';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -14,6 +13,7 @@ import {
   UserCheck,
   X,
 } from 'lucide-react';
+import { useSidebarStore } from '@/store/dashboard/useSidebar';
 
 export const navLinks: Record<string, NavLink> = {
   home: {
@@ -58,7 +58,7 @@ export const navLinks: Record<string, NavLink> = {
 };
 
 export function SidebarDashboard() {
-  const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarState();
+  const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarStore();
 
   const toggleSidebar = () => {
     isOpen ? MenuIsClose() : MenuIsOpen();
