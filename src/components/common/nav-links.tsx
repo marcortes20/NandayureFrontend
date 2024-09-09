@@ -1,46 +1,29 @@
+
 import { Button } from '@/components/ui/button';
-import clsx from 'clsx';
-import {
-  ChevronDown,
-  ChevronRight,
-  Fingerprint,
-  Home,
-  LucideIcon,
-  UserRoundPen,
-} from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-interface SubLink {
+import Link from 'next/link';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
+import { ChevronDown, ChevronRight, LucideIcon } from 'lucide-react';
+
+export interface SubLink {
   href: string;
   label: string;
 }
 
-interface NavLink {
+export interface NavLink {
   href: string;
   icon: LucideIcon;
   label: string;
   subLinks?: Record<string, SubLink>;
 }
 
-export const navLinks: Record<string, NavLink> = {
-  home: {
-    href: '/',
-    icon: Home,
-    label: 'Inicio',
-  },
-  Profile: {
-    href: '/profile',
-    icon: UserRoundPen,
-    label: 'Perfil',
-  },
-  Seguridad: {
-    href: '/security',
-    icon: Fingerprint,
-    label: 'Seguridad',
-  },
-};
-export function NavLinks({ isOpen }: { isOpen: boolean }) {
+interface Props {
+  isOpen: boolean;
+  navLinks: Record<string, NavLink>;
+}
+
+export function NavLinks({ isOpen, navLinks }: Props) {
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const pathname = usePathname();
 

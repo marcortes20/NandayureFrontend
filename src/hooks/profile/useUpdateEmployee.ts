@@ -1,5 +1,5 @@
 import { updateEmployee } from '@/server/profile/updateEmployee/actions';
-import { Employee, UpdateEmployee } from '@/types/entities';
+import { UpdateEmployee } from '@/types/entities';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -32,7 +32,7 @@ const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
             } catch (error) {
               reject('Error al actualizar empleado');
             }
-          }, 500); // artificial waiting 
+          }, 500); // artificial waiting
         }),
         {
           loading: 'Actualizando empleado...',
