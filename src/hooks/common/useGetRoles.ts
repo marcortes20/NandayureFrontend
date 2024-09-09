@@ -4,7 +4,6 @@ import { useSession } from 'next-auth/react';
 const useGetRoles = () => {
   const { data: session } = useSession();
   const token = session?.user?.access_token;
-  console.log(token);
 
   let roles;
   if (token) {

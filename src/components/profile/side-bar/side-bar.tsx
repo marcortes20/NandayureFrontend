@@ -1,13 +1,31 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { NavLinks } from './nav-links';
-import { useSidebarState } from '@/store/dashboard/useSidebar';
 import clsx from 'clsx';
-import { Menu, X } from 'lucide-react';
+import { Fingerprint, Home, Menu, UserRoundPen, X } from 'lucide-react';
+import { NavLink, NavLinks } from '@/components/common/nav-links';
+import { useSidebarStore } from '@/store/useSidebarStore';
 
-export function SideBar() {
-  const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarState();
+export const navLinks: Record<string, NavLink> = {
+  home: {
+    href: '/',
+    icon: Home,
+    label: 'Inicio',
+  },
+  Profile: {
+    href: '/profile',
+    icon: UserRoundPen,
+    label: 'Perfil',
+  },
+  Seguridad: {
+    href: '/security',
+    icon: Fingerprint,
+    label: 'Seguridad',
+  },
+};
+
+export function SideBarProfile() {
+  const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarStore();
 
   const toggleSidebar = () => {
     isOpen ? MenuIsClose() : MenuIsOpen();
@@ -45,7 +63,7 @@ export function SideBar() {
       <nav
         className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}
       >
-        <NavLinks isOpen={isOpen} />
+        <NavLinks isOpen={isOpen} navLinks={navLinks} />
       </nav>
     </aside>
   );

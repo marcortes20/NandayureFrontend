@@ -28,7 +28,6 @@ const usePostEmployee = () => {
   });
 
   const onSubmit = handleSubmit(async (data: Employee) => {
-    console.log(data);
     try {
       const convertedData = convertEmployeeTypes(data);
       const mutationPromise = mutation.mutateAsync(convertedData);
@@ -39,8 +38,6 @@ const usePostEmployee = () => {
       });
       await mutationPromise;
       router.push('/success');
-      console.log(data.Birthdate);
-      console.log(convertedData.Birthdate);
     } catch (error: any) {
       setErrorMessage(error.message);
     }

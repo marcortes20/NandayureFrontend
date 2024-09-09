@@ -18,7 +18,7 @@ interface Field {
   id: string;
   label: string;
   defaultValue: string;
-  type?: string; // Añade la propiedad 'type' como opcional
+  type?: string;
 }
 
 interface DialogProfileProps {
