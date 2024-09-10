@@ -34,10 +34,11 @@ export function DialogProfile({
 }: DialogProfileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { employeeId } = useGetEmployeeId();
-  const { onSubmit, register } = useUpdateEmployee({
+  const { onSubmit, register, errors } = useUpdateEmployee({
     employeeId: employeeId,
     setIsOpen,
   });
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -65,6 +66,11 @@ export function DialogProfile({
                   className="col-span-3"
                   {...register(field.id)}
                 />
+                {typeof errors[field.id]?.message === 'string' && (
+                  <span className="text-red-500 text-sm col-span-4">
+                    {errors[field.id]?.message as string}
+                  </span>
+                )}
               </div>
             ))}
           </div>
