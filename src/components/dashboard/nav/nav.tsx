@@ -3,6 +3,7 @@ import { titleFont } from '@/config/fonts';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import User from './user';
+import { Inbox } from 'lucide-react';
 
 const Nav = () => {
   const { data: session, status } = useSession();
@@ -22,8 +23,14 @@ const Nav = () => {
       >
         Recursos Humanos Nandayure
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center space-x-4">
         <span className="mr-4">{userInfo}</span>
+        <button
+          aria-label="Inbox"
+          className="p-2 rounded-full hover:bg-gray-100 focus:outline-none"
+        >
+          <Inbox strokeWidth={1.5} size={24} />
+        </button>
         <User />
       </div>
     </div>
