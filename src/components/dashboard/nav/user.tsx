@@ -8,17 +8,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import useGetRoles from '@/hooks/common/useGetRoles';
+import { CircleUserRound } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { IoPersonOutline } from 'react-icons/io5';
 
 export default function User() {
   const { roles } = useGetRoles();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="overflow-hidden rounded-full border-2 p-1">
-          <IoPersonOutline size={24} />
+        <button>
+          <CircleUserRound strokeWidth={1.5} size={24} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
