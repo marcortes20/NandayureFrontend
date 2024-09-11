@@ -8,7 +8,8 @@ const usePostSalaryCetificates = () => {
   const { register, handleSubmit } = useForm();
 
   const mutation = useMutation({
-    mutationFn: async (data: RequestSalaryCertificate) => await postSalaryCertificates(data),
+    mutationFn: async (data: RequestSalaryCertificate) =>
+      await postSalaryCertificates(data),
     onError: (error: any) => {
       console.error(error);
     },
@@ -16,12 +17,24 @@ const usePostSalaryCetificates = () => {
 
   const onSubmit = handleSubmit(async (data: any) => {
     try {
-      const mutationPromise = await toast.promise(mutation.mutateAsync(data), {
-        loading: 'Enviando solicitud...',
-        success: 'Solicitud enviada',
-        error: 'Error al enviar solicitud',
-      });
-      await mutationPromise;
+      await toast.promise(
+        new Promise((resolve, reject) => {
+          setTimeout(async () => {
+            try {
+              await mutation.mutateAsync(data);
+              resolve('Solicitud enviada');
+            } catch (error) {
+              reject('Error al enviar solicitud');
+            }
+          }, 500); // artificial waiting
+        }),
+        {
+          loading: 'Enviando solicitud...',
+          success: 'Solicitud enviada',
+          error: 'Error al enviar solicitud',
+        },
+        { duration: 2500 },
+      );
     } catch (error: any) {
       console.error(error);
     }
