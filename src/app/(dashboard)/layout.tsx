@@ -1,5 +1,5 @@
 import Nav from '@/components/dashboard/nav/nav';
-import { Sidebar } from '@/components/dashboard/primary-side-bar/sidebar';
+import SidebarDashboard from '@/components/dashboard/side-bar/side-bar';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function DasboardLayout({
 }>) {
   return (
     <main className="min-h-screen flex">
-      <Sidebar />
+      <SidebarDashboard />
       <div className="flex-1 p-4">
         <Nav />
         {children}

@@ -54,7 +54,7 @@ const usePostEmployee = () => {
 
 export const convertEmployeeTypes = (employee: any): Employee => {
   return {
-    EmployeeId: Number(employee.EmployeeId),
+    id: Number(employee.id),
     Name: employee.Name,
     Surname1: employee.Surname1,
     Surname2: employee.Surname2,

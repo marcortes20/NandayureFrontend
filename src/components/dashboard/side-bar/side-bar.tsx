@@ -1,9 +1,18 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from 'react';
+import { NavLink, NavLinks } from '../../common/nav-links';
 import clsx from 'clsx';
-import { Fingerprint, Home, Menu, UserRoundPen, X } from 'lucide-react';
-import { NavLink, NavLinks } from '@/components/common/nav-links';
+import Link from 'next/link';
+import Image from 'next/image';
+import {
+  Clock,
+  FileText,
+  Folder,
+  Home,
+  Menu,
+  UserCheck,
+  X,
+} from 'lucide-react';
 import { useSidebarStore } from '@/store/useSidebarStore';
 
 export const navLinks: Record<string, NavLink> = {
@@ -12,24 +21,49 @@ export const navLinks: Record<string, NavLink> = {
     icon: Home,
     label: 'Inicio',
   },
-  Profile: {
-    href: '/profile',
-    icon: UserRoundPen,
-    label: 'Perfil',
+  creacionPlanillas: {
+    href: '/payroll-creation',
+    icon: FileText,
+    label: 'Creación de planillas',
   },
-  Seguridad: {
-    href: '/security',
-    icon: Fingerprint,
-    label: 'Seguridad',
+  gestionDocumentos: {
+    href: '/document-management',
+    icon: Folder,
+    label: 'Gestión de documentos',
+  },
+  gestionSolicitudes: {
+    href: '/request-management',
+    icon: UserCheck,
+    label: 'Gestión de solicitudes',
+    subLinks: {
+      solicitudVacaciones: {
+        href: '/vacation-request',
+        label: 'Solicitud de vacaciones',
+      },
+      boletaPago: {
+        href: '/pay-slip',
+        label: 'Boleta de pago',
+      },
+      constanciaSalarial: {
+        href: '/salary-certificate',
+        label: 'Constancia salarial',
+      },
+    },
+  },
+  controlMarcas: {
+    href: '/time-tracking',
+    icon: Clock,
+    label: 'Control de marcas',
   },
 };
 
-export function SideBarProfile() {
+export function SidebarDashboard() {
   const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarStore();
 
   const toggleSidebar = () => {
     isOpen ? MenuIsClose() : MenuIsOpen();
   };
+
   return (
     <aside
       className={clsx(
@@ -68,3 +102,5 @@ export function SideBarProfile() {
     </aside>
   );
 }
+
+export default SidebarDashboard;

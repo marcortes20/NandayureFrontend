@@ -31,8 +31,7 @@ export const options: NextAuthOptions = {
           return user;
         }
         if (user.error) {
-          console.log(user.error);
-          throw new Error(user.error);
+          throw new Error(user.message);
         }
 
         return null;

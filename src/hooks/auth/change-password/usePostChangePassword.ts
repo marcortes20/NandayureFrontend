@@ -5,12 +5,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useSession } from 'next-auth/react';
 import { postChangePassword } from '@/server/auth/change-password/actions';
+import useGetToken from '@/hooks/common/useGetToken';
 
 const useChangePassword = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { data: session } = useSession();
+  const { token } = useGetToken();
   const {
     handleSubmit,
     register,
@@ -21,7 +21,7 @@ const useChangePassword = () => {
 
   const mutation = useMutation({
     mutationFn: async (data: ChangePassword) =>
-      await postChangePassword(data, session?.user?.access_token as string),
+      await postChangePassword(data, token),
     onError: (error: any) => {
       setErrorMessage(error.message);
     },
