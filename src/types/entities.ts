@@ -29,6 +29,7 @@ export interface Employee {
   MaritalStatusId: number;
   GenderId: number;
 }
+
 export interface Gender {
   id: number;
   Name: string;
@@ -58,4 +59,10 @@ export interface ChangePassword {
   OldPassword: string;
   Password: string;
   ConfirmPassword: string;
+}
+
+export interface RequestSalaryCertificate {
+  employeeId: number;
+  requestDate: Date;
+  reason: string; 
 }
