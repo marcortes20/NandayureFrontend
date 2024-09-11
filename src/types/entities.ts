@@ -26,6 +26,9 @@ export interface Employee {
   CellPhone: string;
   NumberChlidren: number;
   AvailableVacationDays: number;
+  JobPositionId: number;
+  DepartmentId: number;
+  EmbargoId: number | boolean;
   MaritalStatusId: number;
   GenderId: number;
 }
@@ -64,5 +67,5 @@ export interface ChangePassword {
 export interface RequestSalaryCertificate {
   employeeId: number;
   requestDate: Date;
-  reason: string; 
+  reason: string;
 }

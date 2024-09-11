@@ -32,6 +32,22 @@ export async function getMaritalStatus() {
   return data;
 }
 
+export async function getJobsPositions() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/job-positions`,
+    options,
+  );
+  const data = await res.json();
+  return data;
+}
+
 export async function postEmployee(employee: Employee) {
   const options = {
     method: 'POST',

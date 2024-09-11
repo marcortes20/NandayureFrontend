@@ -4,10 +4,12 @@ import Spinner from '../../ui/spinner';
 import useGetGenders from '@/hooks/auth/register/useGetGenders';
 import useGetMaritalStatus from '@/hooks/auth/register/useGetMaritalStatus';
 import usePostEmployee from '@/hooks/auth/register/usePostEmployee';
+import useGetJobsPositions from '@/hooks/auth/register/useGetJobPositions';
 
 const RegisterForm = () => {
   const { genders } = useGetGenders();
   const { maritalStatus } = useGetMaritalStatus();
+  const { JobsPositions } = useGetJobsPositions();
   const { onSubmit, register, errorMessage, mutation, errors } =
     usePostEmployee();
   5;
@@ -225,20 +227,40 @@ const RegisterForm = () => {
                 {...register('MaritalStatusId')}
               >
                 <option>Selecciona tu estado civil</option>
-                {maritalStatus?.map(
-                  (status: { id: number; Name: string }) => (
-                    <option
-                      key={status.id}
-                      value={status.id}
-                    >
-                      {status.Name}
-                    </option>
-                  ),
-                )}
+                {maritalStatus?.map((status: { id: number; Name: string }) => (
+                  <option key={status.id} value={status.id}>
+                    {status.Name}
+                  </option>
+                ))}
               </select>
               {errors.MaritalStatusId && (
                 <span className="text-red-500 text-sm">
                   {errors.MaritalStatusId.message}
+                </span>
+              )}
+            </div>
+            <div>
+              <label
+                htmlFor="JobPositionId"
+                className="block text-sm font-medium text-gray-900"
+              >
+                Puesto de Trabajo
+              </label>
+              <select
+                id="JobPositionId"
+                className="block w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base"
+                {...register('JobPositionId')}
+              >
+                <option>Selecciona tu puesto de trabajo</option>
+                {JobsPositions?.map((job: { id: number; Name: string }) => (
+                  <option key={job.id} value={job.id}>
+                    {job.Name}
+                  </option>
+                ))}
+              </select>
+              {errors.JobPositionId && (
+                <span className="text-red-500 text-sm">
+                  {errors.JobPositionId.message}
                 </span>
               )}
             </div>
