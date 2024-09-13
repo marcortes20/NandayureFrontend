@@ -48,6 +48,38 @@ export async function getJobsPositions() {
   return data;
 }
 
+export async function getEmbargoes() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/embargoes`,
+    options,
+  );
+  const data = await res.json();
+  return data;
+}
+
+export async function getDepartments() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/departments`,
+    options,
+  );
+  const data = await res.json();
+  return data;
+}
+
 export async function postEmployee(employee: Employee) {
   const options = {
     method: 'POST',

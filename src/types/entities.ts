@@ -16,7 +16,7 @@ export interface UpdateEmployee {
 }
 
 export interface Employee {
-  id: number;
+  id: string;
   Name: string;
   Surname1: string;
   Surname2: string;
