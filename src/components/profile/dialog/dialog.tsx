@@ -35,7 +35,7 @@ export function DialogProfile({
 }: DialogProfileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { employeeId } = useGetEmployeeId();
-  const { onSubmit, register, errors, mutation } = useUpdateEmployee({
+  const { onSubmit, register, mutation } = useUpdateEmployee({
     employeeId: employeeId,
     setIsOpen,
   });
@@ -67,11 +67,7 @@ export function DialogProfile({
                   className="col-span-3"
                   {...register(field.id)}
                 />
-                {typeof errors[field.id]?.message === 'string' && (
-                  <span className="text-red-500 text-sm col-span-4">
-                    {errors[field.id]?.message as string}
-                  </span>
-                )}
+              
               </div>
             ))}
           </div>

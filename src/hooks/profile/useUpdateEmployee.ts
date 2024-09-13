@@ -15,10 +15,7 @@ const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(UpdateEmployeeSchema)
-  });
+  } = useForm();
 
   const queryClient = useQueryClient();
 
@@ -62,7 +59,6 @@ const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
     mutation,
     onSubmit,
     register,
-    errors,
   };
 };
 
