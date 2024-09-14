@@ -1,5 +1,5 @@
 import Nav from '@/components/dashboard/nav/nav';
-import { SideBar } from '@/components/profile/primary-side-bar/side-bar';
+import { SideBarProfile } from '@/components/profile/side-bar/side-bar';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function ProfileLayout({
 }>) {
   return (
     <main className="min-h-screen flex">
-      <SideBar />
+      <SideBarProfile />
       <div className="flex-1 p-4">
         <Nav />
         {children}

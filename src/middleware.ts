@@ -34,7 +34,6 @@ async function rolesMiddleware(req: NextRequest, roles: string[]) {
     if (roles.some((role) => tokenDecoded?.roles.includes(role))) {
       return null;
     }
-    console.log(tokenDecoded);
     return NextResponse.redirect(new URL('/unauthorized', req.url));
   } catch (error) {
     console.error('Error al verificar roles:', error);

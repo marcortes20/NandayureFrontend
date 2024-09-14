@@ -28,7 +28,6 @@ const usePostEmployee = () => {
   });
 
   const onSubmit = handleSubmit(async (data: Employee) => {
-    console.log(data);
     try {
       const convertedData = convertEmployeeTypes(data);
       const mutationPromise = mutation.mutateAsync(convertedData);
@@ -39,8 +38,6 @@ const usePostEmployee = () => {
       });
       await mutationPromise;
       router.push('/success');
-      console.log(data.Birthdate);
-      console.log(convertedData.Birthdate);
     } catch (error: any) {
       setErrorMessage(error.message);
     }
@@ -57,7 +54,7 @@ const usePostEmployee = () => {
 
 export const convertEmployeeTypes = (employee: any): Employee => {
   return {
-    id: Number(employee.id),
+    id: employee.id,
     Name: employee.Name,
     Surname1: employee.Surname1,
     Surname2: employee.Surname2,
@@ -66,6 +63,9 @@ export const convertEmployeeTypes = (employee: any): Employee => {
     Email: employee.Email,
     CellPhone: employee.CellPhone,
     NumberChlidren: parseInt(employee.NumberChlidren, 10),
+    JobPositionId: parseInt(employee.JobPositionId, 10),
+    DepartmentId: parseInt(employee.DepartmentId, 10), // Corrected here
+    EmbargoId: parseInt(employee.EmbargoId, 10),
     AvailableVacationDays: parseInt(employee.AvailableVacationDays, 10),
     MaritalStatusId: parseInt(employee.MaritalStatusId, 10),
     GenderId: parseInt(employee.GenderId, 10),

@@ -1,76 +1,29 @@
 
-
-import {
-  ChevronDown,
-  ChevronRight,
-  Home,
-  FileText,
-  Folder,
-  Clock,
-  UserCheck,
-  LucideIcon,
-} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { ChevronDown, ChevronRight, LucideIcon } from 'lucide-react';
 
-interface SubLink {
+export interface SubLink {
   href: string;
   label: string;
 }
 
-interface NavLink {
+export interface NavLink {
   href: string;
   icon: LucideIcon;
   label: string;
   subLinks?: Record<string, SubLink>;
 }
 
-export const navLinks: Record<string, NavLink> = {
-  home: {
-    href: '/',
-    icon: Home,
-    label: 'Inicio',
-  },
-  creacionPlanillas: {
-    href: '/payroll-creation',
-    icon: FileText,
-    label: 'Creación de planillas',
-  },
-  gestionDocumentos: {
-    href: '/document-management',
-    icon: Folder,
-    label: 'Gestión de documentos',
-  },
-  gestionSolicitudes: {
-    href: '/request-management',
-    icon: UserCheck,
-    label: 'Gestión de solicitudes',
-    subLinks: {
-      solicitudVacaciones: {
-        href: '/vacation-request',
-        label: 'Solicitud de vacaciones',
-      },
-      boletaPago: {
-        href: '/pay-slip',
-        label: 'Boleta de pago',
-      },
-      constanciaSalarial: {
-        href: '/salary-certificate',
-        label: 'Constancia salarial',
-      },
-    },
-  },
-  controlMarcas: {
-    href: '/time-tracking',
-    icon: Clock,
-    label: 'Control de marcas',
-  },
-};
+interface Props {
+  isOpen: boolean;
+  navLinks: Record<string, NavLink>;
+}
 
-export function NavLinks({ isOpen }: { isOpen: boolean }) {
+export function NavLinks({ isOpen, navLinks }: Props) {
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const pathname = usePathname();
 
@@ -88,7 +41,9 @@ export function NavLinks({ isOpen }: { isOpen: boolean }) {
                 onClick={() => setOpenSubMenu(openSubMenu === key ? null : key)}
               >
                 <link.icon className="mr-2 h-5 w-5" />
-                {isOpen && <span className="flex-grow">{link.label}</span>}
+                {isOpen && (
+                  <span className="flex-grow text-left">{link.label}</span>
+                )}
                 {isOpen &&
                   (openSubMenu === key ? (
                     <ChevronDown className="ml-2 h-4 w-4" />
@@ -116,7 +71,7 @@ export function NavLinks({ isOpen }: { isOpen: boolean }) {
                                   'text-left',
                                   pathname === subLink.href
                                     ? 'text-blue-600'
-                                    : 'text-gray-700'
+                                    : 'text-gray-700',
                                 )}
                               >
                                 {subLink.label}
@@ -145,7 +100,7 @@ export function NavLinks({ isOpen }: { isOpen: boolean }) {
                 <span
                   className={clsx(
                     'text-left',
-                    pathname === link.href ? 'text-blue-600' : 'text-gray-700'
+                    pathname === link.href ? 'text-blue-600' : 'text-gray-700',
                   )}
                 >
                   {link.label}
