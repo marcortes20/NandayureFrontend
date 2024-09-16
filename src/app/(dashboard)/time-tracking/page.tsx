@@ -1,91 +1,29 @@
-"use client"; 
+'use client';
+import useTimeTracking from '@/components/time-tracking/useTimeTracking';
 import { titleFont } from '@/config/fonts';
-import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 
-interface Props {
-  title: string;
-}
+const TimeTracking = () => {
 
-const MaintenancePage = ({ title }: Props) => {
-  const [dragging, setDragging] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [fileContent, setFileContent] = useState<string | ArrayBuffer | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
- 
-  const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    setDragging(true);
-  };
-
-  const onDragEnd = () => {
-    setDragging(false);
-  };
-
-  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      setUploadedFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFileContent(reader.result);
-      };
-      if (file.type.startsWith("image/")) {
-        reader.readAsDataURL(file);
-      } else if (file.type === "text/plain") {
-        reader.readAsText(file);
-      } else {
-        reader.readAsArrayBuffer(file);
-      }
-    }
-  };
-
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setDragging(true);
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setUploadedFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFileContent(reader.result);
-      };
-      if (file.type.startsWith("image/")) {
-        reader.readAsDataURL(file);
-      } else if (file.type === "text/plain") {
-        reader.readAsText(file);
-      } else {
-        reader.readAsArrayBuffer(file);
-      }
-    }
-  };
-
-  const handleSave = () => {
-    if (uploadedFile) {
-      alert(`Archivo "${uploadedFile.name}" guardado correctamente.`);
-    } else {
-      alert("No se ha cargado ningún archivo.");
-    }
-  };
-
-  const handleDelete = () => {
-    setUploadedFile(null);
-    setFileContent(null);
-  };
-
-  const openFileDialog = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+  const {
+    dragging,
+    uploadedFile,
+    fileContent,
+    fileInputRef,
+    setDragging,
+    onDrop,
+    onDragOver,
+    handleFileUpload,
+    handleSave,
+    handleDelete,
+    openFileDialog,
+  } = useTimeTracking();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <h1 className={`${titleFont.className} text-4xl mb-8`}>Control de Asistencia</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <h1 className={`${titleFont.className} text-4xl mb-8`}>
+        Control de Asistencia
+      </h1>
 
       <input
         type="file"
@@ -104,27 +42,30 @@ const MaintenancePage = ({ title }: Props) => {
       >
         {uploadedFile ? (
           <div className="flex items-center justify-center w-full h-full">
-            {uploadedFile.type.startsWith("image/") && fileContent && (
-              <img
+            {uploadedFile.type.startsWith('image/') && fileContent && (
+              <Image
                 src={fileContent as string}
                 alt={uploadedFile.name}
+                width={400}
+                height={300}
                 className="object-contain max-w-full max-h-full"
               />
             )}
 
-            {uploadedFile.type === "text/plain" && fileContent && (
+            {uploadedFile.type === 'text/plain' && fileContent && (
               <div className="overflow-auto w-full h-full p-2 border rounded bg-gray-50">
                 <h3 className="font-bold">{uploadedFile.name}</h3>
               </div>
             )}
 
-            {!uploadedFile.type.startsWith("image/") && uploadedFile.type !== "text/plain" && (
-              <div className="p-2 border rounded">
-                <h3 className="font-bold">{uploadedFile.name}</h3>
-                <p>Tipo de archivo: {uploadedFile.type}</p>
-                <p>Tamaño: {(uploadedFile.size / 1024).toFixed(2)} KB</p>
-              </div>
-            )}
+            {!uploadedFile.type.startsWith('image/') &&
+              uploadedFile.type !== 'text/plain' && (
+                <div className="p-2 border rounded">
+                  <h3 className="font-bold">{uploadedFile.name}</h3>
+                  <p>Tipo de archivo: {uploadedFile.type}</p>
+                  <p>Tamaño: {(uploadedFile.size / 1024).toFixed(2)} KB</p>
+                </div>
+              )}
           </div>
         ) : (
           <p className="text-gray-500">Arrastra y suelta el archivo aquí</p>
@@ -134,14 +75,20 @@ const MaintenancePage = ({ title }: Props) => {
       <div className="mt-4 flex space-x-4">
         <button
           onClick={openFileDialog}
-          className="bg-green-500 text-white py-2 px-4 rounded cursor-pointer"
+          className="bg-apple-500 text-white py-2 px-4 rounded cursor-pointer"
         >
           Elegir Archivo
         </button>
-        <button onClick={handleSave} className="bg-blue-500 text-white py-2 px-4 rounded">
+        <button
+          onClick={handleSave}
+          className="bg-dodger-blue-500 text-white py-2 px-4 rounded"
+        >
           Guardar
         </button>
-        <button onClick={handleDelete} className="bg-red-500 text-white py-2 px-4 rounded">
+        <button
+          onClick={handleDelete}
+          className="bg-rose-500 text-white py-2 px-4 rounded"
+        >
           Eliminar
         </button>
       </div>
@@ -149,4 +96,4 @@ const MaintenancePage = ({ title }: Props) => {
   );
 };
 
-export default MaintenancePage;
+export default TimeTracking;

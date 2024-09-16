@@ -17,6 +17,11 @@ const SalaryCertificatesForm = () => {
       <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
         Por favor, introduce la fecha y el motivo de la solicitud.
       </p>
+      <div className="flex mb-6 mt-4">
+        <div className="flex-1 h-1 bg-dodger-blue-500"></div>
+        <div className="flex-1 h-1 bg-golden-dream-500"></div>
+        <div className="flex-1 h-1 bg-apple-500"></div>
+      </div>
       <div className="mt-4" />
       <InputField id="date" label="Fecha" type="date" register={register} />
       <InputField

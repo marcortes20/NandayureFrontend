@@ -1,22 +1,25 @@
 import React from 'react';
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Textarea from '@/components/ui/textarea';
-import Checkbox from '@/components/ui/checkbox';
-
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@radix-ui/react-checkbox';
 const VacationRequest = () => {
   return (
     <form className="max-w-3xl mx-auto space-y-6 p-6 bg-white rounded-lg shadow">
-      <h1 className="text-xl font-semibold text-center mb-4">DIRECCIÓN DE RECURSOS HUMANOS</h1>
-      <h2 className="text-lg font-medium text-center mb-6">BOLETA SOLICITUD DE VACACIONES</h2>
+      <h1 className="text-xl font-semibold text-center mb-4">
+        DIRECCIÓN DE RECURSOS HUMANOS
+      </h1>
+      <h2 className="text-lg font-medium text-center mb-6">
+        BOLETA SOLICITUD DE VACACIONES
+      </h2>
 
       <div className="flex mb-6">
-  <div className="flex-1 h-1" style={{ backgroundColor: '#2196f3' }}></div>
-  <div className="flex-1 h-1" style={{ backgroundColor: '#e4df5e' }}></div>
-  <div className="flex-1 h-1" style={{ backgroundColor: '#4caf50' }}></div>
-</div>
-      
+        <div className="flex-1 h-1 bg-dodger-blue-500"></div>
+        <div className="flex-1 h-1 bg-golden-dream-500"></div>
+        <div className="flex-1 h-1 bg-apple-500"></div>
+      </div>
+
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="fecha">FECHA</Label>
@@ -101,11 +104,15 @@ const VacationRequest = () => {
           <Input id="firmaJefe" placeholder="Firma del Jefe Inmediato" />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="firmaRRHH">3. Revisado por (Encargado Recursos Humanos)</Label>
+          <Label htmlFor="firmaRRHH">
+            3. Revisado por (Encargado Recursos Humanos)
+          </Label>
           <Input id="firmaRRHH" placeholder="Firma del Encargado de RRHH" />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="firmaAlcalde">4. Aprobado por (Alcalde Municipal)</Label>
+          <Label htmlFor="firmaAlcalde">
+            4. Aprobado por (Alcalde Municipal)
+          </Label>
           <Input id="firmaAlcalde" placeholder="Firma del Alcalde Municipal" />
         </div>
       </div>
@@ -122,14 +129,30 @@ const VacationRequest = () => {
 
       <div className="space-y-2">
         <h4 className="font-semibold">DISPOSICIONES</h4>
-        <p className="text-sm">1. Todo aquel funcionario que requiera tramitar las vacaciones legales debe realizar la solicitud con mínimo una semana de anticipación, ya que deben ser revisadas y posteriormente aprobadas. Por consiguiente las solicitudes con menos de 3 días tramitadas serán analizadas para su aprobación según el grado de urgencia.</p>
-        <p className="text-sm">2. Antes de presentar la solicitud a recursos humanos, esta debe de venir autorizada por el jefe y gestor del área. Las aprobaciones las debe de coordinar el encargado de recursos humano. Incluyendo la del alcalde.</p>
-        <p className="text-sm">3. Las solicitudes se tramitan personalmente, si falta alguna de las 4 firmas, esta no tendrá ninguna validez.</p>
+        <p className="text-sm">
+          1. Todo aquel funcionario que requiera tramitar las vacaciones legales
+          debe realizar la solicitud con mínimo una semana de anticipación, ya
+          que deben ser revisadas y posteriormente aprobadas. Por consiguiente
+          las solicitudes con menos de 3 días tramitadas serán analizadas para
+          su aprobación según el grado de urgencia.
+        </p>
+        <p className="text-sm">
+          2. Antes de presentar la solicitud a recursos humanos, esta debe de
+          venir autorizada por el jefe y gestor del área. Las aprobaciones las
+          debe de coordinar el encargado de recursos humano. Incluyendo la del
+          alcalde.
+        </p>
+        <p className="text-sm">
+          3. Las solicitudes se tramitan personalmente, si falta alguna de las 4
+          firmas, esta no tendrá ninguna validez.
+        </p>
       </div>
 
-      <Button type="submit" className="w-full">Enviar Solicitud</Button>
+      <Button type="submit" className="w-full">
+        Enviar Solicitud
+      </Button>
     </form>
-  )
-}
+  );
+};
 
 export default VacationRequest;
