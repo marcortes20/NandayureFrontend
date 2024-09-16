@@ -1,22 +1,16 @@
 import { User } from 'lucide-react';
 
 export interface UpdateEmployee {
-  id?: number;
   Name?: string;
   Surname1?: string;
   Surname2?: string;
   Birthdate?: string | Date;
-  HiringDate?: string | Date;
   Email?: string;
   CellPhone?: string;
-  NumberChlidren?: number;
-  AvailableVacationDays?: number;
-  MaritalStatusId?: number;
-  GenderId?: number;
 }
 
 export interface Employee {
-  id: number;
+  id: string;
   Name: string;
   Surname1: string;
   Surname2: string;
@@ -26,9 +20,13 @@ export interface Employee {
   CellPhone: string;
   NumberChlidren: number;
   AvailableVacationDays: number;
+  JobPositionId: number;
+  DepartmentId: number;
+  EmbargoId: number | boolean;
   MaritalStatusId: number;
   GenderId: number;
 }
+
 export interface Gender {
   id: number;
   Name: string;
@@ -50,12 +48,27 @@ export interface ForgotPassword {
 
 export interface ResetPassword {
   Password: string;
-  ConfirmPassword: string;
-  token: string;
 }
 
 export interface ChangePassword {
   OldPassword: string;
   Password: string;
   ConfirmPassword: string;
+}
+
+export interface RequestSalaryCertificate {
+  employeeId: number;
+  requestDate: Date;
+  reason: string;
+}
+
+export interface LoginSchema {
+  EmployeeId: string;
+  Password: string;
+}
+
+export interface RequestPaySlip {
+  date: Date;
+  reason: string;
+  employeeId: number;
 }

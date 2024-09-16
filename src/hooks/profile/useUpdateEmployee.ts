@@ -3,23 +3,26 @@ import { updateEmployee } from '@/server/profile/updateEmployee/actions';
 import { UpdateEmployee } from '@/types/entities';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { z } from 'zod';
 
 interface Props {
   employeeId: number | undefined;
   setIsOpen: (value: boolean) => void;
 }
 
+type FormsFiels = z.infer<typeof UpdateEmployeeSchema>;
+
 const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
   const {
     register,
-    handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(UpdateEmployeeSchema)
+    handleSubmit,
+    trigger,
+  } = useForm<FormsFiels>({
+    resolver: zodResolver(UpdateEmployeeSchema),
   });
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -31,7 +34,7 @@ const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
     },
   });
 
-  const onSubmit = handleSubmit(async (data: UpdateEmployee) => {
+  const onSubmit: SubmitHandler<FormsFiels> = async (data) => {
     try {
       await toast.promise(
         new Promise((resolve, reject) => {
@@ -56,10 +59,12 @@ const useUpdateEmployee = ({ employeeId, setIsOpen }: Props) => {
       console.error(error);
       setIsOpen(false);
     }
-  });
+  };
 
   return {
+    handleSubmit,
     mutation,
+    trigger,
     onSubmit,
     register,
     errors,

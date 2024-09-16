@@ -7,11 +7,12 @@ interface Props {
 }
 const ResetPasswordForm = ({ token }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { onSubmit, register, mutation, errors } = usePostResetPassword({
-    token,
-  });
+  const { handleSubmit, register, onSubmit, mutation, errors } =
+    usePostResetPassword({
+      token,
+    });
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="mt-3">
         <label
           htmlFor="password"
@@ -61,11 +62,6 @@ const ResetPasswordForm = ({ token }: Props) => {
           <span className="ml-3 text-sm text-gray-600">Mostrar contraseña</span>
         </label>
       </div>
-      {/* {errorMessage && (
-        <div className="mt-3 text-red-500 text-sm">
-          {errorMessage}
-        </div>
-      )} */}
       <button
         type="submit"
         disabled={mutation.isPending}

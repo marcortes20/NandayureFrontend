@@ -32,6 +32,54 @@ export async function getMaritalStatus() {
   return data;
 }
 
+export async function getJobsPositions() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/job-positions`,
+    options,
+  );
+  const data = await res.json();
+  return data;
+}
+
+export async function getEmbargoes() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/embargoes`,
+    options,
+  );
+  const data = await res.json();
+  return data;
+}
+
+export async function getDepartments() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/departments`,
+    options,
+  );
+  const data = await res.json();
+  return data;
+}
+
 export async function postEmployee(employee: Employee) {
   const options = {
     method: 'POST',
@@ -48,7 +96,7 @@ export async function postEmployee(employee: Employee) {
   );
   const data = await res.json();
   if (!res.ok) {
-    throw new Error(data.error);
+    throw new Error(data.message);
   }
   return data;
 }

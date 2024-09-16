@@ -1,25 +1,29 @@
 import { ResetPassword } from '@/types/entities';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { postResetPassword } from '../../../server/auth/reset-password/actions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ResetPasswordSchema } from '@/lib/zod';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
+import { z } from 'zod';
+
 interface Props {
   token: string;
 }
+
+type FormsFields = z.infer<typeof ResetPasswordSchema>;
+
 const usePostResetPassword = ({ token }: Props) => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
 
   const {
     handleSubmit,
     register,
+    setError,
     formState: { errors },
-  } = useForm<ResetPassword>({
+  } = useForm<FormsFields>({
     resolver: zodResolver(ResetPasswordSchema),
   });
 
@@ -27,11 +31,11 @@ const usePostResetPassword = ({ token }: Props) => {
     mutationFn: async (data: ResetPassword) =>
       await postResetPassword(data, token),
     onError: (error: any) => {
-      setErrorMessage(error.message);
+      setError('root', error.message);
     },
   });
 
-  const onSubmit = handleSubmit(async (data: ResetPassword) => {
+  const onSubmit: SubmitHandler<FormsFields> = async (data) => {
     try {
       const response = await toast.promise(
         mutation.mutateAsync(data),
@@ -58,14 +62,14 @@ const usePostResetPassword = ({ token }: Props) => {
         router.push('/');
       }, 2500);
     } catch (error: any) {
-      setErrorMessage(error.message);
+      setError('root', error.message);
     }
-  });
+  };
 
   return {
+    handleSubmit,
     register,
     onSubmit,
-    errorMessage,
     mutation,
     errors,
   };
