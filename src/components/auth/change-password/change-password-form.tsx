@@ -5,11 +5,11 @@ import useChangePassword from '@/hooks/auth/change-password/usePostChangePasswor
 
 const ChangePasswordForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { register, onSubmit, errorMessage, errors, mutation } =
+  const { handleSubmit, register, onSubmit, mutation, errors } =
     useChangePassword();
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mt-3">
         <label
           htmlFor="oldPassword"
@@ -81,8 +81,8 @@ const ChangePasswordForm = () => {
           <span className="ml-3 text-sm text-gray-600">Mostrar contraseña</span>
         </label>
       </div>
-      {errorMessage && (
-        <div className="text-red-500 text-sm mt-2">{errorMessage}</div>
+      {errors.root && (
+        <div className="text-red-500 text-sm mt-2">{errors.root.message}</div>
       )}
       <button
         type="submit"

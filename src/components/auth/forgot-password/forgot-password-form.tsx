@@ -5,11 +5,11 @@ import { titleFont } from '@/config/fonts';
 import usePostSendEmail from '@/hooks/auth/forgot-password/usePostSendEmail';
 
 const ForgotPasswordForm = () => {
-  const { errorMessage, register, onSubmit, mutation, emailSent, errors } =
+  const { handleSubmit, onSubmit, register, mutation, emailSent, errors } =
     usePostSendEmail();
 
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       {!emailSent ? (
         <>
           <h5
@@ -41,8 +41,8 @@ const ForgotPasswordForm = () => {
               </p>
             )}
           </div>
-          {errorMessage && (
-            <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+          {errors.root && (
+            <p className="text-red-500 text-sm mt-2">{errors.root.message}</p>
           )}
           <button
             type="submit"

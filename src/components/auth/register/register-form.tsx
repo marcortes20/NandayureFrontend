@@ -16,10 +16,10 @@ const RegisterForm = () => {
   const { JobsPositions } = useGetJobsPositions();
   const { Departaments } = useGetDepartaments();
   const { Embargoes } = useGetEmbargoes();
-  const { onSubmit, register, errorMessage, mutation, errors } =
-    usePostEmployee();  
+  const { handleSubmit, onSubmit, register, mutation, errors } =
+    usePostEmployee();
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Información Personal */}
         <div>
@@ -159,12 +159,12 @@ const RegisterForm = () => {
           </div>
         </div>
       </div>
-      {errorMessage && (
+      {errors.root && (
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
           role="alert"
         >
-          <span className="block sm:inline">{errorMessage}</span>
+          <span className="block sm:inline">{errors.root.message}</span>
         </div>
       )}
       <div className="flex flex-col items-center">
