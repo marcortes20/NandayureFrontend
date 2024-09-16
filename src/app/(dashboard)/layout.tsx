@@ -17,6 +17,11 @@ export default function DasboardLayout({
       <SidebarDashboard />
       <div className="flex-1 p-4">
         <Nav />
+        <div className="flex mb-6 mt-4">
+          <div className="flex-1 h-1 bg-dodger-blue-500"></div>
+          <div className="flex-1 h-1 bg-golden-dream-500"></div>
+          <div className="flex-1 h-1 bg-apple-500"></div>
+        </div>
         {children}
       </div>
     </main>
