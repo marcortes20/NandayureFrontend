@@ -11,7 +11,7 @@ interface Props {
   label: string;
   options: Option[] | undefined;
   register: UseFormRegister<any>;
-  errors: Record<string, any>;
+  errors?: Record<string, any>;
 }
 
 const SelectField: React.FC<Props> = ({
@@ -40,7 +40,7 @@ const SelectField: React.FC<Props> = ({
           </option>
         ))}
       </select>
-      {errors[id] && (
+      {errors?.[id] && (
         <span className="text-red-500 text-sm">{errors[id].message}</span>
       )}
     </div>

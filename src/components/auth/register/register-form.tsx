@@ -7,8 +7,8 @@ import usePostEmployee from '@/hooks/auth/register/usePostEmployee';
 import useGetJobsPositions from '@/hooks/auth/register/useGetJobPositions';
 import useGetDepartaments from '@/hooks/auth/register/useGetDepartaments';
 import useGetEmbargoes from '@/hooks/auth/register/useGetEmbargoes';
-import SelectField from './select/select-fields';
-import InputField from './input/input-field';
+import SelectField from '../../ui/select/select-fields';
+import InputField from '../../ui/input/input-field';
 
 const RegisterForm = () => {
   const { genders } = useGetGenders();
