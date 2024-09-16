@@ -48,8 +48,6 @@ export interface ForgotPassword {
 
 export interface ResetPassword {
   Password: string;
-  ConfirmPassword: string;
-  token: string;
 }
 
 export interface ChangePassword {
@@ -62,4 +60,15 @@ export interface RequestSalaryCertificate {
   employeeId: number;
   requestDate: Date;
   reason: string;
+}
+
+export interface LoginSchema {
+  EmployeeId: string;
+  Password: string;
+}
+
+export interface RequestPaySlip {
+  date: Date;
+  reason: string;
+  employeeId: number;
 }

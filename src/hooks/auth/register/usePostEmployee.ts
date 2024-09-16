@@ -1,20 +1,22 @@
 import { Employee } from '@/types/entities';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterSchema } from '@/lib/zod';
 import { postEmployee } from '@/server/auth/register/actions';
+import { z } from 'zod';
+
+type FormsFields = z.infer<typeof RegisterSchema>;
 
 const usePostEmployee = () => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
     handleSubmit,
     register,
+    setError,
     formState: { errors },
-  } = useForm<Employee>({
+  } = useForm<FormsFields>({
     resolver: zodResolver(RegisterSchema),
   });
   const router = useRouter();
@@ -22,12 +24,15 @@ const usePostEmployee = () => {
   const mutation = useMutation({
     mutationFn: async (data: Employee) => await postEmployee(data),
     onError: (error: any) => {
-      console.error(error);
-      setErrorMessage(error.message);
+      console.error('Error recibido:', error);
+      setError('root', {
+        type: 'manual',
+        message: error.message,
+      });
     },
   });
 
-  const onSubmit = handleSubmit(async (data: Employee) => {
+  const onSubmit: SubmitHandler<FormsFields> = async (data) => {
     try {
       const convertedData = convertEmployeeTypes(data);
       const mutationPromise = mutation.mutateAsync(convertedData);
@@ -39,12 +44,16 @@ const usePostEmployee = () => {
       await mutationPromise;
       router.push('/success');
     } catch (error: any) {
-      setErrorMessage(error.message);
+      console.log('Error en onSubmit:', error.message);
+      setError('root', {
+        type: 'manual',
+        message: error.message,
+      });
     }
-  });
+  };
 
   return {
-    errorMessage,
+    handleSubmit,
     onSubmit,
     register,
     mutation,
@@ -64,7 +73,7 @@ export const convertEmployeeTypes = (employee: any): Employee => {
     CellPhone: employee.CellPhone,
     NumberChlidren: parseInt(employee.NumberChlidren, 10),
     JobPositionId: parseInt(employee.JobPositionId, 10),
-    DepartmentId: parseInt(employee.DepartmentId, 10), // Corrected here
+    DepartmentId: parseInt(employee.DepartmentId, 10),
     EmbargoId: parseInt(employee.EmbargoId, 10),
     AvailableVacationDays: parseInt(employee.AvailableVacationDays, 10),
     MaritalStatusId: parseInt(employee.MaritalStatusId, 10),

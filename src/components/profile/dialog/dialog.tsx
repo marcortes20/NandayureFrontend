@@ -13,6 +13,7 @@ import { Label } from '@/components/ui/label';
 import Spinner from '@/components/ui/spinner';
 import useGetEmployeeId from '@/hooks/common/useGetEmployeeId';
 import useUpdateEmployee from '@/hooks/profile/useUpdateEmployee';
+import { UpdateEmployee } from '@/types/entities';
 import { useState } from 'react';
 
 interface Field {
@@ -35,11 +36,13 @@ export function DialogProfile({
 }: DialogProfileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { employeeId } = useGetEmployeeId();
-  const { onSubmit, register, mutation } = useUpdateEmployee({
-    employeeId: employeeId,
-    setIsOpen,
-  });
+  const { trigger, handleSubmit, mutation, onSubmit, register, errors } =
+    useUpdateEmployee({
+      employeeId: employeeId,
+      setIsOpen,
+    });
 
+  console.log(errors);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -50,7 +53,7 @@ export function DialogProfile({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-4 py-4">
             {fields.map((field) => (
               <div
@@ -65,9 +68,15 @@ export function DialogProfile({
                   defaultValue={field.defaultValue}
                   type={field.type || 'text'}
                   className="col-span-3"
-                  {...register(field.id)}
+                  {...register(field.id as keyof UpdateEmployee, {
+                    onBlur: () => trigger(field.id as keyof UpdateEmployee),
+                  })}
                 />
-              
+                {errors[field.id as keyof UpdateEmployee] && (
+                  <p className="text-red-500 text-sm mt-2 col-span-4">
+                    {errors[field.id as keyof UpdateEmployee]?.message}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -75,7 +84,7 @@ export function DialogProfile({
             <Button
               type="submit"
               disabled={mutation.isPending}
-              className=" mt-4 py-2 px-4 bg-dodger-blue-600 hover:bg-dodger-blue-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              className="mt-4 py-2 px-4 bg-dodger-blue-600 hover:bg-dodger-blue-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
               {mutation.isPending ? <Spinner /> : 'Guardar'}
             </Button>

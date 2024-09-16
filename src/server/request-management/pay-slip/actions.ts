@@ -1,6 +1,6 @@
-import { RequestSalaryCertificate } from '@/types/entities';
+import { RequestPaySlip} from '@/types/entities';
 
-export async function getSalaryCertificates() {
+export async function getPaySlip() {
   const options = {
     method: 'GET',
     headers: {
@@ -9,27 +9,25 @@ export async function getSalaryCertificates() {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_UR}/salary-certificates`,
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_UR}/request-payment-confirmations`,
     options,
   );
   const data = await res.json();
   return data;
 }
 
-export async function postSalaryCertificates(
-  salaryCertificate: RequestSalaryCertificate,
-) {
+export async function postPaySlip(paySlip: RequestPaySlip) {
   const options = {
     method: 'POST',
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(salaryCertificate),
+    body: JSON.stringify(paySlip),
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/salary-certificates`,
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/request-payment-confirmations`,
     options,
   );
   const data = await res.json();

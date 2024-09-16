@@ -1,18 +1,17 @@
 'use client';
-
 import InputField from '@/components/ui/input/input-field';
 import Spinner from '@/components/ui/spinner';
 import { titleFont } from '@/config/fonts';
-import usePostSalaryCetificates from '@/hooks/request-management/salary-certificates/usePostSalaryCetificates';
+import usePostPaySlip from '@/hooks/request-management/pay-slip/usePostPaySlip';
 
-const SalaryCertificatesForm = () => {
-  const { onSubmit, register, mutation } = usePostSalaryCetificates();
+const PaySlipForm = () => {
+  const { onSubmit, register, mutation } = usePostPaySlip();
   return (
     <form onSubmit={onSubmit}>
       <h5
         className={`${titleFont.className} mb-3 text-base font-semibold text-gray-900 md:text-xl`}
       >
-        Solicitud de certificados de salario
+        Solicitud de boletas de pago
       </h5>
       <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
         Por favor, introduce la fecha y el motivo de la solicitud.
@@ -37,4 +36,4 @@ const SalaryCertificatesForm = () => {
     </form>
   );
 };
-export default SalaryCertificatesForm;
+export default PaySlipForm;

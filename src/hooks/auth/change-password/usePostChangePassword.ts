@@ -2,20 +2,22 @@ import { ChangePasswordSchema } from '@/lib/zod';
 import { ChangePassword } from '@/types/entities';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { postChangePassword } from '@/server/auth/change-password/actions';
 import useGetToken from '@/hooks/common/useGetToken';
+import { z } from 'zod';
+
+type FormsFields = z.infer<typeof ChangePasswordSchema>;
 
 const useChangePassword = () => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { token } = useGetToken();
   const {
     handleSubmit,
     register,
+    setError,
     formState: { errors },
-  } = useForm<ChangePassword>({
+  } = useForm<FormsFields>({
     resolver: zodResolver(ChangePasswordSchema),
   });
 
@@ -23,11 +25,11 @@ const useChangePassword = () => {
     mutationFn: async (data: ChangePassword) =>
       await postChangePassword(data, token),
     onError: (error: any) => {
-      setErrorMessage(error.message);
+      setError('root', error.message);
     },
   });
 
-  const onSubmit = handleSubmit(async (data: ChangePassword) => {
+  const onSubmit: SubmitHandler<FormsFields> = async (data) => {
     try {
       await toast.promise(mutation.mutateAsync(data), {
         loading: 'Cargando...',
@@ -35,16 +37,17 @@ const useChangePassword = () => {
         error: 'Error al cambiar la contraseña.',
       });
     } catch (error: any) {
-      setErrorMessage(error.message);
+      setError('root', error.message);
     }
-  });
+  };
 
   return {
+    handleSubmit,
     register,
     onSubmit,
-    errorMessage,
     mutation,
     errors,
   };
 };
+
 export default useChangePassword;

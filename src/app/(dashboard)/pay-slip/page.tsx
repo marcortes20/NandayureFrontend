@@ -1,7 +1,13 @@
-import MaintenancePage from '@/components/ui/maintenance-page';
+import PaySlipForm from '@/components/request-management/pay-slip/pay-slip-form';
 
 const PaySlip = () => {
-  return <MaintenancePage title="Boleta de pago" />;
+  return (
+    <div className="min-h-screen p-6">
+      <div className="max-w-3xl mx-auto bg-white border shadow-md rounded-lg overflow-hidden p-6">
+        <PaySlipForm />
+      </div>
+    </div>
+  );
 };
 
 export default PaySlip;
