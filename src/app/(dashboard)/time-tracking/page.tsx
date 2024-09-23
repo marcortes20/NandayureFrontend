@@ -73,7 +73,7 @@ const TimeTracking = () => {
       </div>
 
       <div className="mt-4 flex space-x-4">
-        <Button onClick={openFileDialog} variant={'select'}>
+        <Button onClick={openFileDialog} variant="select">
           Seleccionar archivo
         </Button>
         <Button onClick={handleSave}>Guardar</Button>
