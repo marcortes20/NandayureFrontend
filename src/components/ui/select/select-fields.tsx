@@ -23,7 +23,7 @@ const SelectField: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-900">
+      <label htmlFor={id} className="block text-sm font-medium text-gray-900 mb-2">
         {label}
       </label>
       <select

@@ -18,12 +18,13 @@ const RegisterForm = () => {
   const { Embargoes } = useGetEmbargoes();
   const { handleSubmit, onSubmit, register, mutation, errors } =
     usePostEmployee();
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Información Personal */}
         <div>
-          <h2 className="text-lg font-medium text-gray-900 mb-3">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">
             Información Personal
           </h2>
           <div className="space-y-4">
@@ -65,11 +66,43 @@ const RegisterForm = () => {
               register={register}
               errors={errors}
             />
+            <SelectField
+              id="MaritalStatusId"
+              label="Estado Civil"
+              options={maritalStatus}
+              register={register}
+              errors={errors}
+            />
+          </div>
+          {/* Información de Contacto */}
+          <div className="mt-4">
+            <h2 className="text-lg font-medium text-gray-900 mb-4">
+              Información de Contacto
+            </h2>
+            <div className="space-y-4">
+              <InputField
+                id="Email"
+                label="Correo Electrónico"
+                type="email"
+                placeholder="Escribe tu correo electrónico aquí"
+                register={register}
+                errors={errors}
+              />
+              <InputField
+                id="CellPhone"
+                label="Teléfono Celular"
+                type="tel"
+                placeholder="Escribe tu número de teléfono aquí"
+                register={register}
+                errors={errors}
+              />
+            </div>
           </div>
         </div>
+
         {/* Información Laboral */}
         <div>
-          <h2 className="text-lg font-medium text-gray-900 mb-3">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">
             Información Laboral
           </h2>
           <div className="space-y-4">
@@ -96,21 +129,6 @@ const RegisterForm = () => {
               register={register}
               errors={errors}
             />
-            <InputField
-              id="AvailableVacationDays"
-              label="Días de Vacaciones"
-              type="number"
-              placeholder="Escribe los días de vacaciones aquí"
-              register={register}
-              errors={errors}
-            />
-            <SelectField
-              id="MaritalStatusId"
-              label="Estado Civil"
-              options={maritalStatus}
-              register={register}
-              errors={errors}
-            />
             <SelectField
               id="JobPositionId"
               label="Puesto de Trabajo"
@@ -125,64 +143,38 @@ const RegisterForm = () => {
               register={register}
               errors={errors}
             />
-            <SelectField
-              id="EmbargoId"
-              label="Embargo"
-              options={Embargoes}
-              register={register}
-              errors={errors}
-            />
-          </div>
-        </div>
-        {/* Contacto */}
-        <div>
-          <h2 className="text-lg font-medium text-gray-900 mb-3">
-            Información de Contacto
-          </h2>
-          <div className="space-y-4">
             <InputField
-              id="Email"
-              label="Correo Electrónico"
-              type="email"
-              placeholder="Escribe tu correo electrónico aquí"
+              id="AvailableVacationDays"
+              label="Días de Vacaciones"
+              type="number"
+              placeholder="Escribe los días de vacaciones aquí"
               register={register}
               errors={errors}
             />
-            <InputField
-              id="CellPhone"
-              label="Teléfono Celular"
-              type="tel"
-              placeholder="Escribe tu número de teléfono aquí"
-              register={register}
-              errors={errors}
-            />
+
+            {/* Otros */}
+            <div className="mt-4">
+              <h2 className="text-lg font-medium text-gray-900 mb-4">Otros</h2>
+              <div className="space-y-4">
+                <SelectField
+                  id="EmbargoId"
+                  label="Embargo"
+                  options={Embargoes}
+                  register={register}
+                  errors={errors}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {errors.root && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-          role="alert"
-        >
-          <span className="block sm:inline">{errors.root.message}</span>
-        </div>
-      )}
-      <div className="flex flex-col items-center">
+      <div className="flex justify-center">
         <button
           type="submit"
-          disabled={mutation.isPending}
-          className="px-4 w-28 py-2 mt-4 text-white bg-dodger-blue-600 rounded-md shadow-sm hover:bg-dodger-blue-600 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         >
-          <div className="flex justify-center items-center">
-            {mutation.isPending ? <Spinner /> : <span>Registrar</span>}
-          </div>
+          {mutation.isPending ? <Spinner /> : 'Guardar'}
         </button>
-        <Link
-          href={'/'}
-          className="mt-4 text-sm hover:text-dodger-blue-600 hover:underline"
-        >
-          Volver al Inicio
-        </Link>
       </div>
     </form>
   );
