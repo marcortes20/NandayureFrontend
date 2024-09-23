@@ -1,10 +1,10 @@
 'use client';
 import useTimeTracking from '@/components/time-tracking/useTimeTracking';
+import { Button } from '@/components/ui/button';
 import { titleFont } from '@/config/fonts';
 import Image from 'next/image';
 
 const TimeTracking = () => {
-
   const {
     dragging,
     uploadedFile,
@@ -73,24 +73,13 @@ const TimeTracking = () => {
       </div>
 
       <div className="mt-4 flex space-x-4">
-        <button
-          onClick={openFileDialog}
-          className="bg-apple-500 text-white py-2 px-4 rounded cursor-pointer"
-        >
-          Elegir Archivo
-        </button>
-        <button
-          onClick={handleSave}
-          className="bg-dodger-blue-500 text-white py-2 px-4 rounded"
-        >
-          Guardar
-        </button>
-        <button
-          onClick={handleDelete}
-          className="bg-rose-500 text-white py-2 px-4 rounded"
-        >
+        <Button onClick={openFileDialog} variant={'select'}>
+          Seleccionar archivo
+        </Button>
+        <Button onClick={handleSave}>Guardar</Button>
+        <Button onClick={handleDelete} variant="destructive">
           Eliminar
-        </button>
+        </Button>
       </div>
     </div>
   );

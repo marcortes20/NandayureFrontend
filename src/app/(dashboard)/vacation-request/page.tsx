@@ -6,6 +6,7 @@ import { titleFont } from '@/config/fonts';
 import { CheckIcon } from 'lucide-react';
 import { Checkbox, CheckboxIndicator } from '@radix-ui/react-checkbox';
 import usePostVacation from '@/hooks/request-management/request-vacation/usePostVacation';
+import { Button } from '@/components/ui/button';
 
 const VacationRequestForm = () => {
   const {
@@ -111,15 +112,9 @@ const VacationRequestForm = () => {
         </Checkbox>
         <label htmlFor="aprobacionAlcalde">Aprobación del Alcalde</label>
       </div>
-
-      <button
-        type="submit"
-        className="w-full mt-4 py-2 px-4 bg-dodger-blue-600 hover:bg-dodger-blue-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-      >
-        <div className="flex justify-center items-center">
-          {mutation.isPending ? <Spinner /> : <span>Enviar solicitud</span>}
-        </div>
-      </button>
+      <Button type="submit" className="w-full" disabled={mutation.isPending}>
+        {mutation.isPending ? <Spinner /> : 'Enviar Solicitud'}
+      </Button>
     </form>
   );
 };
