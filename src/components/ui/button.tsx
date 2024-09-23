@@ -15,8 +15,8 @@ const buttonVariants = cva(
           'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-blue-500 text-white hover:bg-blue-600',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-dodger-blue-600  underline-offset-4 hover:underline',
-        select: 'bg-green-500 text-white hover:bg-green-600', // Nueva variante
+        link: 'text-black text-sm hover:text-dodger-blue-600 hover:underline', // Actualizado
+        select: 'bg-green-500 text-white hover:bg-green-600',
       },
       size: {
         default: 'h-10 px-4 py-2',
