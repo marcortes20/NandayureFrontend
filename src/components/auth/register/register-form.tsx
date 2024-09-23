@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import Spinner from '../../ui/spinner';
 import useGetGenders from '@/hooks/auth/register/useGetGenders';
 import useGetMaritalStatus from '@/hooks/auth/register/useGetMaritalStatus';
@@ -9,6 +8,7 @@ import useGetDepartaments from '@/hooks/auth/register/useGetDepartaments';
 import useGetEmbargoes from '@/hooks/auth/register/useGetEmbargoes';
 import SelectField from '../../ui/select/select-fields';
 import InputField from '../../ui/input/input-field';
+import Link from 'next/link';
 
 const RegisterForm = () => {
   const { genders } = useGetGenders();
@@ -168,13 +168,22 @@ const RegisterForm = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center">
         <button
           type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          disabled={mutation.isPending}
+          className="px-4 w-28 py-2 mt-4 text-white bg-dodger-blue-600 rounded-md shadow-sm hover:bg-dodger-blue-600 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500 transition-all"
         >
-          {mutation.isPending ? <Spinner /> : 'Guardar'}
+          <div className="flex justify-center items-center">
+            {mutation.isPending ? <Spinner /> : <span>Registrar</span>}
+          </div>
         </button>
+        <Link
+          href={'/'}
+          className="mt-4 text-sm hover:text-dodger-blue-600 hover:underline"
+        >
+          Volver al Inicio
+        </Link>
       </div>
     </form>
   );
