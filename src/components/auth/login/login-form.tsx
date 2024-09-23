@@ -69,7 +69,6 @@ const LoginForm = () => {
         <Link href="/auth/forgot-password">
           <Button
             variant="link"
-            className="text-dodger-blue-600 underline-offset-4 hover:underline"
           >
             ¿Olvidaste tu contraseña?
           </Button>
