@@ -8,10 +8,14 @@ import { Inbox } from 'lucide-react';
 const Nav = () => {
   const { data: session, status } = useSession();
 
-  let userInfo = 'Invitado';
+  let userInfo;
 
   if (status === 'loading') {
-    userInfo = 'Cargando...';
+    userInfo = (
+      <div className="flex items-center justify-center space-x-4">
+        <div className="mr-4 animate-pulse w-64 h-6 bg-gray-200 rounded-full"></div>
+      </div>
+    );
   } else if (status === 'authenticated' && session?.user) {
     userInfo = session.user.email || session.user.name || 'Usuario';
   }
