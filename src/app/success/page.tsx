@@ -22,7 +22,7 @@ export default function SuccessPage() {
           </p>
         </div>
         <Link href={'/'} className="flex justify-center">
-          <Button variant="select" size="lg" asChild>
+          <Button variant="select" size="lg">
             Volver al Inicio
           </Button>
         </Link>
