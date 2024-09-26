@@ -20,11 +20,10 @@ export interface Employee {
   CellPhone: string;
   NumberChlidren: number;
   AvailableVacationDays: number;
-  JobPositionId: number;
-  DepartmentId: number;
-  EmbargoId: number | boolean;
   MaritalStatusId: number;
   GenderId: number;
+  JobPositionId: number;
+  EmbargoId: number;
 }
 
 export interface Gender {
