@@ -4,7 +4,6 @@ import useGetGenders from '@/hooks/auth/register/useGetGenders';
 import useGetMaritalStatus from '@/hooks/auth/register/useGetMaritalStatus';
 import usePostEmployee from '@/hooks/auth/register/usePostEmployee';
 import useGetJobsPositions from '@/hooks/auth/register/useGetJobPositions';
-import useGetDepartaments from '@/hooks/auth/register/useGetDepartaments';
 import useGetEmbargoes from '@/hooks/auth/register/useGetEmbargoes';
 import SelectField from '../../ui/select/select-fields';
 import InputField from '../../ui/input/input-field';
@@ -15,7 +14,6 @@ const RegisterForm = () => {
   const { genders } = useGetGenders();
   const { maritalStatus } = useGetMaritalStatus();
   const { JobsPositions } = useGetJobsPositions();
-  const { Departaments } = useGetDepartaments();
   const { Embargoes } = useGetEmbargoes();
   const { handleSubmit, onSubmit, register, mutation, errors } =
     usePostEmployee();
@@ -110,7 +108,7 @@ const RegisterForm = () => {
             <InputField
               id="id"
               label="Identificación"
-              type="number"
+              type="text"
               placeholder="Escribe tu identificación laboral aquí"
               register={register}
               errors={errors}
@@ -134,13 +132,6 @@ const RegisterForm = () => {
               id="JobPositionId"
               label="Puesto de Trabajo"
               options={JobsPositions}
-              register={register}
-              errors={errors}
-            />
-            <SelectField
-              id="DepartmentId"
-              label="Departamento"
-              options={Departaments}
               register={register}
               errors={errors}
             />
@@ -169,6 +160,9 @@ const RegisterForm = () => {
           </div>
         </div>
       </div>
+      {errors.root && (
+        <div className="text-red-500 text-sm">{errors.root.message}</div>
+      )}
       <div className="flex flex-col items-center">
         <Button type="submit" disabled={mutation.isPending}>
           {mutation.isPending ? <Spinner /> : 'Registrarse'}
