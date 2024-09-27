@@ -2,7 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useSession } from 'next-auth/react';
 
 const useGetRoles = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const token = session?.user?.access_token;
 
   let roles;
@@ -13,6 +13,7 @@ const useGetRoles = () => {
   return {
     token,
     roles,
+    status,
   };
 };
 

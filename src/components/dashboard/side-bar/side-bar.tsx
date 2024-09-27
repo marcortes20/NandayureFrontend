@@ -14,8 +14,10 @@ import {
   X,
 } from 'lucide-react';
 import { useSidebarStore } from '@/store/useSidebarStore';
+import useGetRoles from '@/hooks/common/useGetRoles';
+import SkeletonLoader from '@/components/ui/skeleton-loader';
 
-export const navLinks: Record<string, NavLink> = {
+const navLinksRH: Record<string, NavLink> = {
   home: {
     href: '/',
     icon: Home,
@@ -57,8 +59,74 @@ export const navLinks: Record<string, NavLink> = {
   },
 };
 
+// Enlaces de navegación para USER
+const navLinksUser: Record<string, NavLink> = {
+  home: {
+    href: '/',
+    icon: Home,
+    label: 'Inicio',
+  },
+  miExpediente: {
+    href: '/my-file',
+    icon: Folder,
+    label: 'Mi expediente',
+  },
+  gestionSolicitudes: {
+    href: '/request-management',
+    icon: UserCheck,
+    label: 'Gestión de solicitudes',
+    subLinks: {
+      solicitudVacaciones: {
+        href: '/vacation-request',
+        label: 'Solicitud de vacaciones',
+      },
+      boletaPago: {
+        href: '/pay-slip',
+        label: 'Boleta de pago',
+      },
+      constanciaSalarial: {
+        href: '/salary-certificate',
+        label: 'Constancia salarial',
+      },
+    },
+  },
+};
+
 export function SidebarDashboard() {
   const { isOpen, MenuIsOpen, MenuIsClose } = useSidebarStore();
+  const { roles, status } = useGetRoles();
+
+  if (status === 'loading') {
+    return (
+      <aside
+        className={clsx(
+          'flex flex-col h-screen transition-all duration-300 p-4  bg-white border rounded border-gray-200',
+          isOpen ? 'w-64' : 'w-20 items-center',
+        )}
+      >
+        <div className="flex items-center p-2">
+          <SkeletonLoader className="w-10 h-10 rounded-full" />
+        </div>
+        <div className="mb-2 flex h-20 items-center justify-center rounded-md p-4 md:h-40">
+          <SkeletonLoader className="w-20 h-20" />
+        </div>
+        <nav
+          className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}
+        >
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
+        </nav>
+      </aside>
+    );
+  }
+
+  // Determinar el conjunto de enlaces de navegación basado en el rol
+  const selectedNavLinks = roles.includes('RH')
+    ? navLinksRH
+    : roles.includes('USER')
+    ? navLinksUser
+    : {};
 
   const toggleSidebar = () => {
     isOpen ? MenuIsClose() : MenuIsOpen();
@@ -97,7 +165,7 @@ export function SidebarDashboard() {
       <nav
         className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}
       >
-        <NavLinks isOpen={isOpen} navLinks={navLinks} />
+        <NavLinks isOpen={isOpen} navLinks={selectedNavLinks} />
       </nav>
     </aside>
   );
