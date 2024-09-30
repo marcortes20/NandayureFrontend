@@ -1,4 +1,3 @@
-import { Employee } from '@/types/entities';
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -7,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterSchema } from '@/lib/zod';
 import { postEmployee } from '@/server/auth/register/actions';
 import { z } from 'zod';
+import { Employee } from '@/types';
 
 type FormsFields = z.infer<typeof RegisterSchema>;
 

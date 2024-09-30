@@ -1,5 +1,5 @@
 import { postSalaryCertificates } from '@/server/request-management/salary-certificates/actions';
-import { RequestSalaryCertificate } from '@/types/entities';
+import { RequestSalaryCertificate } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';

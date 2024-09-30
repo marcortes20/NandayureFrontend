@@ -1,5 +1,5 @@
 import { postPaySlip } from "@/server/request-management/pay-slip/actions";
-import { RequestPaySlip } from "@/types/entities";
+import { RequestPaySlip } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";

@@ -1,4 +1,4 @@
-import { RequestVacation } from '@/types/entities';
+import { RequestVacation } from "@/types";
 
 export async function postVacation(Vacation: RequestVacation) {
   const options = {

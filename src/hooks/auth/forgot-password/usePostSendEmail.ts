@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ForgotPassword } from '@/types/entities';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EmailSendSchema } from '@/lib/zod';
 import { postForgotPassword } from '@/server/auth/forgot-password/actions';
 import { z } from 'zod';
+import { ForgotPassword } from '@/types';
 
 type FormsFields = z.infer<typeof EmailSendSchema>;
 

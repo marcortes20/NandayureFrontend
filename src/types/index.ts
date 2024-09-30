@@ -3,6 +3,7 @@ export * from './Employee';
 export * from './UpdateEmployee';
 export * from './Gender';
 export * from './MaritalStatus';
+export * from './JobPosition';
 export * from './User';
 export * from './Login';
 

@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label';
 import Spinner from '@/components/ui/spinner';
 import useGetEmployeeId from '@/hooks/common/useGetEmployeeId';
 import useUpdateEmployee from '@/hooks/profile/useUpdateEmployee';
-import { UpdateEmployee } from '@/types/entities';
+import { UpdateEmployee } from '@/types';
 import { useState } from 'react';
 
 interface Field {

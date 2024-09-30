@@ -1,4 +1,5 @@
-import { UpdateEmployee } from '@/types/entities';
+import { UpdateEmployee } from "@/types";
+
 
 interface Props {
   employeeId: number;

@@ -1,4 +1,4 @@
-import { Employee, Gender, MaritalStatus } from '@/types/entities';
+import { Employee, Gender, JobPosition, MaritalStatus } from '@/types';
 
 export async function getGenders() {
   const options = {
@@ -44,7 +44,7 @@ export async function getJobsPositions() {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/job-positions`,
     options,
   );
-  const data = await res.json();
+  const data = (await res.json()) as JobPosition[];
   return data;
 }
 

@@ -1,4 +1,5 @@
-import { RequestSalaryCertificate } from '@/types/entities';
+import { RequestSalaryCertificate } from "@/types";
+
 
 export async function getSalaryCertificates() {
   const options = {

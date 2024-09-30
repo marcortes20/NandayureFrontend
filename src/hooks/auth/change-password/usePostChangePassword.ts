@@ -1,5 +1,4 @@
 import { ChangePasswordSchema } from '@/lib/zod';
-import { ChangePassword } from '@/types/entities';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -7,6 +6,7 @@ import toast from 'react-hot-toast';
 import { postChangePassword } from '@/server/auth/change-password/actions';
 import useGetToken from '@/hooks/common/useGetToken';
 import { z } from 'zod';
+import { ChangePassword } from '@/types';
 
 type FormsFields = z.infer<typeof ChangePasswordSchema>;
 

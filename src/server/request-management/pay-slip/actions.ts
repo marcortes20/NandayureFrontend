@@ -1,4 +1,5 @@
-import { RequestPaySlip} from '@/types/entities';
+import { RequestPaySlip } from "@/types";
+
 
 export async function getPaySlip() {
   const options = {

@@ -1,4 +1,3 @@
-import { ResetPassword } from '@/types/entities';
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { postResetPassword } from '../../../server/auth/reset-password/actions';
@@ -8,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
+import { ResetPassword } from '@/types';
 
 interface Props {
   token: string;
