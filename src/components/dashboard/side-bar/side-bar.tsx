@@ -15,8 +15,8 @@ import {
   X,
 } from 'lucide-react';
 import { useSidebarStore } from '@/store/useSidebarStore';
-import useGetRoles from '@/hooks/common/useGetRoles';
 import SkeletonLoader from '@/components/ui/skeleton-loader';
+import { useGetRoles } from '@/hooks';
 
 const navLinksRH: Record<string, NavLink> = {
   home: {

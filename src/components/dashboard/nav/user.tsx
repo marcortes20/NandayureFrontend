@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import useGetRoles from '@/hooks/common/useGetRoles';
+import { useGetRoles } from '@/hooks';
 import { CircleUserRound } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';

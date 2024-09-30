@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import InputField from '@/components/ui/input-field';
 import Spinner from '@/components/ui/spinner';
 import { titleFont } from '@/config/fonts';
-import usePostVacation from '@/hooks/request-management/request-vacation/usePostVacation';
+import { usePostVacation } from '@/hooks';
 import { Checkbox, CheckboxIndicator } from '@radix-ui/react-checkbox';
 import { CheckIcon } from 'lucide-react';
 

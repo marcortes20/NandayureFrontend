@@ -11,8 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Spinner from '@/components/ui/spinner';
-import useGetEmployeeId from '@/hooks/common/useGetEmployeeId';
-import useUpdateEmployee from '@/hooks/profile/useUpdateEmployee';
+import { useGetEmployeeId, useUpdateEmployee } from '@/hooks';
 import { UpdateEmployee } from '@/types';
 import { useState } from 'react';
 

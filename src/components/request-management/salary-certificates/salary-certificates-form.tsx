@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import InputField from '@/components/ui/input-field';
 import Spinner from '@/components/ui/spinner';
 import { titleFont } from '@/config/fonts';
-import usePostSalaryCetificates from '@/hooks/request-management/salary-certificates/usePostSalaryCetificates';
+import { usePostSalaryCetificates } from '@/hooks';
 
 const SalaryCertificatesForm = () => {
   const { onSubmit, register, mutation } = usePostSalaryCetificates();
