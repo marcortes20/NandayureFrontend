@@ -32,11 +32,24 @@ const usePostSendEmail = () => {
 
   const onSubmit: SubmitHandler<FormsFields> = async (data) => {
     try {
-      const mutationPromise = await toast.promise(mutation.mutateAsync(data), {
-        loading: 'Enviando correo...',
-        success: 'Correo enviado',
-        error: 'Error al enviar correo',
-      });
+      const mutationPromise = await toast.promise(
+        new Promise((resolve, reject) => {
+          setTimeout(async () => {
+            try {
+              await mutation.mutateAsync(data);
+              resolve('Correo enviado');
+            } catch (error) {
+              reject('Error al enviar correo');
+            }
+          }, 500); // artificial waiting
+        }),
+        {
+          loading: 'Enviando correo...',
+          success: 'Correo enviado',
+          error: 'Error al enviar correo',
+        },
+        { duration: 2500 },
+      );
       setEmailSent(true);
       await mutationPromise;
     } catch (error: any) {
@@ -55,4 +68,5 @@ const usePostSendEmail = () => {
     errors,
   };
 };
+
 export default usePostSendEmail;
