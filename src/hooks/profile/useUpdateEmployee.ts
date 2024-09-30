@@ -1,4 +1,4 @@
-import { UpdateEmployeeSchema } from '@/lib/zod';
+import { UpdateEmployeeSchema } from '@/schemas';
 import { updateEmployee } from '@/server/profile/updateEmployee/actions';
 import { UpdateEmployee } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';

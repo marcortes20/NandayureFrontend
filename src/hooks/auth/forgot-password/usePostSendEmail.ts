@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSendSchema } from '@/lib/zod';
 import { postForgotPassword } from '@/server/auth/forgot-password/actions';
 import { z } from 'zod';
 import { ForgotPassword } from '@/types';
+import { EmailSendSchema } from '@/schemas';
 
 type FormsFields = z.infer<typeof EmailSendSchema>;
 
