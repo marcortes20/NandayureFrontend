@@ -27,7 +27,7 @@ export async function postPaySlip(paySlip: RequestPaySlip) {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/request-payment-confirmations`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/request-payment-confirmations`,
     options,
   );
   const data = await res.json();

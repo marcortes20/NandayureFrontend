@@ -57,23 +57,7 @@ export async function getEmbargoes() {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/embargoes`,
-    options,
-  );
-  const data = await res.json();
-  return data;
-}
-
-export async function getDepartments() {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-    },
-  };
-
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/departments`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/embargoes`,
     options,
   );
   const data = await res.json();

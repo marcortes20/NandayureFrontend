@@ -5,8 +5,8 @@ import useGetMaritalStatus from '@/hooks/auth/register/useGetMaritalStatus';
 import usePostEmployee from '@/hooks/auth/register/usePostEmployee';
 import useGetJobsPositions from '@/hooks/auth/register/useGetJobPositions';
 import useGetEmbargoes from '@/hooks/auth/register/useGetEmbargoes';
-import SelectField from '../../ui/select/select-fields';
-import InputField from '../../ui/input/input-field';
+import SelectField from '../../ui/select-fields';
+import InputField from '../../ui/input-field';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 

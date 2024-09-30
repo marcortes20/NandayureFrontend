@@ -29,7 +29,7 @@ export async function postSalaryCertificates(
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/salary-certificates`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/salary-certificates`,
     options,
   );
   const data = await res.json();

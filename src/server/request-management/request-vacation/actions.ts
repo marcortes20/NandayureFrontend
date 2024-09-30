@@ -11,12 +11,29 @@ export async function postVacation(Vacation: RequestVacation) {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/request-vacation`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/request-vacation`,
     options,
   );
   const data = await res.json();
   if (!res.ok) {
     throw new Error(data.message);
   }
+  return data;
+}
+
+
+export async function getVacation() {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/request-vacation`,
+    options,
+  );
+  const data = await res.json();
   return data;
 }
