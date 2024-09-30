@@ -10,6 +10,7 @@ import {
   Folder,
   Home,
   Menu,
+  SquarePen,
   UserCheck,
   X,
 } from 'lucide-react';
@@ -32,6 +33,16 @@ const navLinksRH: Record<string, NavLink> = {
     href: '/document-management',
     icon: Folder,
     label: 'Gestión de documentos',
+    subLinks: {
+      ExpedientesDigitales: {
+        href: '/document-management/digital-files',
+        label: 'Expedientes digitales',
+      },
+      Planillas: {
+        href: '/document-management/payrolls',
+        label: 'Planillas',
+      },
+    },
   },
   gestionSolicitudes: {
     href: '/request-management',
@@ -39,15 +50,34 @@ const navLinksRH: Record<string, NavLink> = {
     label: 'Gestión de solicitudes',
     subLinks: {
       solicitudVacaciones: {
-        href: '/vacation-request',
+        href: '/request-management/vacation-request',
         label: 'Solicitud de vacaciones',
       },
       boletaPago: {
-        href: '/pay-slip',
+        href: '/request-management/pay-slip',
         label: 'Boleta de pago',
       },
       constanciaSalarial: {
-        href: '/salary-certificate',
+        href: '/request-management/salary-certificate',
+        label: 'Constancia salarial',
+      },
+    },
+  },
+  Solicitudes: {
+    href: '/request',
+    icon: SquarePen,
+    label: 'Solicitudes',
+    subLinks: {
+      solicitudVacaciones: {
+        href: '/request/vacation-request',
+        label: 'Solicitud de vacaciones',
+      },
+      boletaPago: {
+        href: '/request/pay-slip',
+        label: 'Boleta de pago',
+      },
+      constanciaSalarial: {
+        href: '/request/salary-certificate',
         label: 'Constancia salarial',
       },
     },
@@ -113,6 +143,12 @@ export function SidebarDashboard() {
         <nav
           className={clsx('flex flex-col flex-grow', !isOpen && 'items-center')}
         >
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
+          <SkeletonLoader className="w-full h-6 mb-2" />
           <SkeletonLoader className="w-full h-6 mb-2" />
           <SkeletonLoader className="w-full h-6 mb-2" />
           <SkeletonLoader className="w-full h-6 mb-2" />
