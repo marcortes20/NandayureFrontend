@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Spinner from '@/components/ui/spinner';
-import useChangePassword from '@/hooks/auth/change-password/usePostChangePassword';
 import { Button } from '@/components/ui/button';
+import { useChangePassword } from '@/hooks';
 
 const ChangePasswordForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);

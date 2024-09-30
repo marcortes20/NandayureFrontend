@@ -1,4 +1,5 @@
-import { ForgotPassword } from '@/types/entities';
+import { ForgotPassword } from "@/types";
+
 
 export async function postForgotPassword(Email: ForgotPassword) {
   const options = {

@@ -1,11 +1,11 @@
-'use client'
-import { Button } from "@/components/ui/button";
-import InputField from "@/components/ui/input/input-field";
-import Spinner from "@/components/ui/spinner";
-import { titleFont } from "@/config/fonts";
-import usePostVacation from "@/hooks/request-management/request-vacation/usePostVacation";
-import { Checkbox, CheckboxIndicator } from "@radix-ui/react-checkbox";
-import { CheckIcon } from "lucide-react";
+'use client';
+import { Button } from '@/components/ui/button';
+import InputField from '@/components/ui/input-field';
+import Spinner from '@/components/ui/spinner';
+import { titleFont } from '@/config/fonts';
+import { usePostVacation } from '@/hooks';
+import { Checkbox, CheckboxIndicator } from '@radix-ui/react-checkbox';
+import { CheckIcon } from 'lucide-react';
 
 const RequestVacationForm = () => {
   const {
@@ -21,9 +21,7 @@ const RequestVacationForm = () => {
   } = usePostVacation();
 
   return (
-    <form
-      onSubmit={onSubmit}
-    >
+    <form onSubmit={onSubmit}>
       <h5
         className={`${titleFont.className} mb-3 text-base font-semibold text-gray-900 md:text-xl`}
       >
@@ -110,7 +108,11 @@ const RequestVacationForm = () => {
         </Checkbox>
         <label htmlFor="aprobacionAlcalde">Aprobación del Alcalde</label>
       </div>
-      <Button type="submit" className="w-full mt-4" disabled={mutation.isPending}>
+      <Button
+        type="submit"
+        className="w-full mt-4"
+        disabled={mutation.isPending}
+      >
         {mutation.isPending ? <Spinner /> : 'Enviar Solicitud'}
       </Button>
     </form>

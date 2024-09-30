@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import Spinner from '@/components/ui/spinner';
 import { titleFont } from '@/config/fonts';
-import usePostSendEmail from '@/hooks/auth/forgot-password/usePostSendEmail';
 import { Button } from '@/components/ui/button';
+import usePostSendEmail from '@/hooks/auth/forgot-password/usePostSendEmail';
 
 const ForgotPasswordForm = () => {
   const { handleSubmit, onSubmit, register, mutation, emailSent, errors } =

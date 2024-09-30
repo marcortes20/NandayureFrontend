@@ -11,7 +11,6 @@ const useGetRoles = () => {
     roles = payload.roles;
   }
   return {
-    token,
     roles,
     status,
   };

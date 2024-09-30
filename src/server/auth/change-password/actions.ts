@@ -1,4 +1,4 @@
-import { ChangePassword } from '@/types/entities';
+import { ChangePassword } from "@/types";
 
 export async function postChangePassword(
   resetPassword: ChangePassword,

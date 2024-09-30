@@ -1,4 +1,4 @@
-import { Employee, Gender, MaritalStatus } from '@/types/entities';
+import { Employee, Gender, JobPosition, MaritalStatus } from '@/types';
 
 export async function getGenders() {
   const options = {
@@ -44,7 +44,7 @@ export async function getJobsPositions() {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/job-positions`,
     options,
   );
-  const data = await res.json();
+  const data = (await res.json()) as JobPosition[];
   return data;
 }
 
@@ -57,23 +57,7 @@ export async function getEmbargoes() {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/embargoes`,
-    options,
-  );
-  const data = await res.json();
-  return data;
-}
-
-export async function getDepartments() {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-    },
-  };
-
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/departments`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/embargoes`,
     options,
   );
   const data = await res.json();

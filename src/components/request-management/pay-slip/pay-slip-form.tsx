@@ -1,9 +1,9 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import InputField from '@/components/ui/input/input-field';
+import InputField from '@/components/ui/input-field';
 import Spinner from '@/components/ui/spinner';
 import { titleFont } from '@/config/fonts';
-import usePostPaySlip from '@/hooks/request-management/pay-slip/usePostPaySlip';
+import { usePostPaySlip } from '@/hooks';
 
 const PaySlipForm = () => {
   const { onSubmit, register, mutation } = usePostPaySlip();

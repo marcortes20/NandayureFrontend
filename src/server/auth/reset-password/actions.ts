@@ -1,4 +1,4 @@
-import { ResetPassword } from '@/types/entities';
+import { ResetPassword } from "@/types";
 
 export async function postResetPassword(
   resetPassword: ResetPassword,
