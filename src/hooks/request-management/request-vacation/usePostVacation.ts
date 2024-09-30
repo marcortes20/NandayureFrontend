@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { RequestVacation } from '@/types';
-import { postVacation } from '@/server';
+import { postVacation } from '@/services';
 
 const usePostVacation = () => {
   const { register, handleSubmit } = useForm<RequestVacation>();

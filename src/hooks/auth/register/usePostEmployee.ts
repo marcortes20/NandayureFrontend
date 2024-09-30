@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 import { Employee } from '@/types';
 import { RegisterSchema } from '@/schemas';
-import { postEmployee } from '@/server';
+import { postEmployee } from '@/services';
 
 type FormsFields = z.infer<typeof RegisterSchema>;
 

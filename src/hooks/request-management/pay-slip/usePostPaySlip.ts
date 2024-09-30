@@ -1,15 +1,14 @@
-import { postPaySlip } from "@/server";
-import { RequestPaySlip } from "@/types";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import { postPaySlip } from '@/services';
+import { RequestPaySlip } from '@/types';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const usePostPaySlip = () => {
   const { register, handleSubmit } = useForm();
 
   const mutation = useMutation({
-    mutationFn: async (data: RequestPaySlip) =>
-      await postPaySlip(data),
+    mutationFn: async (data: RequestPaySlip) => await postPaySlip(data),
     onError: (error: any) => {
       console.error(error);
     },

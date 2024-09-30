@@ -1,4 +1,3 @@
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -8,7 +7,7 @@ import { z } from 'zod';
 
 import { ChangePassword } from '@/types';
 import { ChangePasswordSchema } from '@/schemas';
-import { postChangePassword } from '@/server';
+import { postChangePassword } from '@/services';
 
 type FormsFields = z.infer<typeof ChangePasswordSchema>;
 
