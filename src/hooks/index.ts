@@ -21,3 +21,5 @@ export { default as usePostVacation } from './request-management/request-vacatio
 export { default as usePostSalaryCetificates } from './request-management/salary-certificates/usePostSalaryCetificates';
 
 export { default as useTimeTracking } from './time-tracking/useTimeTracking';
+
+export { default as useSalaryCertificateTemplates } from './templates/salary-certificate/useSalaryCertificateTemplates';

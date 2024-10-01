@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getJobsPositions } from '@/server';
+import { getJobsPositions } from '@/services';
 
 const useGetJobsPositions = () => {
   const { data: JobsPositions } = useQuery({

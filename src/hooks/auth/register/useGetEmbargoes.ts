@@ -1,4 +1,4 @@
-import { getEmbargoes } from '@/server';
+import { getEmbargoes } from '@/services';
 import { useQuery } from '@tanstack/react-query';
 
 const useGetEmbargoes = () => {

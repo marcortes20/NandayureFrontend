@@ -1,5 +1,5 @@
 import { UpdateEmployeeSchema } from '@/schemas';
-import { updateEmployee } from '@/server';
+import { updateEmployee } from '@/services';
 import { UpdateEmployee } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

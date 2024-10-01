@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { ResetPassword } from '@/types';
 import { ResetPasswordSchema } from '@/schemas';
-import { postResetPassword } from '@/server';
+import { postResetPassword } from '@/services';
 
 interface Props {
   token: string;

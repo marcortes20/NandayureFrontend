@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 import { ForgotPassword } from '@/types';
 import { EmailSendSchema } from '@/schemas';
-import { postForgotPassword } from '@/server';
+import { postForgotPassword } from '@/services';
 
 type FormsFields = z.infer<typeof EmailSendSchema>;
 
