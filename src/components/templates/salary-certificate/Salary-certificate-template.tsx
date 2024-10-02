@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 'use client';
 import {
   View,
@@ -9,6 +10,8 @@ import {
 } from '@react-pdf/renderer';
 import useGetSalaryCertificateTemplate from '@/hooks/templates/salary-certificate/useSalaryCertificateTemplates';
 import dynamic from 'next/dynamic';
+import logo from '@/assets/logoNanda.jpg';
+
 const PDFViewer = dynamic(
   () => import('@react-pdf/renderer').then((mod) => mod.PDFViewer),
   {
@@ -119,10 +122,11 @@ const ConstanciaSalario: React.FC = () => {
   return (
     <div>
       {!isLoading ? (
-        <PDFViewer width="100%" height="600">
+        <PDFViewer width="70%" height="600">
           <Document>
             <Page size="A4" style={styles.page}>
               <View style={styles.header}>
+                <Image style={styles.logo} src={logo.src} />
                 <View style={styles.tituloContainer}>
                   <Text style={[styles.titulo, styles.boldText]}>
                     Municipalidad de Nandayure
