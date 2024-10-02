@@ -1,16 +1,13 @@
-'use client'
-import dynamic from 'next/dynamic';
+'use client';
 
-// Importa el componente de forma dinámica solo en el cliente
-const SalaryCertificateTemplate = dynamic(
-  () => import('@/components/templates/salary-certificate/Salary-certificate-template'),
-  { ssr: false }
-);
+import { Button } from '@/components/ui/button';
+import MaintenancePage from '@/components/ui/maintenance-page';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
     <>
-      <SalaryCertificateTemplate />
+      <MaintenancePage title="Dashboard" />
     </>
   );
 }

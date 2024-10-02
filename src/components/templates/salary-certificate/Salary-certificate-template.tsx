@@ -115,14 +115,15 @@ const HorizontalLineFooter: React.FC<HorizontalLineProps> = ({
   </View>
 );
 
-const ConstanciaSalario: React.FC = () => {
-  const { SalaryCertificateInfo, isLoading } =
-    useGetSalaryCertificateTemplate();
-  console.log(SalaryCertificateInfo);
+const ConstanciaSalario = ({ id }: { id: string }) => {
+  const { SalaryCertificateInfo, isLoading } = useGetSalaryCertificateTemplate({
+    id,
+  });
+
   return (
     <div>
       {!isLoading ? (
-        <PDFViewer width="70%" height="600">
+        <PDFViewer width="100%" height="600">
           <Document>
             <Page size="A4" style={styles.page}>
               <View style={styles.header}>
