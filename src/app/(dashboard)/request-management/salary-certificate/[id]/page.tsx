@@ -1,4 +1,5 @@
 'use client';
+import SkeletonLoader from '@/components/ui/skeleton-loader';
 import dynamic from 'next/dynamic';
 // import SalaryCertificateTemplate from '@/components/templates/salary-certificate/Salary-certificate-template';
 import { useParams } from 'next/navigation';
@@ -9,7 +10,7 @@ const SalaryCertificateTemplate = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <p>Loading...</p>,
+    loading: () => <SkeletonLoader className="w-full h-screen" />,
   },
 );
 type Params = {

@@ -15,8 +15,7 @@ import {
 import useGetSalaryCertificateTemplate from '@/hooks/templates/salary-certificate/useSalaryCertificateTemplates';
 import { notFound } from 'next/navigation';
 import logo from '@/assets/logoNanda.jpg';
-
-
+import SkeletonLoader from '@/components/ui/skeleton-loader';
 
 interface HorizontalLineProps {
   width: string;
@@ -121,7 +120,7 @@ const SalaryCertificateTemplate = ({ id }: { id: string }) => {
     useGetSalaryCertificateTemplate({ id });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <SkeletonLoader className="w-full h-screen" />;
   }
 
   if (isError || !SalaryCertificateInfo || SalaryCertificateInfo.id !== id) {
