@@ -1,4 +1,4 @@
-import { postSalaryCertificates } from '@/server';
+import { postSalaryCertificates } from '@/services';
 import { RequestSalaryCertificate } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';

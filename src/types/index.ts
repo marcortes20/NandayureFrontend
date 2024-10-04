@@ -14,3 +14,5 @@ export * from './auth/ChangePassword';
 export * from './request/RequestSalaryCertificate';
 export * from './request/RequestPaySlip';
 export * from './request/RequestVacation';
+
+export * from './templates/salary-certificate';
