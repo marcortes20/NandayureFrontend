@@ -1,4 +1,5 @@
 export interface SalaryCertificatTemplateProps {
+  id: string;
   name: string;
   idCard: string;
   position: string;

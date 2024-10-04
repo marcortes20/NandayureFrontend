@@ -38,76 +38,24 @@ const RequestVacationForm = () => {
 
       {/* Campos del formulario */}
       <InputField
-        id="diasSolicitados"
+        id="daysRequested"
         label="Días Solicitados"
         type="number"
         placeholder="Número de días solicitados"
         register={register}
       />
       <InputField
-        id="fechaSalida"
+        id="departureDate"
         label="Fecha de salida"
         type="date"
         register={register}
       />
       <InputField
-        id="fechaEntrada"
+        id="entryDate"
         label="Fecha de entrada"
         type="date"
         register={register}
       />
-      <InputField
-        id="idSolicitud"
-        label="ID de Solicitud"
-        type="number"
-        placeholder="Escribe el ID de la solicitud"
-        register={register}
-      />
-
-      {/* Checkboxes para aprobaciones */}
-      <div className="flex items-center space-x-2 mt-4">
-        <Checkbox
-          id="aprobacionDepartamento"
-          checked={isDepartmentApproved}
-          onCheckedChange={() => setIsDepartmentApproved(!isDepartmentApproved)}
-          className="w-6 h-6 bg-white border border-gray-300 rounded-lg"
-        >
-          <CheckboxIndicator className="flex justify-center items-center">
-            <CheckIcon className="w-4 h-4 text-green-600" />
-          </CheckboxIndicator>
-        </Checkbox>
-        <label htmlFor="aprobacionDepartamento">
-          Aprobación del Departamento
-        </label>
-      </div>
-
-      <div className="flex items-center space-x-2 mt-4">
-        <Checkbox
-          id="aprobacionRRHH"
-          checked={isRRHHApproved}
-          onCheckedChange={() => setIsRRHHApproved(!isRRHHApproved)}
-          className="w-6 h-6 bg-white border border-gray-300 rounded-lg"
-        >
-          <CheckboxIndicator className="flex justify-center items-center">
-            <CheckIcon className="w-4 h-4 text-green-600" />
-          </CheckboxIndicator>
-        </Checkbox>
-        <label htmlFor="aprobacionRRHH">Aprobación de RRHH</label>
-      </div>
-
-      <div className="flex items-center space-x-2 mt-4">
-        <Checkbox
-          id="aprobacionAlcalde"
-          checked={isMayorApproved}
-          onCheckedChange={() => setIsMayorApproved(!isMayorApproved)}
-          className="w-6 h-6 bg-white border border-gray-300 rounded-lg"
-        >
-          <CheckboxIndicator className="flex justify-center items-center">
-            <CheckIcon className="w-4 h-4 text-green-600" />
-          </CheckboxIndicator>
-        </Checkbox>
-        <label htmlFor="aprobacionAlcalde">Aprobación del Alcalde</label>
-      </div>
       <Button
         type="submit"
         className="w-full mt-4"

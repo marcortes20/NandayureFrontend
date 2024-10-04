@@ -1,11 +1,12 @@
-import { RequestVacation } from "@/types";
+import { RequestVacation } from '@/types';
 
-export async function postVacation(Vacation: RequestVacation) {
+export async function postVacation(Vacation: RequestVacation, token: string) {
   const options = {
     method: 'POST',
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(Vacation),
   };
@@ -20,7 +21,6 @@ export async function postVacation(Vacation: RequestVacation) {
   }
   return data;
 }
-
 
 export async function getVacation() {
   const options = {
