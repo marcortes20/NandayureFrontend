@@ -10,18 +10,13 @@ import {
   Image,
   Document,
   Page,
+  PDFViewer,
 } from '@react-pdf/renderer';
 import useGetSalaryCertificateTemplate from '@/hooks/templates/salary-certificate/useSalaryCertificateTemplates';
 import { notFound } from 'next/navigation';
 import logo from '@/assets/logoNanda.jpg';
 
-const PDFViewer = dynamic(
-  () => import('@react-pdf/renderer').then((mod) => mod.PDFViewer),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  },
-);
+
 
 interface HorizontalLineProps {
   width: string;
