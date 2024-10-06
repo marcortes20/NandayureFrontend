@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import React from 'react';
 import User from './user';
 import { Inbox } from 'lucide-react';
+import InboxComponent from './inbox/inbox';
 
 const Nav = () => {
   const { data: session, status } = useSession();
@@ -29,12 +30,7 @@ const Nav = () => {
       </div>
       <div className="flex items-center space-x-4">
         <span className="mr-4">{userInfo}</span>
-        <button
-          aria-label="Inbox"
-          className="p-2 rounded-full hover:bg-gray-100 focus:outline-none"
-        >
-          <Inbox strokeWidth={1.5} size={24} />
-        </button>
+        <InboxComponent />
         <User />
       </div>
     </div>
