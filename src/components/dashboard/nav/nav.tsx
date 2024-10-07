@@ -5,10 +5,12 @@ import React from 'react';
 import User from './user';
 import { Inbox } from 'lucide-react';
 import InboxComponent from './inbox/inbox';
+import { useGetAllRequest } from '@/hooks';
 
 const Nav = () => {
   const { data: session, status } = useSession();
-
+  const { allRequests } = useGetAllRequest();
+  console.log(allRequests);
   let userInfo;
 
   if (status === 'loading') {

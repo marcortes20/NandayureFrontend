@@ -23,3 +23,5 @@ export { default as usePostSalaryCetificates } from './request/salary-certificat
 export { default as useTimeTracking } from './time-tracking/useTimeTracking';
 
 export { default as useSalaryCertificateTemplates } from './templates/salary-certificate/useSalaryCertificateTemplates';
+
+export { default as useGetAllRequest } from './request-management/useGetAllRequest';

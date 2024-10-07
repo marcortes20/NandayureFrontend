@@ -9,7 +9,7 @@ export async function getAllRequests() {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MOCK_BACKEND_URL}/requests`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/requests`,
     options,
   );
   const data = await res.json() as RequestDetails[];

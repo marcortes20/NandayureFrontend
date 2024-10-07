@@ -15,8 +15,8 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        pending: "border-dodger-blue-500 bg-dodger-blue-500 text-white",
-        rejecting: "border-golden-dream-500 bg-golden-dream-500 text-white",
+        pending: "border-golden-dream-500 bg-golden-dream-500 text-white",
+        rejecting: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         approving: "border-apple-500 bg-apple-500 text-white",
       },
     },
