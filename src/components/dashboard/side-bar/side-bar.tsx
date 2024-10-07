@@ -48,20 +48,6 @@ const navLinksRH: Record<string, NavLink> = {
     href: '/request-management',
     icon: UserCheck,
     label: 'Gestión de solicitudes',
-    subLinks: {
-      solicitudVacaciones: {
-        href: '/request-management/vacation-request',
-        label: 'Solicitud de vacaciones',
-      },
-      boletaPago: {
-        href: '/request-management/pay-slip',
-        label: 'Boleta de pago',
-      },
-      constanciaSalarial: {
-        href: '/request-management/salary-certificate',
-        label: 'Constancia salarial',
-      },
-    },
   },
   Solicitudes: {
     href: '/request',

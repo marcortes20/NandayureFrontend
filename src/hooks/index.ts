@@ -16,9 +16,9 @@ export { default as useGetToken } from './common/useGetToken';
 export { default as useGetByIdEmployee } from './profile/useGetByIdEmployee';
 export { default as useUpdateEmployee } from './profile/useUpdateEmployee';
 
-export { default as usePostPaySlip } from './request-management/pay-slip/usePostPaySlip';
-export { default as usePostVacation } from './request-management/request-vacation/usePostVacation';
-export { default as usePostSalaryCetificates } from './request-management/salary-certificates/usePostSalaryCetificates';
+export { default as usePostPaySlip } from './request/pay-slip/usePostPaySlip';
+export { default as usePostVacation } from './request/request-vacation/usePostVacation';
+export { default as usePostSalaryCetificates } from './request/salary-certificates/usePostSalaryCetificates';
 
 export { default as useTimeTracking } from './time-tracking/useTimeTracking';
 
