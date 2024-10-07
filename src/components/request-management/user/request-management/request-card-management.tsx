@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from '@formkit/tempo';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -18,7 +17,6 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   Calendar,
   FileText,
@@ -27,39 +25,8 @@ import {
   CheckCircle2,
   XCircle,
 } from 'lucide-react';
-
-// Types
-type RequestApproval = {
-  id: number;
-  approverId: string | null;
-  requesterId: string;
-  processNumber: number;
-  RequestId: number;
-  observation: string | null;
-  approved: boolean | null;
-  current: boolean;
-  ApprovedDate: string | null;
-};
-
-type RequestVacation = {
-  id: number;
-  daysRequested: number;
-  departureDate: string;
-  entryDate: string;
-  RequestId: number;
-};
-
-type Request = {
-  id: number;
-  date: string;
-  RequestStateId: number;
-  RequestTypeId: number;
-  EmployeeId: string;
-  RequestApprovals: RequestApproval[];
-  RequestVacation: RequestVacation | null;
-  RequestSalaryCertificate: null;
-  RequestPaymentConfirmation: null;
-};
+import { RequestDetails } from '@/types';
+import { useGetAllRequestById } from '@/hooks';
 
 // Helper functions
 const formatDate = (dateString: string) =>
@@ -99,11 +66,11 @@ const getRequestIcon = (typeId: number) => {
 const getStatusColor = (stateId: number) => {
   switch (stateId) {
     case 1:
-      return 'bg-yellow-100 text-yellow-800';
+      return 'bg-golden-dream-500 text-white';
     case 2:
-      return 'bg-green-100 text-green-800';
+      return 'bg-apple-500 text-white';
     case 3:
-      return 'bg-red-100 text-red-800';
+      return 'bg-red-500 text-white';
     default:
       return 'bg-gray-100 text-gray-800';
   }
@@ -113,7 +80,7 @@ const RequestCard = ({
   request,
   onClick,
 }: {
-  request: Request;
+  request: RequestDetails;
   onClick: () => void;
 }) => (
   <Card
@@ -145,7 +112,7 @@ const RequestModal = ({
   isOpen,
   onClose,
 }: {
-  request: Request | null;
+  request: RequestDetails | null;
   isOpen: boolean;
   onClose: () => void;
 }) => {
@@ -230,115 +197,10 @@ const RequestModal = ({
 };
 
 export default function RequestCardManagement() {
-  const [selectedRequest, setSelectedRequest] = useState<Request | null>(null);
-  const [requests, setRequests] = useState<Request[]>([
-    {
-      id: 1,
-      date: '2024-10-07T01:45:26.000Z',
-      RequestStateId: 1,
-      RequestTypeId: 1,
-      EmployeeId: '504510677',
-      RequestApprovals: [
-        {
-          id: 3,
-          approverId: '504420108',
-          requesterId: '504510677',
-          processNumber: 3,
-          RequestId: 1,
-          observation: null,
-          approved: null,
-          current: false,
-          ApprovedDate: null,
-        },
-        {
-          id: 2,
-          approverId: '504950876',
-          requesterId: '504510677',
-          processNumber: 2,
-          RequestId: 1,
-          observation: null,
-          approved: null,
-          current: true,
-          ApprovedDate: null,
-        },
-        {
-          id: 1,
-          approverId: null,
-          requesterId: '504510677',
-          processNumber: 1,
-          RequestId: 1,
-          observation:
-            'La solicitud fue aprobada automáticamente por el sistema en el proceso 1 ya que el solicitante es el jefe del departamento en el que está asignado o no poseé jefe de departamento',
-          approved: true,
-          current: false,
-          ApprovedDate: '2024-10-07T01:45:26.000Z',
-        },
-      ],
-      RequestVacation: {
-        id: 1,
-        daysRequested: 7,
-        departureDate: '2024-10-06T06:00:00.000Z',
-        entryDate: '2024-10-13T06:00:00.000Z',
-        RequestId: 1,
-      },
-      RequestSalaryCertificate: null,
-      RequestPaymentConfirmation: null,
-    },
-    {
-      id: 2,
-      date: '2024-10-07T04:18:26.000Z',
-      RequestStateId: 1,
-      RequestTypeId: 1,
-      EmployeeId: '504510677',
-      RequestApprovals: [
-        {
-          id: 6,
-          approverId: '504420108',
-          requesterId: '504510677',
-          processNumber: 3,
-          RequestId: 2,
-          observation: null,
-          approved: null,
-          current: false,
-          ApprovedDate: null,
-        },
-        {
-          id: 5,
-          approverId: '504950876',
-          requesterId: '504510677',
-          processNumber: 2,
-          RequestId: 2,
-          observation: null,
-          approved: null,
-          current: true,
-          ApprovedDate: null,
-        },
-        {
-          id: 4,
-          approverId: null,
-          requesterId: '504510677',
-          processNumber: 1,
-          RequestId: 2,
-          observation:
-            'La solicitud fue aprobada automáticamente por el sistema en el proceso 1 ya que el solicitante es el jefe del departamento en el que está asignado o no poseé jefe de departamento',
-          approved: true,
-          current: false,
-          ApprovedDate: '2024-10-07T04:18:26.000Z',
-        },
-      ],
-      RequestVacation: {
-        id: 2,
-        daysRequested: 5,
-        departureDate: '2024-10-07T06:00:00.000Z',
-        entryDate: '2024-10-15T06:00:00.000Z',
-        RequestId: 2,
-      },
-      RequestSalaryCertificate: null,
-      RequestPaymentConfirmation: null,
-    },
-  ]);
+  const [selectedRequest, setSelectedRequest] = useState<RequestDetails | null>(null);
+  const { AllRequestsById } = useGetAllRequestById();
 
-  const handleRequestClick = (request: Request) => {
+  const handleRequestClick = (request: RequestDetails) => {
     setSelectedRequest(request);
   };
 
@@ -350,7 +212,7 @@ export default function RequestCardManagement() {
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-6">Mis Solicitudes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {requests.map((request) => (
+        {AllRequestsById?.map((request) => (
           <RequestCard
             key={request.id}
             request={request}
