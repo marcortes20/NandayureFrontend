@@ -90,21 +90,26 @@ const navLinksUser: Record<string, NavLink> = {
   gestionSolicitudes: {
     href: '/request-management',
     icon: UserCheck,
-    label: 'Gestión de solicitudes',
+    label: 'Solicitudes',
     subLinks: {
       solicitudVacaciones: {
-        href: '/vacation-request',
+        href: '/request/vacation-request',
         label: 'Solicitud de vacaciones',
       },
       boletaPago: {
-        href: '/pay-slip',
+        href: '/request/pay-slip',
         label: 'Boleta de pago',
       },
       constanciaSalarial: {
-        href: '/salary-certificate',
-        label: 'Constancia salarial',
+        href: '/request/salary-certificate',
+        label: 'Cons/requesttancia salarial',
       },
     },
+  },
+  miSolicitudes: {
+    href: '/request-management/my-requests',
+    icon: SquarePen,
+    label: 'Mis solicitudes',
   },
 };
 

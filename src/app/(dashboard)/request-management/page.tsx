@@ -1,4 +1,4 @@
-import RequestTableManagement from "@/components/request-management/request-table-management";
+import RequestTableManagement from "@/components/request-management/admin/request-management/request-table-management";
 
 const RequestManagementPage = () => {
   return   <RequestTableManagement />
