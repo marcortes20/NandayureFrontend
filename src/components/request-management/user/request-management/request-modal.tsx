@@ -6,34 +6,14 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
+import { formatDate } from '@/lib/utils';
 import { RequestDetails } from '@/types';
-import { format } from '@formkit/tempo';
 import {
   Clock,
   CheckCircle2,
   XCircle,
 } from 'lucide-react';
-
-const formatDate = (dateString: string) =>
-  format(new Date(dateString), 'DD/MM/YYYY');
-
-const getRequestType = (typeId: number) => {
-  const types = {
-    1: 'Vacaciones',
-    2: 'Certificado de Salario',
-    3: 'Confirmación de Pago',
-  };
-  return types[typeId as keyof typeof types] || 'Desconocido';
-};
-
-const getRequestState = (stateId: number) => {
-  const states = {
-    1: 'Pendiente',
-    2: 'Aprobado',
-    3: 'Rechazado',
-  };
-  return states[stateId as keyof typeof states] || 'Desconocido';
-};
+import { getRequestState, getRequestType } from '../../request-helpers';
 
 const RequestModal = ({
   request,

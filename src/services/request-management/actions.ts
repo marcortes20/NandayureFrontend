@@ -25,7 +25,7 @@ export async function getAllRequestsById(employeeId: number) {
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/requests/requests/${employeeId}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/requests/${employeeId}`,
     options,
   );
   const data = (await res.json()) as RequestDetails[];

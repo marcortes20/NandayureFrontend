@@ -7,29 +7,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { RequestDetails } from '@/types';
-import { format } from '@formkit/tempo';
 import { Badge } from '../../../ui/badge';
-
-const formatDate = (dateString: string) =>
-  format(new Date(dateString), 'DD/MM/YYYY');
-
-const getRequestType = (typeId: number) => {
-  const types = {
-    1: 'Vacaciones',
-    2: 'Certificado de Salario',
-    3: 'Confirmación de Pago',
-  };
-  return types[typeId as keyof typeof types] || 'Desconocido';
-};
-
-const getRequestState = (stateId: number) => {
-  const states = {
-    1: 'Pendiente',
-    2: 'Aprobado',
-    3: 'Rechazado',
-  };
-  return states[stateId as keyof typeof states] || 'Desconocido';
-};
+import { formatDate } from '@/lib/utils';
+import { getRequestState, getRequestType } from '../../request-helpers';
 
 const RequestTable = ({
   requests,
