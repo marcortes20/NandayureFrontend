@@ -1,30 +1,49 @@
 'use client'
 
-import { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Search } from "lucide-react"
+import { Search, X } from "lucide-react"
 
-export default function SearchBar() {
-  const [searchQuery, setSearchQuery] = useState('')
+interface SearchBarProps {
+  searchQuery: string
+  setSearchQuery: (query: string) => void
+}
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Implement your search logic here
-    console.log('Searching for:', searchQuery)
+export default function SearchBar({ searchQuery, setSearchQuery }: SearchBarProps) {
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (searchQuery) {
+      setSearchQuery('');
+    } else {
+      console.log('Performing search...');
+    }
   }
 
   return (
-    <form onSubmit={handleSearch} className="flex w-full max-w-sm items-center space-x-2">
+    <form className="flex items-center w-full max-w-sm space-x-2">
       <Input
         type="text"
-        placeholder="Search..."
+        placeholder="Buscar por Employee ID..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <Button type="submit" size="icon">
-        <Search className="h-4 w-4" />
-        <span className="sr-only">Search</span>
+      <Button
+        type="button"
+        size="icon"
+        onClick={handleButtonClick}
+      >
+        {searchQuery ? (
+          <>
+            <X className="h-4 w-4" />
+            <span className="sr-only">Limpiar búsqueda</span>
+          </>
+        ) : (
+          <>
+            <Search className="h-4 w-4" />
+            <span className="sr-only">Buscar</span>
+          </>
+        )}
       </Button>
     </form>
   )
