@@ -1,3 +1,4 @@
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -8,14 +9,9 @@ import {
 } from '@/components/ui/card';
 import { formatDate } from '@/lib/utils';
 import { RequestDetails } from '@/types';
-import { format } from '@formkit/tempo';
-import {
-  Calendar,
-  FileText,
-  DollarSign,
-  Clock,
-} from 'lucide-react';
+import { Calendar, FileText, DollarSign, Clock } from 'lucide-react';
 import { getRequestState, getRequestType } from '../../request-helpers';
+import SkeletonLoader from '@/components/ui/skeleton-loader';
 
 const getRequestIcon = (typeId: number) => {
   switch (typeId) {
@@ -44,34 +40,70 @@ const getStatusColor = (stateId: number) => {
 };
 
 const RequestCard = ({
-  request,
+  requests,
+  isLoading,
   onClick,
 }: {
-  request: RequestDetails;
-  onClick: () => void;
+  requests: RequestDetails[];
+  isLoading: boolean;
+  onClick: (request: RequestDetails) => void;
 }) => (
-  <Card
-    className="cursor-pointer hover:shadow-md transition-shadow"
-    onClick={onClick}
-  >
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium">
-        Solicitud #{request.id}
-      </CardTitle>
-      <Badge className={getStatusColor(request.RequestStateId)}>
-        {getRequestState(request.RequestStateId)}
-      </Badge>
-    </CardHeader>
-    <CardContent>
-      <div className="flex items-center space-x-4 text-sm text-gray-500">
-        {getRequestIcon(request.RequestTypeId)}
-        <span>{getRequestType(request.RequestTypeId)}</span>
-      </div>
-    </CardContent>
-    <CardFooter>
-      <p className="text-xs text-gray-500">Fecha: {formatDate(request.date)}</p>
-    </CardFooter>
-  </Card>
+  <>
+    {isLoading
+      ? Array.from({ length: 3 }).map((_, index) => (
+          <SkeletonCard key={index} />
+        ))
+      : requests.map((request) => (
+          <Card
+            key={request.id}
+            className="cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => onClick(request)}
+          >
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Solicitud #{request.id}
+              </CardTitle>
+              <Badge className={getStatusColor(request.RequestStateId)}>
+                {getRequestState(request.RequestStateId)}
+              </Badge>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center space-x-4 text-sm text-gray-500">
+                {getRequestIcon(request.RequestTypeId)}
+                <span>{getRequestType(request.RequestTypeId)}</span>
+              </div>
+            </CardContent>
+            <CardFooter>
+              <p className="text-xs text-gray-500">
+                Fecha: {formatDate(request.date)}
+              </p>
+            </CardFooter>
+          </Card>
+        ))}
+  </>
 );
 
 export default RequestCard;
+
+const SkeletonCard = () => (
+  <Card className="animate-pulse">
+    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      {/* Simula el título */}
+      <div className="bg-gray-300 h-6 w-1/3 rounded"></div>
+      {/* Simula el estado */}
+      <div className="bg-gray-300 h-6 w-16 rounded"></div>
+    </CardHeader>
+    <CardContent>
+      <div className="flex items-center space-x-4">
+        {/* Simula el ícono */}
+        <div className="bg-gray-300 h-6 w-6 rounded-full"></div>
+        {/* Simula el tipo de solicitud */}
+        <div className="bg-gray-300 h-4 w-1/3 rounded"></div>
+      </div>
+    </CardContent>
+    <CardFooter>
+      {/* Simula la fecha */}
+      <div className="bg-gray-300 h-4 w-1/4 rounded"></div>
+    </CardFooter>
+  </Card>
+);

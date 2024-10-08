@@ -10,7 +10,7 @@ export default function RequestTableManagement() {
   const [selectedRequest, setSelectedRequest] = useState<RequestDetails | null>(
     null,
   );
-  const { allRequests } = useGetAllRequest();
+  const { allRequests, isLoading } = useGetAllRequest();
 
   const handleRowClick = (request: RequestDetails) => {
     setSelectedRequest(request);
@@ -23,7 +23,11 @@ export default function RequestTableManagement() {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-4">Gestión de Solicitudes</h1>
-      <RequestTable requests={allRequests || []} onRowClick={handleRowClick} />
+      <RequestTable
+        requests={allRequests || []}
+        onRowClick={handleRowClick}
+        isLoading={isLoading}
+      />
       <RequestModal
         request={selectedRequest}
         isOpen={!!selectedRequest}

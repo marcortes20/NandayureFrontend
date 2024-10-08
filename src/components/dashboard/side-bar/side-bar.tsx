@@ -68,6 +68,11 @@ const navLinksRH: Record<string, NavLink> = {
       },
     },
   },
+  miSolicitudes: {
+    href: '/request-management/my-requests',
+    icon: SquarePen,
+    label: 'Mis solicitudes',
+  },
   controlMarcas: {
     href: '/time-tracking',
     icon: Clock,
