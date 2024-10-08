@@ -107,7 +107,7 @@ const navLinksUser: Record<string, NavLink> = {
       },
       constanciaSalarial: {
         href: '/request/salary-certificate',
-        label: 'Cons/requesttancia salarial',
+        label: 'Constancia salarial',
       },
     },
   },

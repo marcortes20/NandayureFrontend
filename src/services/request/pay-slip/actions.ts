@@ -17,12 +17,13 @@ export async function getPaySlip() {
   return data;
 }
 
-export async function postPaySlip(paySlip: RequestPaySlip) {
+export async function postPaySlip(paySlip: RequestPaySlip, token: string) {
   const options = {
     method: 'POST',
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(paySlip),
   };

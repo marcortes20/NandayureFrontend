@@ -5,6 +5,7 @@ import { RequestDetails } from '@/types';
 import { useState } from 'react';
 import RequestTable from './request-table';
 import RequestModal from './request-modal';
+import SearchBar from './search-bar/search-bar';
 
 export default function RequestTableManagement() {
   const [selectedRequest, setSelectedRequest] = useState<RequestDetails | null>(
@@ -22,7 +23,10 @@ export default function RequestTableManagement() {
 
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-4">Gestión de Solicitudes</h1>
+      <div className='flex justify-between mr-4'>
+        <h1 className="text-2xl font-bold mb-4">Gestión de Solicitudes</h1>
+        <SearchBar />
+      </div>
       <RequestTable
         requests={allRequests || []}
         onRowClick={handleRowClick}

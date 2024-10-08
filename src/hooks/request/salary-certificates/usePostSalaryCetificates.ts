@@ -1,3 +1,4 @@
+import useGetToken from '@/hooks/common/useGetToken';
 import { postSalaryCertificates } from '@/services';
 import { RequestSalaryCertificate } from '@/types';
 import { useMutation } from '@tanstack/react-query';
@@ -6,10 +7,11 @@ import toast from 'react-hot-toast';
 
 const usePostSalaryCetificates = () => {
   const { register, handleSubmit } = useForm();
+  const { token } = useGetToken();
 
   const mutation = useMutation({
     mutationFn: async (data: RequestSalaryCertificate) =>
-      await postSalaryCertificates(data),
+      await postSalaryCertificates(data,token),
     onError: (error: any) => {
       console.error(error);
     },
