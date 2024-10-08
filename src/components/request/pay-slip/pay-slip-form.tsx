@@ -23,7 +23,6 @@ const PaySlipForm = () => {
         <div className="flex-1 h-1 bg-apple-500"></div>
       </div>
       <div className="mt-4" />
-      <InputField id="date" label="Fecha" type="date" register={register} />
       <InputField
         id="reason"
         label="Motivo"

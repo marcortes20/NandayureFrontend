@@ -1,4 +1,4 @@
-import { RequestDetails } from '@/types';
+import { currentToApprove, RequestDetails } from '@/types';
 
 export async function getAllRequests() {
   const options = {
@@ -31,3 +31,42 @@ export async function getAllRequestsById(employeeId: number) {
   const data = (await res.json()) as RequestDetails[];
   return data;
 }
+
+export async function getCurrentToApprove(token: string) {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/request-approvals/currentToApprove{ApproverId}`,
+    options,
+  );
+  const data = (await res.json()) as currentToApprove[];
+  return data;
+}
+
+export async function patchRequestApproval(
+  id: number,
+  data: { approved: boolean; observation: string },
+  token: string,
+) {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  };
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/request-approvals/${id}`,
+    options,
+  );
+  return res;
+}
+

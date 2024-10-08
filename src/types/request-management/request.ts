@@ -28,4 +28,22 @@ export interface RequestDetails {
   RequestVacation: RequestVacation | null;
   RequestSalaryCertificate: null;
   RequestPaymentConfirmation: null;
-};
+}
+
+export interface currentToApprove {
+  id: number;
+  approverId: string;
+  requesterId: string;
+  processNumber: number;
+  RequestId: number;
+  observation?: string | null;
+  approved?: boolean | null;
+  current: boolean;
+  ApprovedDate?: string | null;
+}
+
+
+export interface currentRequestApproval {
+  approved: boolean;
+  observation: string;
+}

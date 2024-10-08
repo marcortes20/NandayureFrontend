@@ -26,3 +26,4 @@ export { default as useSalaryCertificateTemplates } from './templates/salary-cer
 
 export { default as useGetAllRequest } from './request-management/useGetAllRequest';
 export { default as useGetAllRequestById } from './request-management/useGetAllRequesById';
+export { default as useGetCurrentToApprove } from './request-management/useGetCurrentToApprove';

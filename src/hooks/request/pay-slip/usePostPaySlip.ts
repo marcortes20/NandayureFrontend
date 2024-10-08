@@ -1,3 +1,4 @@
+import useGetToken from '@/hooks/common/useGetToken';
 import { postPaySlip } from '@/services';
 import { RequestPaySlip } from '@/types';
 import { useMutation } from '@tanstack/react-query';
@@ -6,9 +7,10 @@ import toast from 'react-hot-toast';
 
 const usePostPaySlip = () => {
   const { register, handleSubmit } = useForm();
+  const { token } = useGetToken();
 
   const mutation = useMutation({
-    mutationFn: async (data: RequestPaySlip) => await postPaySlip(data),
+    mutationFn: async (data: RequestPaySlip) => await postPaySlip(data, token),
     onError: (error: any) => {
       console.error(error);
     },

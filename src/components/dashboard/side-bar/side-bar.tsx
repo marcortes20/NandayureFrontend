@@ -10,6 +10,7 @@ import {
   Folder,
   Home,
   Menu,
+  PanelTopOpen,
   SquarePen,
   UserCheck,
   X,
@@ -70,7 +71,7 @@ const navLinksRH: Record<string, NavLink> = {
   },
   miSolicitudes: {
     href: '/request-management/my-requests',
-    icon: SquarePen,
+    icon:  PanelTopOpen,
     label: 'Mis solicitudes',
   },
   controlMarcas: {
@@ -107,13 +108,13 @@ const navLinksUser: Record<string, NavLink> = {
       },
       constanciaSalarial: {
         href: '/request/salary-certificate',
-        label: 'Cons/requesttancia salarial',
+        label: 'Constancia salarial',
       },
     },
   },
   miSolicitudes: {
     href: '/request-management/my-requests',
-    icon: SquarePen,
+    icon: PanelTopOpen,
     label: 'Mis solicitudes',
   },
 };

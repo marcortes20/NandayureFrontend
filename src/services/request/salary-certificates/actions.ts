@@ -19,18 +19,20 @@ export async function getSalaryCertificates() {
 
 export async function postSalaryCertificates(
   salaryCertificate: RequestSalaryCertificate,
+  token: string,
 ) {
   const options = {
     method: 'POST',
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(salaryCertificate),
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/salary-certificates`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/request-salary-certificates`,
     options,
   );
   const data = await res.json();
