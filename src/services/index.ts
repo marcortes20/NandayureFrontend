@@ -5,8 +5,10 @@ export * from './auth/reset-password/actions';
 
 export * from './profile/employee/actions';
 
-export * from './request-management/pay-slip/actions';
-export * from './request-management/request-vacation/actions';
-export * from './request-management/salary-certificates/actions';
+export * from './request/pay-slip/actions';
+export * from './request/request-vacation/actions';
+export * from './request/salary-certificates/actions';
 
 export * from './templates/salary-certificate/actions';
+
+export * from './request-management/actions';
