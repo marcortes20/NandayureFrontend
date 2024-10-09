@@ -2,17 +2,20 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { postVacation } from '@/server/request-management/request-vacation/actions';
-import { RequestVacation } from '@/types/entities';
+import { RequestVacation } from '@/types';
+import { postVacation } from '@/services';
+import useGetToken from '@/hooks/common/useGetToken';
 
 const usePostVacation = () => {
   const { register, handleSubmit } = useForm<RequestVacation>();
   const [isDepartmentApproved, setIsDepartmentApproved] = useState(false);
   const [isRRHHApproved, setIsRRHHApproved] = useState(false);
   const [isMayorApproved, setIsMayorApproved] = useState(false);
+  const { token } = useGetToken();
 
   const mutation = useMutation({
-    mutationFn: async (data: RequestVacation) => await postVacation(data),
+    mutationFn: async (data: RequestVacation) =>
+      await postVacation(data, token),
     onSuccess: () => {
       toast.success('Solicitud enviada con éxito');
     },
@@ -26,9 +29,7 @@ const usePostVacation = () => {
     try {
       const formData: RequestVacation = {
         ...data,
-        departmentApproval: isDepartmentApproved,
-        RRHHApproval: isRRHHApproved,
-        mayorApproval: isMayorApproved,
+        daysRequested: Number(data.daysRequested),
       };
 
       await toast.promise(

@@ -1,9 +1,10 @@
 'use client';
 
-import InputField from '@/components/ui/input/input-field';
+import { Button } from '@/components/ui/button';
+import InputField from '@/components/ui/input-field';
 import Spinner from '@/components/ui/spinner';
 import { titleFont } from '@/config/fonts';
-import usePostSalaryCetificates from '@/hooks/request-management/salary-certificates/usePostSalaryCetificates';
+import { usePostSalaryCetificates } from '@/hooks';
 
 const SalaryCertificatesForm = () => {
   const { onSubmit, register, mutation } = usePostSalaryCetificates();
@@ -31,14 +32,13 @@ const SalaryCertificatesForm = () => {
         placeholder="Escribe el motivo de la solicitud"
         register={register}
       />
-      <button
+      <Button
         type="submit"
-        className="w-full mt-4 py-2 px-4 bg-dodger-blue-600 hover:bg-dodger-blue-700 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+        className="mt-4 w-full"
+        disabled={mutation.isPending}
       >
-        <div className="flex justify-center items-center">
-          {mutation.isPending ? <Spinner /> : <span>Enviar solicitud</span>}
-        </div>
-      </button>
+        {mutation.isPending ? <Spinner /> : 'Enviar solicitud'}
+      </Button>
     </form>
   );
 };
