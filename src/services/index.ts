@@ -10,3 +10,4 @@ export * from './request-management/request-vacation/actions';
 export * from './request-management/salary-certificates/actions';
 
 export * from './templates/salary-certificate/actions';
+export * from './templates/pay-slip/actions';
