@@ -1,71 +1,18 @@
-import { Employee, JobPosition } from "@/types";
-import { Annuites } from "@/types/Annuites";
-import { OverTime } from "@/types/OverTime";
+import { PaySlipTemplateProps } from "@/types/templates/pay-slip";
 
-interface GetEmployeeByIdProps {
-    employeeId: number;
-  }
-  
-  export async function getIdEmployee({ employeeId }: GetEmployeeByIdProps) {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    };
-  
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/employees/${employeeId}`,
-      options,
-    );
-    const data = (await res.json()) as Employee;
-    return data;
-  }
+export async function getPaySlipInfo({ id }: { id: string }) {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  };
 
-  export async function getByIdOvertimes({ employeeId }: GetEmployeeByIdProps) {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    };
-  
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/overtimes/${employeeId}`,
-      options,
-    );
-    const data = (await res.json()) as OverTime;
-    return data;
-  }
-
-  export async function getByIdAannuites({ employeeId }: GetEmployeeByIdProps) {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    };
-  
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/annuities/${employeeId}`,
-      options,
-    );
-    const data = (await res.json()) as Annuites;
-    return data;
-  }
-
-  export async function getByIdJobPosition() {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    };
-  
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/job-positions/`,
-      options,
-    );
-    const data = (await res.json()) as JobPosition;
-    return data;
-  }
+  const res = await fetch(
+    // TODO:  Change the URL to the correct one
+    `https://66331b88f7d50bbd9b48356d.mockapi.io/boletaPago/${id}`,
+    options,
+  );
+  const data = (await res.json()) as PaySlipTemplateProps;
+  return data;
+}

@@ -77,22 +77,16 @@ const HorizontalLineFooter: React.FC<HorizontalLineProps> = ({ width, spaceWidth
   </View>
 );
 
-interface PaySlipProps {
-  employeeId: number; // Añadir employeeId como propiedad esperada del componente
-}
 
-const PaySlip: React.FC<PaySlipProps> = ({ employeeId }) => {
-  // Integración del hook `useGetPaySlipTemplate` con employeeId
-  const { employee, overTime, annuities, jobPosition, isLoading, isError } =
-    useGetPaySlipTemplate({ employeeId });
+const PaySlipTemplate = ({ id }: { id: string }) => {
+  const { PaySlipInfo, isLoading, isError } =
+    useGetPaySlipTemplate({ id });
 
-  // Verificar si los datos se están cargando
   if (isLoading) {
     return <SkeletonLoader className="w-full h-screen" />;
   }
 
-  // Verificar si hay un error al obtener los datos o si los datos no existen
-  if (isError || !employee || !jobPosition) {
+  if (isError || !PaySlipInfo || PaySlipInfo.id !== id) {
     return notFound();
   }
 
@@ -115,15 +109,15 @@ const PaySlip: React.FC<PaySlipProps> = ({ employeeId }) => {
             {/* Datos del funcionario */}
             <View style={styles.section}>
               <Text style={styles.fieldLabel}>Nombre del Funcionario:</Text>
-              <Text style={styles.fieldValue}>{Person.Name}</Text>
+              <Text style={styles.fieldValue}>{PaySlipInfo.funcionario}</Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.fieldLabel}>Puesto:</Text>
-              <Text style={styles.fieldValue}>{jobPosition.Name}</Text>
+              <Text style={styles.fieldValue}>{PaySlipInfo.puesto}</Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.fieldLabel}>Categoría de Puesto:</Text>
-              <Text style={styles.fieldValue}>{jobPosition.DepartmentId}</Text>
+              <Text style={styles.fieldValue}>{PaySlipInfo.categoriaPuesto}</Text>
             </View>
 
             {/* Tabla de salarios */}
@@ -136,49 +130,49 @@ const PaySlip: React.FC<PaySlipProps> = ({ employeeId }) => {
                 <Text style={styles.tableColHeaderSalario}>Prohibición</Text>
               </View>
               <View style={styles.tableRow}>
-                <Text style={styles.tableColSalario}>{jobPosition.baseSalary}</Text>
-                <Text style={styles.tableColSalario}>{annuities?.Amount || 0}</Text>
-                <Text style={styles.tableColSalario}>{overTime?.Hours || 0}</Text>
-                <Text style={styles.tableColSalario}>{employee.dedication}</Text>
-                <Text style={styles.tableColSalario}>{employee.prohibition}</Text>
+                <Text style={styles.tableColSalario}>{PaySlipInfo.salarioBase}</Text>
+                <Text style={styles.tableColSalario}>{PaySlipInfo.anualidades}</Text>
+                <Text style={styles.tableColSalario}>{PaySlipInfo.horasExtras}</Text>
+                <Text style={styles.tableColSalario}>{PaySlipInfo.dedicacion}</Text>
+                <Text style={styles.tableColSalario}>{PaySlipInfo.prohibicion}</Text>
               </View>
             </View>
 
             {/* Total devengado */}
             <View style={styles.devengadoSection}>
               <Text style={styles.tableColHeaderDevengado}>Total Devengado:</Text>
-              <Text style={styles.tableColDevengado}>{employee.totalEarned}</Text>
+              <Text style={styles.tableColDevengado}>{PaySlipInfo.totalDevengado}</Text>
             </View>
 
             {/* Deducciones y observaciones */}
             <View style={styles.contentWrapper}>
               <View style={styles.deduccion}>
                 <Text style={styles.deducciontitulo}>Deducciones:</Text>
-                <Text>Seguro (10,67%): {employee.deductions?.insurance || 0}</Text>
-                <Text>Tributación: {employee.deductions?.tax || 0}</Text>
-                <Text>Coopeservidores: {employee.deductions?.coopeservidores || 0}</Text>
-                <Text>Coopealianza: {employee.deductions?.coopealianza || 0}</Text>
-                <Text>Servicoop: {employee.deductions?.servicoop || 0}</Text>
-                <Text>Coope-Ande: {employee.deductions?.coopeAnde || 0}</Text>
-                <Text>ASEMUNA (5%): {employee.deductions?.asemuna || 0}</Text>
-                <Text>Embargos: {employee.deductions?.embargos || 0}</Text>
-                <Text>Pensión: {employee.deductions?.pension || 0}</Text>
-                <Text>Funerales vida: {employee.deductions?.lifeFuneral || 0}</Text>
-                <Text>SITRAMUNA: {employee.deductions?.sitramuna || 0}</Text>
-                <Text>ANEP: {employee.deductions?.anep || 0}</Text>
-                <Text>INS: {employee.deductions?.ins || 0}</Text>
-                <Text>Total de Deducciones: {employee.totalDeductions || 0}</Text>
+                <Text>Seguro (10,67%): {PaySlipInfo.deducciones?.seguro || 0}</Text>
+                <Text>Tributación: {PaySlipInfo.deducciones?.tributacion || 0}</Text>
+                <Text>Coopeservidores: {PaySlipInfo.deducciones?.coopeservidores || 0}</Text>
+                <Text>Coopealianza: {PaySlipInfo.deducciones?.coopealianza || 0}</Text>
+                <Text>Servicoop: {PaySlipInfo.deducciones?.servicoop || 0}</Text>
+                <Text>Coope-Ande: {PaySlipInfo.deducciones?.coopeAnde || 0}</Text>
+                <Text>ASEMUNA (5%): {PaySlipInfo.deducciones?.asemuna || 0}</Text>
+                <Text>Embargos: {PaySlipInfo.deducciones?.embargos || 0}</Text>
+                <Text>Pensión: {PaySlipInfo.deducciones?.pension || 0}</Text>
+                <Text>Funerales vida: {PaySlipInfo.deducciones?.funeralesVida || 0}</Text>
+                <Text>SITRAMUNA: {PaySlipInfo.deducciones?.sitramuna || 0}</Text>
+                <Text>ANEP: {PaySlipInfo.deducciones?.anep || 0}</Text>
+                <Text>INS: {PaySlipInfo.deducciones?.ins || 0}</Text>
+                <Text>Total de Deducciones: {PaySlipInfo.totalDeducciones || 0}</Text>
               </View>
               <View style={styles.observacion}>
                 <Text style={styles.observaciontitulo}>Observaciones:</Text>
-                <Text>{employee.observations || 'Ninguna'}</Text>
+                <Text>{PaySlipInfo.observaciones || 'Ninguna'}</Text>
               </View>
             </View>
 
             {/* Neto a Pagar */}
             <View style={styles.devengadoSection}>
               <Text style={styles.tableColHeaderDevengado}>Neto a Pagar:</Text>
-              <Text style={styles.tableColDevengado}>{employee.netPay}</Text>
+              <Text style={styles.tableColDevengado}>{PaySlipInfo.netoAPagar}</Text>
             </View>
 
             <HorizontalLineFooter width="50%" spaceWidth="0%" />
@@ -196,7 +190,7 @@ const PaySlip: React.FC<PaySlipProps> = ({ employeeId }) => {
   );
 };
 
-export default PaySlip;
+export default PaySlipTemplate;
 
 // Estilos
 const styles = StyleSheet.create({
