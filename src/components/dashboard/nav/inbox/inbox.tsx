@@ -17,6 +17,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useGetCurrentToApprove } from '@/hooks';
 import usePatchRequestApproval from '@/hooks/request-management/usePatchRequestApproval';
+import RequestInformation from '../requestInformation';
 
 export default function InboxComponent() {
   const { currentToApprove } = useGetCurrentToApprove();
@@ -65,10 +66,7 @@ export default function InboxComponent() {
                 >
                   <div className="mb-2">
                     <p className="font-medium">
-                      Aprobación de Proceso {request.processNumber}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Solicitud de aprobación #{request.RequestId}
+                      Solicitud de {request.Request.RequestType.name}
                     </p>
                   </div>
                   <div className="text-sm text-gray-700">
@@ -76,10 +74,7 @@ export default function InboxComponent() {
                       <span className="font-medium">Solicitante:</span>{' '}
                       {request.requesterId}
                     </p>
-                    <p>
-                      <span className="font-medium">Proceso:</span>{' '}
-                      {request.processNumber}
-                    </p>
+                    <RequestInformation request={request} />
                   </div>
                 </div>
               ))
@@ -123,11 +118,17 @@ export default function InboxComponent() {
               {/* Handle form submission with the specified action */}
               <Button
                 variant="outline"
-                onClick={handleSubmit((data) => onSubmit({ ...data, reason: data.reason || '' }, "reject"))}
+                onClick={handleSubmit((data) =>
+                  onSubmit({ ...data, reason: data.reason || '' }, 'reject'),
+                )}
               >
                 Rechazar
               </Button>
-              <Button onClick={handleSubmit((data) => onSubmit({ ...data, reason: data.reason || '' }, "approve"))}>
+              <Button
+                onClick={handleSubmit((data) =>
+                  onSubmit({ ...data, reason: data.reason || '' }, 'approve'),
+                )}
+              >
                 Aprobar
               </Button>
             </DialogFooter>

@@ -18,16 +18,34 @@ interface RequestVacation {
   RequestId: number;
 }
 
+//Those two are the same but I'm not sure if they will be the same in the future
+interface RequestSalaryCertificate {
+  id: number;
+  reason: string;
+  RequestId: number;
+}
+interface RequestPaymentConfirmation {
+  id: number;
+  reason: string;
+  RequestId: number;
+}
+
+interface RequestType {
+  id: number;
+  name: string;
+}
+
 export interface RequestDetails {
   id: number;
   date: string;
   RequestStateId: number;
   RequestTypeId: number;
   EmployeeId: string;
+  RequestType: RequestType;
   RequestApprovals: RequestApproval[];
   RequestVacation: RequestVacation | null;
-  RequestSalaryCertificate: null;
-  RequestPaymentConfirmation: null;
+  RequestSalaryCertificate: RequestSalaryCertificate | null;
+  RequestPaymentConfirmation: RequestPaymentConfirmation | null;
 }
 
 export interface currentToApprove {
@@ -40,8 +58,8 @@ export interface currentToApprove {
   approved?: boolean | null;
   current: boolean;
   ApprovedDate?: string | null;
+  Request: RequestDetails;
 }
-
 
 export interface currentRequestApproval {
   approved: boolean;
