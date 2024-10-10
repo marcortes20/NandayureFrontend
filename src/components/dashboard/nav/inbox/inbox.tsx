@@ -1,4 +1,4 @@
-import { useState } from 'react';
+'use client';
 import { Inbox } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,9 +18,10 @@ import { Badge } from '@/components/ui/badge';
 import { useGetCurrentToApprove } from '@/hooks';
 import usePatchRequestApproval from '@/hooks/request-management/usePatchRequestApproval';
 import RequestInformation from '../requestInformation';
+import SkeletonLoader from '@/components/ui/skeleton-loader';
 
 export default function InboxComponent() {
-  const { currentToApprove } = useGetCurrentToApprove();
+  const { currentToApprove, isLoading } = useGetCurrentToApprove();
   const {
     register,
     handleSubmit,
@@ -38,10 +39,7 @@ export default function InboxComponent() {
           <Button className="relative bg-transparent text-black hover:bg-gray-100 focus:outline-none">
             <Inbox className="h-5 w-5" />
             {Array.isArray(currentToApprove) && currentToApprove.length > 0 && (
-              <Badge
-                variant="destructive"
-                className="absolute -top-2 -right-2 px-2 py-1"
-              >
+              <Badge variant="destructive" className="absolute -top-2 -right-2 px-2 py-1">
                 {currentToApprove.length}
               </Badge>
             )}
@@ -53,8 +51,14 @@ export default function InboxComponent() {
               Solicitudes pendientes (
               {Array.isArray(currentToApprove) ? currentToApprove.length : 0})
             </h3>
-            {Array.isArray(currentToApprove) &&
-            currentToApprove.length === 0 ? (
+            {isLoading ? (
+              // Mostrar SkeletonLoader si los datos están cargando
+              <>
+                <SkeletonLoader className="h-6 w-full mb-2" />
+                <SkeletonLoader className="h-6 w-full mb-2" />
+                <SkeletonLoader className="h-6 w-full mb-2" />
+              </>
+            ) : Array.isArray(currentToApprove) && currentToApprove.length === 0 ? (
               <p>No hay solicitudes pendientes</p>
             ) : (
               Array.isArray(currentToApprove) &&
